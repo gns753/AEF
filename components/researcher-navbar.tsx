@@ -54,14 +54,14 @@ export function ResearcherNavbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
             <Link href="/researcher/dashboard" className="flex items-center gap-2">
               <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
-              <span className="hidden sm:block text-sm font-bold text-gray-900">AEF</span>
+              <span className="hidden sm:block text-sm font-bold text-foreground">AEF</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -74,8 +74,8 @@ export function ResearcherNavbar() {
                     href={link.href}
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-blue-50 text-blue-700"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
@@ -91,7 +91,7 @@ export function ResearcherNavbar() {
             {/* Language Toggle (desktop) */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-gray-600 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-primary hover:text-primary transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
@@ -100,26 +100,26 @@ export function ResearcherNavbar() {
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-blue-100 text-blue-700 text-xs font-semibold">
+                    <AvatarFallback className="bg-primary/10 text-primary text-xs font-semibold">
                       AM
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:flex flex-col items-start">
-                    <span className="text-sm font-medium text-gray-900 leading-none">
+                    <span className="text-sm font-medium text-foreground leading-none">
                       {userName}
                     </span>
                     <Badge variant="secondary" className="mt-0.5 text-[10px] px-1.5 py-0 h-4">
                       İddiaçı
                     </Badge>
                   </div>
-                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-gray-400" />
+                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-muted-foreground" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 md:hidden">
-                  <p className="text-sm font-medium text-gray-900">{userName}</p>
+                  <p className="text-sm font-medium text-foreground">{userName}</p>
                   <Badge variant="secondary" className="mt-1 text-[10px]">
                     İddiaçı
                   </Badge>
@@ -137,7 +137,7 @@ export function ResearcherNavbar() {
                   E-mail və şifrəni dəyişin
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" />
                   Çıxış
                 </DropdownMenuItem>
@@ -162,8 +162,8 @@ export function ResearcherNavbar() {
                       className="rounded-full"
                     />
                     <div>
-                      <p className="text-sm font-bold text-gray-900">Azərbaycan Elm Fondu</p>
-                      <p className="text-xs text-gray-500">Qrant sistemi</p>
+                      <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
+                      <p className="text-xs text-muted-foreground">Qrant sistemi</p>
                     </div>
                   </div>
                 </div>
@@ -177,8 +177,8 @@ export function ResearcherNavbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-blue-50 text-blue-700"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         }`}
                       >
                         <link.icon className="h-5 w-5" />

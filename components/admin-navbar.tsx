@@ -52,14 +52,14 @@ export function AdminNavbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
             <Link href="/admin/dashboard" className="flex items-center gap-2">
               <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
-              <span className="hidden sm:block text-sm font-bold text-gray-900">AEF</span>
+              <span className="hidden sm:block text-sm font-bold text-foreground">AEF</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -75,8 +75,8 @@ export function AdminNavbar() {
                     href={link.href}
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        ? "bg-success/10 text-success"
+                        : "text-gray-600 hover:text-foreground hover:bg-gray-50"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
@@ -108,7 +108,7 @@ export function AdminNavbar() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:flex flex-col items-start">
-                    <span className="text-sm font-medium text-gray-900 leading-none">
+                    <span className="text-sm font-medium text-foreground leading-none">
                       {userName}
                     </span>
                     <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
@@ -120,7 +120,7 @@ export function AdminNavbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 md:hidden">
-                  <p className="text-sm font-medium text-gray-900">{userName}</p>
+                  <p className="text-sm font-medium text-foreground">{userName}</p>
                   <Badge className="mt-1 text-[10px] bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
                     Fond İnzibatçısı
                   </Badge>
@@ -153,7 +153,7 @@ export function AdminNavbar() {
                   <div className="flex items-center gap-3">
                     <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
                     <div>
-                      <p className="text-sm font-bold text-gray-900">Azərbaycan Elm Fondu</p>
+                      <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
                       <p className="text-xs text-gray-500">İnzibatçı paneli</p>
                     </div>
                   </div>
@@ -171,8 +171,8 @@ export function AdminNavbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-emerald-50 text-emerald-700"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                            ? "bg-success/10 text-success"
+                            : "text-gray-600 hover:text-foreground hover:bg-gray-50"
                         }`}
                       >
                         <link.icon className="h-5 w-5" />
