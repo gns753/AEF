@@ -62,7 +62,7 @@ export default function ResearcherDashboard() {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Aktiv qrant müsabiqələri</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Qrant Müsabiqələri</h1>
         <p className="text-gray-500 mt-1">
           Hazırda müraciət üçün açıq olan və keçmiş müsabiqələr
         </p>

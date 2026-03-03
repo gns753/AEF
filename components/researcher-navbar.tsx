@@ -28,10 +28,10 @@ import {
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/researcher/dashboard", label: "Ana səhifə", icon: Home },
+  { href: "/researcher/dashboard", label: "Qrant layihələri", icon: Home },
   { href: "/researcher/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
-  { href: "/researcher/projects", label: "Qrant layihələri", icon: FolderOpen },
-  { href: "/researcher/documents", label: "Normativ sənədlər", icon: FileText },
+  //{ href: "/researcher/projects", label: "Qrant layihələri", icon: FolderOpen },
+  { href: "/researcher/documents", label: "Sənədlər", icon: FileText },
 ]
 
 export function ResearcherNavbar() {
