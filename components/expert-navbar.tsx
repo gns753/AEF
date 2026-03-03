@@ -26,7 +26,7 @@ import {
 
 const navLinks = [
   { href: "/expert/dashboard", label: "Ekspertizaya göndərilmiş müsabiqələr", icon: Home },
-  { href: "/expert/dashboard", label: "Şəxsi Kabinet", icon: Home },
+  { href: "/expert/dashboard", label: "Şəxsi Kabinet", icon: User },
 ]
 
 export function ExpertNavbar() {
