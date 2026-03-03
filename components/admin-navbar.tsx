@@ -58,8 +58,8 @@ export function AdminNavbar() {
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
             <Link href="/admin/dashboard" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
-              <span className="hidden sm:block text-sm font-bold text-foreground">AEF</span>
+              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full tracking-normal leading-7" />
+              <span className="hidden sm:block text-sm font-bold text-foreground">Azərbaycan Elm Fondu</span>
             </Link>
 
             {/* Desktop Nav */}
