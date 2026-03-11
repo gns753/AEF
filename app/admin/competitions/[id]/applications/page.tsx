@@ -171,8 +171,8 @@ export default function ApplicationsPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <p className="text-sm text-gray-500">Müsabiqələrə qayıt</p>
-          <h1 className="text-2xl font-bold text-gray-900">Müraciətlər — {competitionName}</h1>
+          <p className="text-sm text-muted-foreground">Müsabiqələrə qayıt</p>
+          <h1 className="text-2xl font-bold text-foreground">Müraciətlər — {competitionName}</h1>
         </div>
       </div>
 
@@ -197,8 +197,8 @@ export default function ApplicationsPage() {
                 {applications.map((app) => (
                   <TableRow key={app.id}>
                     <TableCell className="font-medium">{app.leader}</TableCell>
-                    <TableCell className="text-gray-700">{app.project}</TableCell>
-                    <TableCell className="text-gray-500">{app.signDate}</TableCell>
+                    <TableCell className="text-foreground">{app.project}</TableCell>
+                    <TableCell className="text-muted-foreground">{app.signDate}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
                         <Button size="sm" variant="outline" asChild>
@@ -228,8 +228,8 @@ export default function ApplicationsPage() {
             {applications.map((app) => (
               <div key={app.id} className="p-4 border rounded-lg space-y-3">
                 <p className="font-medium text-sm">{app.leader}</p>
-                <p className="text-sm text-gray-700">{app.project}</p>
-                <p className="text-xs text-gray-500">İmzalama: {app.signDate}</p>
+                <p className="text-sm text-foreground">{app.project}</p>
+                <p className="text-xs text-muted-foreground">İmzalama: {app.signDate}</p>
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" variant="outline" className="text-xs" asChild>
                     <a href={`/admin/competitions/${id}/project/${app.id}`}>
@@ -269,9 +269,9 @@ export default function ApplicationsPage() {
               {(documentsData[docsProjectId] || []).map((doc, i) => (
                 <TableRow key={i}>
                   <TableCell className="font-medium">{doc.name}</TableCell>
-                  <TableCell className="text-gray-600">{doc.signer}</TableCell>
+                  <TableCell className="text-muted-foreground">{doc.signer}</TableCell>
                   <TableCell>{getFormatBadge(doc.format)}</TableCell>
-                  <TableCell className="text-gray-500">{doc.date}</TableCell>
+                  <TableCell className="text-muted-foreground">{doc.date}</TableCell>
                   <TableCell className="text-right">
                     <Button
                       size="sm"
@@ -357,7 +357,7 @@ export default function ApplicationsPage() {
                     className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors -mb-px ${
                       profileTab === tab.key
                         ? "border-emerald-600 text-emerald-700"
-                        : "border-transparent text-gray-500 hover:text-gray-700"
+                        : "border-transparent text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {tab.label}
@@ -368,13 +368,13 @@ export default function ApplicationsPage() {
               {/* Tab Content */}
               {profileTab === "personal" && (
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-gray-500">Ad:</span> <span className="font-medium ml-2">{profile.name}</span></div>
-                  <div><span className="text-gray-500">Soyad:</span> <span className="font-medium ml-2">{profile.surname}</span></div>
-                  <div><span className="text-gray-500">Ata adı:</span> <span className="font-medium ml-2">{profile.fatherName}</span></div>
-                  <div><span className="text-gray-500">Doğum tarixi:</span> <span className="font-medium ml-2">{profile.birthDate}</span></div>
-                  <div><span className="text-gray-500">Cinsiyyət:</span> <span className="font-medium ml-2">{profile.gender}</span></div>
-                  <div><span className="text-gray-500">FİN:</span> <span className="font-medium ml-2">{profile.fin}</span></div>
-                  <div><span className="text-gray-500">Vətəndaşlıq:</span> <span className="font-medium ml-2">{profile.citizenship}</span></div>
+                  <div><span className="text-muted-foreground">Ad:</span> <span className="font-medium ml-2">{profile.name}</span></div>
+                  <div><span className="text-muted-foreground">Soyad:</span> <span className="font-medium ml-2">{profile.surname}</span></div>
+                  <div><span className="text-muted-foreground">Ata adı:</span> <span className="font-medium ml-2">{profile.fatherName}</span></div>
+                  <div><span className="text-muted-foreground">Doğum tarixi:</span> <span className="font-medium ml-2">{profile.birthDate}</span></div>
+                  <div><span className="text-muted-foreground">Cinsiyyət:</span> <span className="font-medium ml-2">{profile.gender}</span></div>
+                  <div><span className="text-muted-foreground">FİN:</span> <span className="font-medium ml-2">{profile.fin}</span></div>
+                  <div><span className="text-muted-foreground">Vətəndaşlıq:</span> <span className="font-medium ml-2">{profile.citizenship}</span></div>
                 </div>
               )}
 
@@ -424,9 +424,9 @@ export default function ApplicationsPage() {
 
               {profileTab === "science" && (
                 <div className="space-y-3 text-sm">
-                  <div><span className="text-gray-500">Elmi dərəcə:</span> <span className="font-medium ml-2">{profile.degree}</span></div>
-                  <div><span className="text-gray-500">Elmi ad:</span> <span className="font-medium ml-2">{profile.title}</span></div>
-                  <div><span className="text-gray-500">Əsərlərin sayı:</span> <span className="font-medium ml-2">{profile.works}</span></div>
+                  <div><span className="text-muted-foreground">Elmi dərəcə:</span> <span className="font-medium ml-2">{profile.degree}</span></div>
+                  <div><span className="text-muted-foreground">Elmi ad:</span> <span className="font-medium ml-2">{profile.title}</span></div>
+                  <div><span className="text-muted-foreground">Əsərlərin sayı:</span> <span className="font-medium ml-2">{profile.works}</span></div>
                 </div>
               )}
             </div>

@@ -242,8 +242,8 @@ export default function NewsManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Xeberler ve Bannerler Idareetmesi</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-foreground">Xeberler ve Bannerler Idareetmesi</h1>
+          <p className="text-sm text-muted-foreground mt-1">
             Login sehifesindeki slider/banner mezmunlarini idare edin
           </p>
         </div>
@@ -257,7 +257,7 @@ export default function NewsManagementPage() {
       <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
+            <TableRow className="bg-muted/50">
               <TableHead className="w-[50px]">Sira</TableHead>
               <TableHead>Basliq</TableHead>
               <TableHead className="hidden md:table-cell">Qisa metn</TableHead>
@@ -282,15 +282,15 @@ export default function NewsManagementPage() {
               >
                 <TableCell>
                   <div className="flex items-center gap-1.5">
-                    <GripVertical className="h-4 w-4 text-gray-300 group-hover:text-gray-500 cursor-grab active:cursor-grabbing transition-colors" />
-                    <span className="text-sm font-medium text-gray-600">{item.order}</span>
+                    <GripVertical className="h-4 w-4 text-muted-foreground/50 group-hover:text-muted-foreground cursor-grab active:cursor-grabbing transition-colors" />
+                    <span className="text-sm font-medium text-muted-foreground">{item.order}</span>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm font-medium text-gray-900 line-clamp-1">{item.titleAz}</span>
+                  <span className="text-sm font-medium text-foreground line-clamp-1">{item.titleAz}</span>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  <span className="text-sm text-gray-500 line-clamp-1">{item.textAz}</span>
+                  <span className="text-sm text-muted-foreground line-clamp-1">{item.textAz}</span>
                 </TableCell>
                 <TableCell>
                   {item.image ? (
@@ -298,7 +298,7 @@ export default function NewsManagementPage() {
                       var
                     </Badge>
                   ) : (
-                    <Badge variant="outline" className="text-gray-400 border-gray-200 text-xs">
+                    <Badge variant="outline" className="text-muted-foreground/70 border-gray-200 text-xs">
                       yox
                     </Badge>
                   )}
@@ -315,7 +315,7 @@ export default function NewsManagementPage() {
                   )}
                 </TableCell>
                 <TableCell className="hidden sm:table-cell">
-                  <span className="text-sm text-gray-500">{item.date}</span>
+                  <span className="text-sm text-muted-foreground">{item.date}</span>
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-1">
@@ -343,7 +343,7 @@ export default function NewsManagementPage() {
             ))}
             {sortedNews.length === 0 && (
               <TableRow>
-                <TableCell colSpan={7} className="text-center py-12 text-gray-400">
+                <TableCell colSpan={7} className="text-center py-12 text-muted-foreground/70">
                   Hec bir xeber tapilmadi
                 </TableCell>
               </TableRow>
@@ -424,13 +424,13 @@ export default function NewsManagementPage() {
             <div className="space-y-2">
               <Label>Sekil yukle</Label>
               <div className="flex items-start gap-4">
-                <label className="flex items-center gap-2 px-4 py-2 border-2 border-dashed rounded-lg cursor-pointer hover:border-red-300 hover:bg-red-50/50 transition-colors text-sm text-gray-500">
+                <label className="flex items-center gap-2 px-4 py-2 border-2 border-dashed rounded-lg cursor-pointer hover:border-red-300 hover:bg-red-50/50 transition-colors text-sm text-muted-foreground">
                   <ImageIcon className="h-4 w-4" />
                   Fayl secin
                   <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
                 </label>
                 {imagePreview && (
-                  <div className="relative w-20 h-20 rounded-lg overflow-hidden border bg-gray-50">
+                  <div className="relative w-20 h-20 rounded-lg overflow-hidden border bg-muted/50">
                     <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                     <button
                       onClick={() => setImagePreview(null)}

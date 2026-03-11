@@ -188,7 +188,7 @@ export default function SuperadminLayout({ children }: { children: React.ReactNo
               </SheetContent>
             </Sheet>
 
-            <h1 className="text-sm font-semibold text-gray-800">
+            <h1 className="text-sm font-semibold text-foreground">
               {allLinks.find((l) => pathname.startsWith(l.href))?.label || "Admin Paneli"}
             </h1>
           </div>
@@ -198,7 +198,7 @@ export default function SuperadminLayout({ children }: { children: React.ReactNo
               <Avatar className="h-7 w-7">
                 <AvatarFallback className="bg-red-100 text-red-700 text-xs font-semibold">A</AvatarFallback>
               </Avatar>
-              <span className="text-sm font-medium text-gray-700">Admin</span>
+              <span className="text-sm font-medium text-foreground">Admin</span>
             </div>
             <Button
               variant="ghost"

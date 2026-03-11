@@ -62,8 +62,8 @@ export default function DocumentsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Normativ sənədlər</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Normativ sənədlər</h1>
+        <p className="text-muted-foreground mt-1">
           Qrant müsabiqələri ilə bağlı normativ sənədlər və təlimatlar
         </p>
       </div>
@@ -77,16 +77,16 @@ export default function DocumentsPage() {
                   <FileText className="h-5 w-5 text-blue-600" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-medium text-sm text-gray-900 truncate">{doc.title}</h3>
+                  <h3 className="font-medium text-sm text-foreground truncate">{doc.title}</h3>
                   <div className="flex items-center gap-3 mt-1">
                     <Badge className={`text-[10px] ${typeColors[doc.type] || ""}`}>
                       {doc.type}
                     </Badge>
-                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3" />
                       {doc.date}
                     </span>
-                    <span className="text-xs text-gray-400">{doc.size}</span>
+                    <span className="text-xs text-muted-foreground">{doc.size}</span>
                   </div>
                 </div>
               </div>

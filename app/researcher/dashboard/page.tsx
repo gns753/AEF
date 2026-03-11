@@ -54,7 +54,7 @@ const competitions = [
 const statusConfig = {
   Aktiv: { variant: "default" as const, className: "bg-green-100 text-green-800 hover:bg-green-100", icon: CheckCircle2 },
   Gözləmədə: { variant: "secondary" as const, className: "bg-amber-100 text-amber-800 hover:bg-amber-100", icon: Clock },
-  Tamamlanmış: { variant: "outline" as const, className: "bg-gray-100 text-gray-600 hover:bg-gray-100", icon: AlertCircle },
+  Tamamlanmış: { variant: "outline" as const, className: "bg-gray-100 text-muted-foreground hover:bg-gray-100", icon: AlertCircle },
 }
 
 export default function ResearcherDashboard() {
@@ -62,8 +62,8 @@ export default function ResearcherDashboard() {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Qrant Müsabiqələri</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Qrant Müsabiqələri</h1>
+        <p className="text-muted-foreground mt-1">
           Hazırda müraciət üçün açıq olan və keçmiş müsabiqələr
         </p>
       </div>
@@ -76,8 +76,8 @@ export default function ResearcherDashboard() {
               <CheckCircle2 className="h-5 w-5 text-green-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">3</p>
-              <p className="text-xs text-gray-500">Aktiv müsabiqə</p>
+              <p className="text-2xl font-bold text-foreground">3</p>
+              <p className="text-xs text-muted-foreground">Aktiv müsabiqə</p>
             </div>
           </CardContent>
         </Card>
@@ -87,19 +87,19 @@ export default function ResearcherDashboard() {
               <Clock className="h-5 w-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">1</p>
-              <p className="text-xs text-gray-500">Gözləmədə</p>
+              <p className="text-2xl font-bold text-foreground">1</p>
+              <p className="text-xs text-muted-foreground">Gözləmədə</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex items-center gap-4 p-4">
             <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
-              <FileText className="h-5 w-5 text-gray-500" />
+              <FileText className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">1</p>
-              <p className="text-xs text-gray-500">Tamamlanmış</p>
+              <p className="text-2xl font-bold text-foreground">1</p>
+              <p className="text-xs text-muted-foreground">Tamamlanmış</p>
             </div>
           </CardContent>
         </Card>
@@ -128,8 +128,8 @@ export default function ResearcherDashboard() {
                 return (
                   <TableRow key={comp.id}>
                     <TableCell className="pl-6 font-medium">{comp.name}</TableCell>
-                    <TableCell className="text-gray-600">{comp.amount}</TableCell>
-                    <TableCell className="text-gray-600">{comp.deadline}</TableCell>
+                    <TableCell className="text-muted-foreground">{comp.amount}</TableCell>
+                    <TableCell className="text-muted-foreground">{comp.deadline}</TableCell>
                     <TableCell>
                       <Badge className={config.className}>
                         <StatusIcon className="h-3 w-3 mr-1" />
@@ -139,14 +139,14 @@ export default function ResearcherDashboard() {
                     <TableCell className="text-right pr-6">
                       {comp.status === "Aktiv" ? (
                         <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                          Müraciət et
+                          İştirak et
                         </Button>
                       ) : comp.status === "Gözləmədə" ? (
                         <Button size="sm" variant="outline" disabled>
                           Gözləyin
                         </Button>
                       ) : (
-                        <Button size="sm" variant="ghost" className="text-gray-400">
+                        <Button size="sm" variant="ghost" className="text-muted-foreground">
                           Baxış
                         </Button>
                       )}
@@ -168,19 +168,19 @@ export default function ResearcherDashboard() {
             <Card key={comp.id}>
               <CardContent className="p-4 space-y-3">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-medium text-sm text-gray-900">{comp.name}</h3>
+                  <h3 className="font-medium text-sm text-foreground">{comp.name}</h3>
                   <Badge className={`shrink-0 ${config.className}`}>
                     <StatusIcon className="h-3 w-3 mr-1" />
                     {comp.status}
                   </Badge>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-500">
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span>{comp.amount}</span>
                   <span>Son tarix: {comp.deadline}</span>
                 </div>
                 {comp.status === "Aktiv" && (
                   <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Müraciət et
+                    İştirak et
                   </Button>
                 )}
               </CardContent>

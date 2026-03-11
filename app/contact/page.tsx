@@ -57,12 +57,12 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
           <span>Ana səhifə</span>
           <ChevronRight className="h-4 w-4" />
           <span className="text-blue-600 font-medium">Əlaqə</span>
@@ -70,8 +70,8 @@ export default function ContactPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Əlaqə</h1>
-          <p className="text-gray-600">Bizimlə əlaqə saxlayın və suallarınızı verin</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Əlaqə</h1>
+          <p className="text-muted-foreground">Bizimlə əlaqə saxlayın və suallarınızı verin</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -87,10 +87,10 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
+                  <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
                     <p className="font-medium">Ünvan</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       Bakı şəhəri, Nəsimi rayonu,
                       <br />
                       Azadlıq prospekti 33,
@@ -101,26 +101,26 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-gray-400" />
+                  <Phone className="h-5 w-5 text-muted-foreground" />
                   <div>
                     <p className="font-medium">Telefon</p>
-                    <p className="text-sm text-gray-600">+994 12 123 45 67</p>
+                    <p className="text-sm text-muted-foreground">+994 12 123 45 67</p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                  <Mail className="h-5 w-5 text-muted-foreground" />
                   <div>
                     <p className="font-medium">E-mail</p>
-                    <p className="text-sm text-gray-600">info@aef.gov.az</p>
+                    <p className="text-sm text-muted-foreground">info@aef.gov.az</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <Clock className="h-5 w-5 text-gray-400 mt-0.5" />
+                  <Clock className="h-5 w-5 text-muted-foreground mt-0.5" />
                   <div>
                     <p className="font-medium">İş saatları</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       Bazar ertəsi - Cümə
                       <br />
                       09:00 - 18:00
@@ -141,19 +141,19 @@ export default function ContactPage() {
               <CardContent className="space-y-3">
                 <div>
                   <p className="font-medium text-sm">Qrant Müsabiqələri</p>
-                  <p className="text-sm text-gray-600">grants@aef.gov.az</p>
+                  <p className="text-sm text-muted-foreground">grants@aef.gov.az</p>
                 </div>
                 <div>
                   <p className="font-medium text-sm">Beynəlxalq Əlaqələr</p>
-                  <p className="text-sm text-gray-600">international@aef.gov.az</p>
+                  <p className="text-sm text-muted-foreground">international@aef.gov.az</p>
                 </div>
                 <div>
                   <p className="font-medium text-sm">Mətbuat Xidməti</p>
-                  <p className="text-sm text-gray-600">press@aef.gov.az</p>
+                  <p className="text-sm text-muted-foreground">press@aef.gov.az</p>
                 </div>
                 <div>
                   <p className="font-medium text-sm">Texniki Dəstək</p>
-                  <p className="text-sm text-gray-600">support@aef.gov.az</p>
+                  <p className="text-sm text-muted-foreground">support@aef.gov.az</p>
                 </div>
               </CardContent>
             </Card>
@@ -309,11 +309,11 @@ export default function ContactPage() {
             <CardTitle>Xəritədə yerləşmə</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+            <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
               <div className="text-center">
-                <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Xəritə yüklənir...</p>
-                <p className="text-sm text-gray-400 mt-1">Azadlıq prospekti 33, Bakı, Azərbaycan</p>
+                <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
+                <p className="text-muted-foreground">Xəritə yüklənir...</p>
+                <p className="text-sm text-muted-foreground mt-1">Azadlıq prospekti 33, Bakı, Azərbaycan</p>
               </div>
             </div>
           </CardContent>

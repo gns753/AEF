@@ -102,8 +102,8 @@ export default function UsersPage() {
           <Users className="h-5 w-5 text-red-600" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-gray-900">İstifadəçilər</h1>
-          <p className="text-sm text-gray-500">Sistemdəki bütün istifadəçiləri idarə edin</p>
+          <h1 className="text-xl font-bold text-foreground">İstifadəçilər</h1>
+          <p className="text-sm text-muted-foreground">Sistemdəki bütün istifadəçiləri idarə edin</p>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ export default function UsersPage() {
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/70" />
               <Input
                 placeholder="Ad üzrə axtar"
                 value={searchFirstName}
@@ -192,7 +192,7 @@ export default function UsersPage() {
                   <TableRow key={u.id} className="hover:bg-slate-50">
                     <TableCell className="font-medium">{u.firstName}</TableCell>
                     <TableCell>{u.lastName}</TableCell>
-                    <TableCell className="text-gray-600">{u.email}</TableCell>
+                    <TableCell className="text-muted-foreground">{u.email}</TableCell>
                     <TableCell>
                       <Badge variant="outline" className="font-mono text-xs">{u.fin}</Badge>
                     </TableCell>
@@ -255,8 +255,8 @@ export default function UsersPage() {
               <div key={u.id} className="p-4 border rounded-lg space-y-2 hover:bg-slate-50 transition-colors">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{u.firstName} {u.lastName}</p>
-                    <p className="text-xs text-gray-500">{u.email}</p>
+                    <p className="font-medium text-foreground">{u.firstName} {u.lastName}</p>
+                    <p className="text-xs text-muted-foreground">{u.email}</p>
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

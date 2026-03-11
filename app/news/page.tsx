@@ -134,12 +134,12 @@ export default function NewsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
           <span>Ana səhifə</span>
           <ChevronRight className="h-4 w-4" />
           <span className="text-blue-600 font-medium">Xəbərlər</span>
@@ -147,8 +147,8 @@ export default function NewsPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Xəbərlər</h1>
-          <p className="text-gray-600">Azərbaycan Elm Fondundan ən son xəbərlər və elanlar</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Xəbərlər</h1>
+          <p className="text-muted-foreground">Azərbaycan Elm Fondundan ən son xəbərlər və elanlar</p>
         </div>
 
         {/* Filters */}
@@ -159,7 +159,7 @@ export default function NewsPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Xəbər axtarın..."
                   value={searchTerm}
@@ -209,7 +209,7 @@ export default function NewsPage() {
         {/* Featured News */}
         {featuredNews.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Seçilmiş Xəbərlər</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-4">Seçilmiş Xəbərlər</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {featuredNews.map((item) => (
                 <Card key={item.id} className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-600">
@@ -224,7 +224,7 @@ export default function NewsPage() {
                     <CardDescription className="text-base">{item.excerpt}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex justify-between items-center text-sm text-gray-600">
+                    <div className="flex justify-between items-center text-sm text-muted-foreground">
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center">
                           <Calendar className="h-4 w-4 mr-1" />
@@ -246,7 +246,7 @@ export default function NewsPage() {
 
         {/* Regular News */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Bütün Xəbərlər</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">Bütün Xəbərlər</h2>
           <div className="space-y-6">
             {regularNews.map((item) => (
               <Card key={item.id} className="hover:shadow-md transition-shadow">
@@ -255,17 +255,17 @@ export default function NewsPage() {
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
                         <Badge variant="outline">{item.category}</Badge>
-                        <div className="flex items-center text-sm text-gray-500">
+                        <div className="flex items-center text-sm text-muted-foreground">
                           <Clock className="h-4 w-4 mr-1" />
                           {formatDate(item.date)}
                         </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer">
+                      <h3 className="text-xl font-semibold text-foreground mb-2 hover:text-blue-600 cursor-pointer">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 mb-4">{item.excerpt}</p>
+                      <p className="text-muted-foreground mb-4">{item.excerpt}</p>
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                           <span>{item.author}</span>
                           <div className="flex items-center">
                             <Eye className="h-4 w-4 mr-1" />
@@ -287,9 +287,9 @@ export default function NewsPage() {
         {filteredNews.length === 0 && (
           <Card>
             <CardContent className="text-center py-12">
-              <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Heç bir xəbər tapılmadı</h3>
-              <p className="text-gray-500">Axtarış kriteriyalarınızı dəyişdirərək yenidən cəhd edin.</p>
+              <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">Heç bir xəbər tapılmadı</h3>
+              <p className="text-muted-foreground">Axtarış kriteriyalarınızı dəyişdirərək yenidən cəhd edin.</p>
             </CardContent>
           </Card>
         )}

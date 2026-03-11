@@ -28,9 +28,9 @@ import {
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/researcher/dashboard", label: "Qrant layihələri", icon: Home },
+  { href: "/researcher/dashboard", label: "Qrant müsabiqələri", icon: Home },
   { href: "/researcher/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
-  //{ href: "/researcher/projects", label: "Qrant layihələri", icon: FolderOpen },
+  { href: "/researcher/projects", label: "Sizə aid olan qrant layihələri", icon: FolderOpen },
   { href: "/researcher/documents", label: "Sənədlər", icon: FileText },
 ]
 

@@ -81,8 +81,8 @@ export default function ProjectsPage() {
     <>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Qrant layihələri</h1>
-          <p className="text-gray-500 mt-1">Sizə aid olan qrant layihələri və müraciətlər</p>
+          <h1 className="text-2xl font-bold text-foreground">Qrant layihələri</h1>
+          <p className="text-muted-foreground mt-1">Sizə aid olan qrant layihələri və müraciətlər</p>
         </div>
 
         {/* Summary */}
@@ -93,8 +93,8 @@ export default function ProjectsPage() {
                 <FolderOpen className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">{projects.length}</p>
-                <p className="text-xs text-gray-500">Ümumi layihə</p>
+                <p className="text-2xl font-bold text-foreground">{projects.length}</p>
+                <p className="text-xs text-muted-foreground">Ümumi layihə</p>
               </div>
             </CardContent>
           </Card>
@@ -104,8 +104,8 @@ export default function ProjectsPage() {
                 <span className="text-sm font-bold text-blue-600">2</span>
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">2</p>
-                <p className="text-xs text-gray-500">Müraciətçi kimi</p>
+                <p className="text-2xl font-bold text-foreground">2</p>
+                <p className="text-xs text-muted-foreground">Müraciətçi kimi</p>
               </div>
             </CardContent>
           </Card>
@@ -115,8 +115,8 @@ export default function ProjectsPage() {
                 <span className="text-sm font-bold text-green-600">1</span>
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">1</p>
-                <p className="text-xs text-gray-500">İştirakçı kimi</p>
+                <p className="text-2xl font-bold text-foreground">1</p>
+                <p className="text-xs text-muted-foreground">İştirakçı kimi</p>
               </div>
             </CardContent>
           </Card>
@@ -142,13 +142,13 @@ export default function ProjectsPage() {
               <TableBody>
                 {projects.map((p) => (
                   <TableRow key={p.id}>
-                    <TableCell className="pl-6 text-gray-600 max-w-[180px] truncate">{p.competition}</TableCell>
+                    <TableCell className="pl-6 text-muted-foreground max-w-[180px] truncate">{p.competition}</TableCell>
                     <TableCell className="font-medium max-w-[200px] truncate">{p.project}</TableCell>
-                    <TableCell className="text-gray-600">{p.leader}</TableCell>
+                    <TableCell className="text-muted-foreground">{p.leader}</TableCell>
                     <TableCell>
                       <Badge className={roleColors[p.role] || ""}>{p.role}</Badge>
                     </TableCell>
-                    <TableCell className="text-gray-500 text-sm">{p.date}</TableCell>
+                    <TableCell className="text-muted-foreground text-sm">{p.date}</TableCell>
                     <TableCell className="text-right pr-6">
                       <Button size="sm" variant="outline" onClick={() => setSelectedProject(p)}>
                         <Eye className="h-3.5 w-3.5 mr-1" />
@@ -168,11 +168,11 @@ export default function ProjectsPage() {
             <Card key={p.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => setSelectedProject(p)}>
               <CardContent className="p-4 space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-medium text-sm text-gray-900">{p.project}</h3>
+                  <h3 className="font-medium text-sm text-foreground">{p.project}</h3>
                   <Badge className={`shrink-0 ${roleColors[p.role] || ""}`}>{p.role}</Badge>
                 </div>
-                <p className="text-xs text-gray-500">{p.competition}</p>
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                <p className="text-xs text-muted-foreground">{p.competition}</p>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>{p.leader}</span>
                   <span>{p.date}</span>
                 </div>
@@ -193,25 +193,25 @@ export default function ProjectsPage() {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-gray-500">Layihə rəhbəri</p>
+                  <p className="text-xs text-muted-foreground">Layihə rəhbəri</p>
                   <p className="text-sm font-medium">{selectedProject.leader}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">İştirak statusu</p>
+                  <p className="text-xs text-muted-foreground">İştirak statusu</p>
                   <Badge className={`mt-0.5 ${roleColors[selectedProject.role] || ""}`}>{selectedProject.role}</Badge>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Tarix</p>
+                  <p className="text-xs text-muted-foreground">Tarix</p>
                   <p className="text-sm font-medium">{selectedProject.date}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Maliyyələşmə</p>
+                  <p className="text-xs text-muted-foreground">Maliyyələşmə</p>
                   <p className="text-sm font-bold text-green-600">{selectedProject.amount}</p>
                 </div>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Layihə haqqında</p>
-                <p className="text-sm text-gray-700 leading-relaxed">{selectedProject.description}</p>
+                <p className="text-xs text-muted-foreground mb-1">Layihə haqqında</p>
+                <p className="text-sm text-foreground leading-relaxed">{selectedProject.description}</p>
               </div>
             </div>
           )}

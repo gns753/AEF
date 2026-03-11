@@ -137,8 +137,8 @@ export default function ParticipantsPage() {
             <Trophy className="h-5 w-5 text-red-600" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Müsabiqələrin iştirakçıları</h1>
-            <p className="text-sm text-gray-500">İştirakçıları idarə edin</p>
+            <h1 className="text-xl font-bold text-foreground">Müsabiqələrin iştirakçıları</h1>
+            <p className="text-sm text-muted-foreground">İştirakçıları idarə edin</p>
           </div>
         </div>
         <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={openAdd}>
@@ -152,7 +152,7 @@ export default function ParticipantsPage() {
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/70" />
               <Input
                 placeholder="Ad üzrə axtar"
                 value={searchFirstName}
@@ -200,7 +200,7 @@ export default function ParticipantsPage() {
                     <TableCell>
                       <Badge variant="outline" className="font-mono text-xs">{p.fin}</Badge>
                     </TableCell>
-                    <TableCell className="text-gray-600 max-w-[200px] truncate">{p.competition}</TableCell>
+                    <TableCell className="text-muted-foreground max-w-[200px] truncate">{p.competition}</TableCell>
                     <TableCell>
                       <Badge className="bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-100">
                         {p.role}
@@ -232,8 +232,8 @@ export default function ParticipantsPage() {
               <div key={p.id} className="p-4 border rounded-lg space-y-2 hover:bg-slate-50">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{p.firstName} {p.lastName}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{p.competition}</p>
+                    <p className="font-medium text-foreground">{p.firstName} {p.lastName}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{p.competition}</p>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <div className={`h-2 w-2 rounded-full ${p.status === "Aktiv" ? "bg-emerald-500" : "bg-red-500"}`} />

@@ -52,8 +52,8 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Tənzimləmələr</h1>
-        <p className="text-gray-500 mt-1">E-mail və şifrənizi dəyişdirin</p>
+        <h1 className="text-2xl font-bold text-foreground">Tənzimləmələr</h1>
+        <p className="text-muted-foreground mt-1">E-mail və şifrənizi dəyişdirin</p>
       </div>
 
       {/* Email Change */}
@@ -67,8 +67,8 @@ export default function SettingsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-1.5">
-            <Label className="text-xs text-gray-500">Cari e-mail</Label>
-            <Input value={currentEmail} readOnly className="bg-gray-50" />
+            <Label className="text-xs text-muted-foreground">Cari e-mail</Label>
+            <Input value={currentEmail} readOnly className="bg-muted" />
           </div>
           <div className="space-y-1.5">
             <Label>Yeni e-mail</Label>
@@ -100,7 +100,7 @@ export default function SettingsPage() {
                 onChange={(e) => setVerifyCode(e.target.value)}
                 maxLength={6}
               />
-              <p className="text-xs text-gray-400">Demo: 123456</p>
+              <p className="text-xs text-muted-foreground">Demo: 123456</p>
             </div>
           )}
 

@@ -13,7 +13,7 @@ import { InstitutionalPartners } from "@/components/institutional-partners"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Carousel */}
@@ -23,11 +23,11 @@ export default function HomePage() {
       <InstitutionalPartners />
 
       {/* Current Grants Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Cari Qrant Müsabiqələri</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Cari Qrant Müsabiqələri</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Hazırda müraciət üçün açıq olan qrant müsabiqələri ilə tanış olun
             </p>
           </div>
@@ -37,14 +37,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="default">Aktiv</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 15 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 15 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Süni İntellekt və Maşın Öyrənməsi</CardTitle>
                 <CardDescription>AI və ML sahələrində fundamental və tətbiqi tədqiqatlar</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">50,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">50,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>
@@ -54,14 +54,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="default">Aktiv</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 20 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 20 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Bərpa Olunan Enerji</CardTitle>
                 <CardDescription>Günəş və külək enerjisi sahəsində innovativ həllər</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">75,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">75,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>
@@ -71,14 +71,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="secondary">Gözləmədə</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 25 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 25 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Tibbi Biotexnologiya</CardTitle>
                 <CardDescription>Gen terapiyası və personalizə edilmiş tibb</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">100,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">100,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>
@@ -97,11 +97,11 @@ export default function HomePage() {
       </section>
 
       {/* Cari Qrant Müsabiqələri Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Aktiv Qrant Müsabiqələri</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Aktiv Qrant Müsabiqələri</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Hazırda davam edən qrant müsabiqələri ilə tanış olun
             </p>
           </div>
@@ -111,14 +111,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="default">Aktiv</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 15 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 15 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Süni İntellekt və Maşın Öyrənməsi</CardTitle>
                 <CardDescription>AI və ML sahələrində fundamental və tətbiqi tədqiqatlar</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">50,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">50,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>
@@ -128,14 +128,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="default">Aktiv</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 20 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 20 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Bərpa Olunan Enerji</CardTitle>
                 <CardDescription>Günəş və külək enerjisi sahəsində innovativ həllər</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">75,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">75,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>
@@ -145,14 +145,14 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <Badge variant="secondary">Gözləmədə</Badge>
-                  <span className="text-sm text-gray-500">Son tarix: 25 Mar</span>
+                  <span className="text-sm text-muted-foreground">Son tarix: 25 Mar</span>
                 </div>
                 <CardTitle className="text-lg">Tibbi Biotexnologiya</CardTitle>
                 <CardDescription>Gen terapiyası və personalizə edilmiş tibb</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-green-600">100,000 AZN</span>
+                  <span className="text-2xl font-bold text-emerald-600">100,000 AZN</span>
                   <Button size="sm">Ətraflı</Button>
                 </div>
               </CardContent>

@@ -98,12 +98,12 @@ export default function GrantsPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
+        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
           <span>Ana səhifə</span>
           <ChevronRight className="h-4 w-4" />
           <span className="text-blue-600 font-medium">Qrant Müsabiqələri</span>
@@ -111,8 +111,8 @@ export default function GrantsPage() {
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Qrant Müsabiqələri</h1>
-          <p className="text-gray-600">Azərbaycan Elm Fondu tərəfindən elan edilmiş aktiv qrant müsabiqələri</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Qrant Müsabiqələri</h1>
+          <p className="text-muted-foreground">Azərbaycan Elm Fondu tərəfindən elan edilmiş aktiv qrant müsabiqələri</p>
         </div>
 
         {/* Stats */}
@@ -170,7 +170,7 @@ export default function GrantsPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Qrant axtarın..."
                   value={searchTerm}
@@ -227,7 +227,7 @@ export default function GrantsPage() {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex-1">
                     <CardTitle className="text-lg mb-1">{grant.title}</CardTitle>
-                    <p className="text-sm text-gray-600 font-mono">{grant.id}</p>
+                    <p className="text-sm text-muted-foreground font-mono">{grant.id}</p>
                   </div>
                   {getStatusBadge(grant.status)}
                 </div>
@@ -237,25 +237,25 @@ export default function GrantsPage() {
                 <div className="space-y-3">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-gray-600">Kateqoriya:</span>
+                      <span className="text-muted-foreground">Kateqoriya:</span>
                       <p className="font-medium">{grant.category}</p>
                     </div>
                     <div>
-                      <span className="text-gray-600">Məbləğ:</span>
-                      <p className="font-medium text-green-600">{grant.amount}</p>
+                      <span className="text-muted-foreground">Məbləğ:</span>
+                      <p className="font-medium text-emerald-600">{grant.amount}</p>
                     </div>
                     <div>
-                      <span className="text-gray-600">Son tarix:</span>
+                      <span className="text-muted-foreground">Son tarix:</span>
                       <p className="font-medium">{grant.deadline}</p>
                     </div>
                     <div>
-                      <span className="text-gray-600">Müddət:</span>
+                      <span className="text-muted-foreground">Müddət:</span>
                       <p className="font-medium">{grant.duration}</p>
                     </div>
                   </div>
 
                   <div className="flex justify-between items-center pt-2 border-t">
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-muted-foreground">
                       <Users className="h-4 w-4 mr-1" />
                       {grant.applicants} müraciət
                     </div>
@@ -273,9 +273,9 @@ export default function GrantsPage() {
         {filteredGrants.length === 0 && (
           <Card>
             <CardContent className="text-center py-12">
-              <Award className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Heç bir qrant tapılmadı</h3>
-              <p className="text-gray-500">Axtarış kriteriyalarınızı dəyişdirərək yenidən cəhd edin.</p>
+              <Award className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">Heç bir qrant tapılmadı</h3>
+              <p className="text-muted-foreground">Axtarış kriteriyalarınızı dəyişdirərək yenidən cəhd edin.</p>
             </CardContent>
           </Card>
         )}

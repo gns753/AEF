@@ -142,8 +142,8 @@ export default function PageContentPage() {
 
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Sehife Mezmununun Idareetmesi</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Sehife Mezmununun Idareetmesi</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Login sehifesinde gorunen statik mezmunlari idare edin
         </p>
       </div>
@@ -152,7 +152,7 @@ export default function PageContentPage() {
       <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
+            <TableRow className="bg-muted/50">
               <TableHead>Blok adi</TableHead>
               <TableHead className="hidden md:table-cell">Yer</TableHead>
               <TableHead className="hidden lg:table-cell">Mezmun (AZ)</TableHead>
@@ -165,13 +165,13 @@ export default function PageContentPage() {
             {content.map((block) => (
               <TableRow key={block.id} className="group">
                 <TableCell>
-                  <span className="text-sm font-medium text-gray-900">{block.name}</span>
+                  <span className="text-sm font-medium text-foreground">{block.name}</span>
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
-                  <span className="text-sm text-gray-500">{block.location}</span>
+                  <span className="text-sm text-muted-foreground">{block.location}</span>
                 </TableCell>
                 <TableCell className="hidden lg:table-cell max-w-[250px]">
-                  <span className="text-sm text-gray-500 line-clamp-1">{block.az}</span>
+                  <span className="text-sm text-muted-foreground line-clamp-1">{block.az}</span>
                 </TableCell>
                 <TableCell>
                   {block.visible ? (
@@ -179,13 +179,13 @@ export default function PageContentPage() {
                       Gorunur
                     </Badge>
                   ) : (
-                    <Badge className="bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-100 text-xs">
+                    <Badge className="bg-gray-100 text-muted-foreground border-gray-200 hover:bg-gray-100 text-xs">
                       Gizli
                     </Badge>
                   )}
                 </TableCell>
                 <TableCell className="hidden sm:table-cell">
-                  <span className="text-sm text-gray-500">{block.lastUpdated}</span>
+                  <span className="text-sm text-muted-foreground">{block.lastUpdated}</span>
                 </TableCell>
                 <TableCell className="text-right">
                   <div className="flex items-center justify-end gap-1">
@@ -205,7 +205,7 @@ export default function PageContentPage() {
                         onClick={() => toggleVisibility(block.id)}
                         className={`h-8 px-2 ${
                           block.visible
-                            ? "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                            ? "text-muted-foreground hover:text-gray-700 hover:bg-muted/50"
                             : "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
                         }`}
                       >

@@ -90,8 +90,8 @@ export default function RegisterPage() {
               className="rounded-full"
             />
           </div>
-          <h1 className="text-2xl font-bold text-blue-900 mb-2">Azərbaycan Elm Fondu</h1>
-          <p className="text-gray-600">Yeni hesab yaradın</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Azərbaycan Elm Fondu</h1>
+          <p className="text-muted-foreground">Yeni hesab yaradın</p>
         </div>
 
         <Card className="shadow-xl border-0">
@@ -131,7 +131,7 @@ export default function RegisterPage() {
                 <div className="space-y-2">
                   <Label htmlFor="firstName">Ad *</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="firstName"
                       value={formData.firstName}
@@ -160,7 +160,7 @@ export default function RegisterPage() {
                 <div className="space-y-2">
                   <Label htmlFor="email">E-mail *</Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
@@ -176,7 +176,7 @@ export default function RegisterPage() {
                 <div className="space-y-2">
                   <Label htmlFor="phone">Telefon</Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="phone"
                       value={formData.phone}
@@ -209,9 +209,9 @@ export default function RegisterPage() {
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (
-                        <EyeOff className="h-4 w-4 text-gray-400" />
+                        <EyeOff className="h-4 w-4 text-muted-foreground" />
                       ) : (
-                        <Eye className="h-4 w-4 text-gray-400" />
+                        <Eye className="h-4 w-4 text-muted-foreground" />
                       )}
                     </Button>
                   </div>
@@ -237,9 +237,9 @@ export default function RegisterPage() {
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? (
-                        <EyeOff className="h-4 w-4 text-gray-400" />
+                        <EyeOff className="h-4 w-4 text-muted-foreground" />
                       ) : (
-                        <Eye className="h-4 w-4 text-gray-400" />
+                        <Eye className="h-4 w-4 text-muted-foreground" />
                       )}
                     </Button>
                   </div>
@@ -252,7 +252,7 @@ export default function RegisterPage() {
                 <div className="space-y-2">
                   <Label htmlFor="institution">Qurum/Təşkilat *</Label>
                   <div className="relative">
-                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="institution"
                       value={formData.institution}
@@ -306,7 +306,7 @@ export default function RegisterPage() {
                 <div className="space-y-2">
                   <Label htmlFor="orcid">ORCID ID</Label>
                   <div className="relative">
-                    <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="orcid"
                       value={formData.orcid}
@@ -358,7 +358,7 @@ export default function RegisterPage() {
 
               {/* Login Link */}
               <div className="text-center">
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-muted-foreground">
                   Artıq hesabınız var?{" "}
                   <Link href="/login" className="text-blue-600 hover:underline">
                     Daxil olun

@@ -47,8 +47,8 @@ export default function AdminDashboardPage() {
     <div className="space-y-6">
       {/* Page Title */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Qrant müsabiqələrinin siyahısı</h1>
-        <p className="text-gray-500 mt-1">Bütün müsabiqələri idarə edin</p>
+        <h1 className="text-2xl font-bold text-foreground">Qrant müsabiqələrinin siyahısı</h1>
+        <p className="text-muted-foreground mt-1">Bütün müsabiqələri idarə edin</p>
       </div>
 
       {/* Summary Cards */}
@@ -60,8 +60,8 @@ export default function AdminDashboardPage() {
                 <Trophy className="h-6 w-6 text-emerald-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Cəmi müsabiqə</p>
-                <p className="text-2xl font-bold text-gray-900">{competitions.length}</p>
+                <p className="text-sm text-muted-foreground">Cəmi müsabiqə</p>
+                <p className="text-2xl font-bold text-foreground">{competitions.length}</p>
               </div>
             </div>
           </CardContent>
@@ -73,8 +73,8 @@ export default function AdminDashboardPage() {
                 <ClipboardList className="h-6 w-6 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Cəmi müraciət</p>
-                <p className="text-2xl font-bold text-gray-900">9</p>
+                <p className="text-sm text-muted-foreground">Cəmi müraciət</p>
+                <p className="text-2xl font-bold text-foreground">9</p>
               </div>
             </div>
           </CardContent>
@@ -86,8 +86,8 @@ export default function AdminDashboardPage() {
                 <Users className="h-6 w-6 text-amber-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Ekspertlər</p>
-                <p className="text-2xl font-bold text-gray-900">4</p>
+                <p className="text-sm text-muted-foreground">Ekspertlər</p>
+                <p className="text-2xl font-bold text-foreground">4</p>
               </div>
             </div>
           </CardContent>
@@ -99,8 +99,8 @@ export default function AdminDashboardPage() {
                 <FileText className="h-6 w-6 text-violet-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Aktiv müsabiqə</p>
-                <p className="text-2xl font-bold text-gray-900">2</p>
+                <p className="text-sm text-muted-foreground">Aktiv müsabiqə</p>
+                <p className="text-2xl font-bold text-foreground">2</p>
               </div>
             </div>
           </CardContent>
@@ -141,8 +141,8 @@ export default function AdminDashboardPage() {
                         {c.code}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-gray-600">{c.startDate}</TableCell>
-                    <TableCell className="text-gray-600">{c.endDate}</TableCell>
+                    <TableCell className="text-muted-foreground">{c.startDate}</TableCell>
+                    <TableCell className="text-muted-foreground">{c.endDate}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
                         <Button size="sm" variant="outline" asChild>
@@ -182,7 +182,7 @@ export default function AdminDashboardPage() {
                     {c.code}
                   </Badge>
                 </div>
-                <div className="flex gap-4 text-xs text-gray-500">
+                <div className="flex gap-4 text-xs text-muted-foreground">
                   <span>Başlama: {c.startDate}</span>
                   <span>Bitmə: {c.endDate}</span>
                 </div>

@@ -102,8 +102,8 @@ export default function RolesPage() {
             <Tag className="h-5 w-5 text-red-600" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Rollar</h1>
-            <p className="text-sm text-gray-500">Sistem rollarını idarə edin</p>
+            <h1 className="text-xl font-bold text-foreground">Rollar</h1>
+            <p className="text-sm text-muted-foreground">Sistem rollarını idarə edin</p>
           </div>
         </div>
         <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={openAdd}>
@@ -132,7 +132,7 @@ export default function RolesPage() {
                 {roles.map((r) => (
                   <TableRow key={r.id} className="hover:bg-slate-50">
                     <TableCell className="font-medium">{r.name}</TableCell>
-                    <TableCell className="text-gray-600 max-w-xs truncate">{r.description}</TableCell>
+                    <TableCell className="text-muted-foreground max-w-xs truncate">{r.description}</TableCell>
                     <TableCell className="text-center">
                       <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-slate-100 text-sm font-medium text-slate-700">
                         {r.userCount}
@@ -167,8 +167,8 @@ export default function RolesPage() {
               <div key={r.id} className="p-4 border rounded-lg space-y-2 hover:bg-slate-50">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{r.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{r.description}</p>
+                    <p className="font-medium text-foreground">{r.name}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{r.description}</p>
                   </div>
                   <span className="text-sm font-medium text-slate-700 bg-slate-100 px-2 py-0.5 rounded">{r.userCount}</span>
                 </div>

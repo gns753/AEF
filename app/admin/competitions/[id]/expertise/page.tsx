@@ -239,8 +239,8 @@ export default function ExpertisePage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <p className="text-sm text-gray-500">Müsabiqələrə qayıt</p>
-          <h1 className="text-2xl font-bold text-gray-900">Ekspertiza — {competitionName}</h1>
+          <p className="text-sm text-muted-foreground">Müsabiqələrə qayıt</p>
+          <h1 className="text-2xl font-bold text-foreground">Ekspertiza — {competitionName}</h1>
         </div>
       </div>
 
@@ -268,7 +268,7 @@ export default function ExpertisePage() {
                 className="p-1 h-auto"
                 onClick={() => setExpertNotificationVisible(false)}
               >
-                <X className="h-4 w-4 text-gray-500" />
+                <X className="h-4 w-4 text-muted-foreground" />
               </Button>
             </div>
           </AlertDescription>
@@ -282,7 +282,7 @@ export default function ExpertisePage() {
           className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
             activeTab === "prepare"
               ? "border-emerald-600 text-emerald-700"
-              : "border-transparent text-gray-500 hover:text-gray-700"
+              : "border-transparent text-muted-foreground hover:text-foreground"
           }`}
         >
           Ekspertlər üçün hazırlamaq
@@ -292,7 +292,7 @@ export default function ExpertisePage() {
           className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
             activeTab === "suspended"
               ? "border-emerald-600 text-emerald-700"
-              : "border-transparent text-gray-500 hover:text-gray-700"
+              : "border-transparent text-muted-foreground hover:text-foreground"
           }`}
         >
           İştirakı dayandırılmış layihələr
@@ -302,7 +302,7 @@ export default function ExpertisePage() {
       {/* Search + Filter */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/70" />
           <Input
             placeholder="Açar sözə görə axtar..."
             value={search}
@@ -392,7 +392,7 @@ export default function ExpertisePage() {
                 ))}
                 {filtered.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8 text-gray-500">
+                    <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
                       Nəticə tapılmadı.
                     </TableCell>
                   </TableRow>
@@ -429,7 +429,7 @@ export default function ExpertisePage() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="text-center py-8 text-gray-500 text-sm">Nəticə tapılmadı.</div>
+              <div className="text-center py-8 text-muted-foreground text-sm">Nəticə tapılmadı.</div>
             )}
           </div>
         </CardContent>
@@ -476,9 +476,9 @@ export default function ExpertisePage() {
               {documentsData.map((doc, i) => (
                 <TableRow key={i}>
                   <TableCell className="font-medium">{doc.name}</TableCell>
-                  <TableCell className="text-gray-600">{doc.signer}</TableCell>
+                  <TableCell className="text-muted-foreground">{doc.signer}</TableCell>
                   <TableCell>{getFormatBadge(doc.format)}</TableCell>
-                  <TableCell className="text-gray-500">{doc.date}</TableCell>
+                  <TableCell className="text-muted-foreground">{doc.date}</TableCell>
                   <TableCell className="text-right">
                     <Button size="sm" variant="outline" onClick={() => alert(`Sənəd yüklənir: ${doc.name}`)}>
                       Sənədə baxış

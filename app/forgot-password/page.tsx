@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
                 className="rounded-full"
               />
             </div>
-            <h1 className="text-2xl font-bold text-blue-900 mb-2">Azərbaycan Elm Fondu</h1>
+            <h1 className="text-2xl font-bold text-foreground mb-2">Azərbaycan Elm Fondu</h1>
           </div>
 
           <Card className="shadow-xl border-0">
@@ -106,8 +106,8 @@ export default function ForgotPasswordPage() {
               className="rounded-full"
             />
           </div>
-          <h1 className="text-2xl font-bold text-blue-900 mb-2">Azərbaycan Elm Fondu</h1>
-          <p className="text-gray-600">Şifrəni bərpa edin</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Azərbaycan Elm Fondu</h1>
+          <p className="text-muted-foreground">Şifrəni bərpa edin</p>
         </div>
 
         <Card className="shadow-xl border-0">
@@ -122,7 +122,7 @@ export default function ForgotPasswordPage() {
               <div className="space-y-2">
                 <Label htmlFor="email">E-mail ünvanı</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
