@@ -134,8 +134,7 @@ export default function ApplyPage() {
               <div>
                 <DialogTitle>Diqqət</DialogTitle>
                 <DialogDescription className="mt-3">
-                  Məlumatları doldurarkən ad, soyad qeyd olunduğu halda layihəyə xitam veriləcəkdir.
-                  Zəhmət olmasa bu məlumatları diqqətlə doldurun.
+                  Əsas məlumatlar xaricində digər xanaları doldurarkən ad, soyad qeyd olunduğu halda layihəyə xitam veriləcəkdir!
                 </DialogDescription>
               </div>
             </div>
