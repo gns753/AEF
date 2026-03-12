@@ -27,8 +27,8 @@ const sidebarLinks = [
 ]
 
 const contentLinks = [
-  { href: "/superadmin/news", label: "Xəbərlər və Bannerlər", icon: Newspaper },
-  { href: "/superadmin/page-content", label: "Səhifə Məzmunu", icon: FileText },
+ // { href: "/superadmin/news", label: "Xəbərlər və Bannerlər", icon: Newspaper },
+ // { href: "/superadmin/page-content", label: "Səhifə Məzmunu", icon: FileText },
 ]
 
 const allLinks = [...sidebarLinks, ...contentLinks]
