@@ -28,7 +28,9 @@ interface ScienceField {
 }
 
 export default function ApplyPage({ params }: { params: Promise<{ competitionId: string }> }) {
-  const { competitionId } = use(params)
+  const resolvedParams = use(params)
+  const competitionId = resolvedParams.competitionId
+  console.log("[v0] ApplyPage rendered, competitionId:", competitionId)
   const [showWarning, setShowWarning] = useState(true)
   const [scienceFields, setScienceFields] = useState<ScienceField[]>([])
   const [newField, setNewField] = useState({ code: "", name: "" })
