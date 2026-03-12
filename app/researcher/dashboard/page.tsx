@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { FileText, Clock, CheckCircle2, AlertCircle } from "lucide-react"
+import Link from "next/link"
 
 const competitions = [
   {
@@ -138,8 +139,10 @@ export default function ResearcherDashboard() {
                     </TableCell>
                     <TableCell className="text-right pr-6">
                       {comp.status === "Aktiv" ? (
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                          İştirak et
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" asChild>
+                          <Link href={`/researcher/apply/${comp.id}`}>
+                            İştirak et
+                          </Link>
                         </Button>
                       ) : comp.status === "Gözləmədə" ? (
                         <Button size="sm" variant="outline" disabled>
@@ -179,8 +182,10 @@ export default function ResearcherDashboard() {
                   <span>Son tarix: {comp.deadline}</span>
                 </div>
                 {comp.status === "Aktiv" && (
-                  <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    İştirak et
+                  <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white" asChild>
+                    <Link href={`/researcher/apply/${comp.id}`}>
+                      İştirak et
+                    </Link>
                   </Button>
                 )}
               </CardContent>
