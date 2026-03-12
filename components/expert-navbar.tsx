@@ -22,6 +22,7 @@ import {
   Menu,
   ChevronDown,
   ClipboardCheck,
+  User,
 } from "lucide-react"
 
 const navLinks = [

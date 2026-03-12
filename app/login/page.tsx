@@ -316,7 +316,7 @@ export default function LoginPage() {
                 <h2 className="text-xl font-bold text-foreground">Giriş növünü seçin</h2>
                 <button
                   onClick={() => setShowFondSelection(false)}
-                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-muted transition-colors"
                 >
                   <X className="h-5 w-5 text-muted-foreground" />
                 </button>
@@ -326,7 +326,7 @@ export default function LoginPage() {
                 {/* Fond İnzibatçısı option */}
                 <button
                   onClick={handleFondInzibatciLogin}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-gray-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
+                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
                     <User className="h-8 w-8 text-emerald-600" />
@@ -343,7 +343,7 @@ export default function LoginPage() {
                 {/* Admin option */}
                 <button
                   onClick={handleAdminPinOpen}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-gray-200 hover:border-red-400 hover:bg-red-50/50 transition-all group text-center"
+                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-red-400 hover:bg-red-50/50 transition-all group text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center group-hover:bg-red-200 transition-colors">
                     <Lock className="h-8 w-8 text-red-600" />
@@ -380,7 +380,7 @@ export default function LoginPage() {
 
         <Card className="shadow-xl border-0 overflow-hidden">
           {/* User Type Toggle */}
-          <div className="bg-gray-50 border-b px-6 py-4">
+          <div className="bg-muted border-b px-6 py-4">
             <div className="flex items-center justify-between">
               <Label className="text-sm font-medium text-muted-foreground">İstifadəçi növü</Label>
               <div className="flex gap-1 bg-white rounded-lg p-1 border">
@@ -488,7 +488,7 @@ export default function LoginPage() {
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    <div className="w-full border-t border-border" />
                   </div>
                   <div className="relative flex justify-center text-xs">
                     <span className="bg-white px-3 text-muted-foreground">və ya</span>
@@ -509,7 +509,7 @@ export default function LoginPage() {
                         setLoginMode("digital")
                         setError("")
                       }}
-                      className="p-1 rounded-md hover:bg-gray-100 transition-colors"
+                      className="p-1 rounded-md hover:bg-muted transition-colors"
                     >
                       <ArrowLeft className="h-4 w-4 text-muted-foreground" />
                     </button>
@@ -597,17 +597,17 @@ export default function LoginPage() {
                 </form>
 
                 {/* Demo Credentials */}
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                <div className="p-3 bg-muted rounded-lg border border-gray-100">
                   <h3 className="font-medium text-xs text-muted-foreground mb-2">Demo hesablar:</h3>
                   <div className="space-y-1 text-xs text-muted-foreground">
                     <div>
-                      <strong className="text-gray-700">İddiaçı:</strong> researcher@aef.gov.az / researcher123
+                      <strong className="text-foreground">İddiaçı:</strong> researcher@aef.gov.az / researcher123
                     </div>
                     <div>
-                      <strong className="text-gray-700">Ekspert:</strong> expert@aef.gov.az / expert123
+                      <strong className="text-foreground">Ekspert:</strong> expert@aef.gov.az / expert123
                     </div>
                     <div>
-                      <strong className="text-gray-700">Fond inzibatçısı:</strong> admin@aef.gov.az / admin123
+                      <strong className="text-foreground">Fond inzibatçısı:</strong> admin@aef.gov.az / admin123
                     </div>
                   </div>
                 </div>

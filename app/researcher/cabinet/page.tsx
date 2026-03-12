@@ -542,8 +542,8 @@ function EducationTab() {
             <div key={item.id} className="border rounded-lg p-4 hover:border-blue-200 transition-colors">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-medium text-gray-900">{item.institution}</h4>
-                  <p className="text-sm text-gray-600 mt-0.5">{item.speciality}</p>
+                  <h4 className="font-medium text-foreground">{item.institution}</h4>
+                  <p className="text-sm text-muted-foreground mt-0.5">{item.speciality}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <Badge variant="secondary">{item.level}</Badge>
                     <span className="text-xs text-muted-foreground">{item.start} - {item.end}</span>
@@ -666,7 +666,7 @@ function AcademicDegreesTab() {
             {items.map((item) => (
               <div key={item.id} className="flex items-center justify-between border rounded-lg px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{item.title}</p>
+                  <p className="text-sm font-medium text-foreground">{item.title}</p>
                   <p className="text-xs text-muted-foreground">{item.year}{item.org ? ` — ${item.org}` : ""}</p>
                 </div>
                 <Button size="sm" variant="ghost" className="text-red-500" onClick={() => onRemove(item.id)}>
@@ -952,7 +952,7 @@ export default function CabinetPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Şəxsi kabinet</h1>
+        <h1 className="text-2xl font-bold text-foreground">Şəxsi kabinet</h1>
         <p className="text-muted-foreground mt-1">Şəxsi və peşəkar məlumatlarınızı idarə edin</p>
       </div>
 

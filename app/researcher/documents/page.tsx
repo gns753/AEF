@@ -55,7 +55,7 @@ const typeColors: Record<string, string> = {
   Təlimat: "bg-emerald-100 text-emerald-700",
   Forma: "bg-amber-100 text-amber-700",
   Siyasət: "bg-red-100 text-red-700",
-  Göstəriş: "bg-gray-100 text-gray-700",
+  Göstəriş: "bg-muted text-foreground",
 }
 
 export default function DocumentsPage() {

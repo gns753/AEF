@@ -269,7 +269,7 @@ export default function ProjectsSelectionPage() {
                     <TableRow
                       key={project.id}
                       className={`transition-colors ${
-                        isSelected ? "bg-blue-50/60" : "hover:bg-gray-50/50"
+                        isSelected ? "bg-blue-50/60" : "hover:bg-muted/50"
                       }`}
                     >
                       <TableCell>

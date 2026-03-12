@@ -76,7 +76,7 @@ export function AdminNavbar() {
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-success/10 text-success"
-                        : "text-gray-600 hover:text-foreground hover:bg-gray-50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
@@ -92,7 +92,7 @@ export function AdminNavbar() {
             {/* Language Toggle (desktop) */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-gray-600 hover:border-emerald-300 hover:text-emerald-600 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-success hover:text-success transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
@@ -101,7 +101,7 @@ export function AdminNavbar() {
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-emerald-100 text-emerald-700 text-xs font-semibold">
                       SQ
@@ -115,7 +115,7 @@ export function AdminNavbar() {
                       Fond İnzibatçısı
                     </Badge>
                   </div>
-                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-gray-400" />
+                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-muted-foreground" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
@@ -154,7 +154,7 @@ export function AdminNavbar() {
                     <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
                     <div>
                       <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
-                      <p className="text-xs text-gray-500">İnzibatçı paneli</p>
+                      <p className="text-xs text-muted-foreground">İnzibatçı paneli</p>
                     </div>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ export function AdminNavbar() {
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
                             ? "bg-success/10 text-success"
-                            : "text-gray-600 hover:text-foreground hover:bg-gray-50"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         }`}
                       >
                         <link.icon className="h-5 w-5" />

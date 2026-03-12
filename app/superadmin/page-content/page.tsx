@@ -179,7 +179,7 @@ export default function PageContentPage() {
                       Gorunur
                     </Badge>
                   ) : (
-                    <Badge className="bg-gray-100 text-muted-foreground border-gray-200 hover:bg-gray-100 text-xs">
+                    <Badge className="bg-muted text-muted-foreground border-border hover:bg-muted text-xs">
                       Gizli
                     </Badge>
                   )}
@@ -205,7 +205,7 @@ export default function PageContentPage() {
                         onClick={() => toggleVisibility(block.id)}
                         className={`h-8 px-2 ${
                           block.visible
-                            ? "text-muted-foreground hover:text-gray-700 hover:bg-muted/50"
+                            ? "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                             : "text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50"
                         }`}
                       >

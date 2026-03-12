@@ -116,7 +116,7 @@ export default function ExpertDashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gray-100">
+            <div className="p-2 rounded-lg bg-muted">
               <ClipboardCheck className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
@@ -180,7 +180,7 @@ export default function ExpertDashboard() {
               </TableHeader>
               <TableBody>
                 {competitions.map((comp) => (
-                  <TableRow key={comp.id} className="hover:bg-gray-50/50">
+                  <TableRow key={comp.id} className="hover:bg-muted/50">
                     <TableCell className="font-medium">{comp.name}</TableCell>
                     <TableCell>{getStageBadge(comp.stage)}</TableCell>
                     <TableCell className="text-muted-foreground">{comp.startDate}</TableCell>

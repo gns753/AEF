@@ -28,7 +28,7 @@ export default function ResearcherLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted/30">
       <ResearcherNavbar />
       <main className="container mx-auto px-4 py-6">{children}</main>
     </div>

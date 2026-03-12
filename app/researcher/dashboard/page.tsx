@@ -54,7 +54,7 @@ const competitions = [
 const statusConfig = {
   Aktiv: { variant: "default" as const, className: "bg-green-100 text-green-800 hover:bg-green-100", icon: CheckCircle2 },
   Gözləmədə: { variant: "secondary" as const, className: "bg-amber-100 text-amber-800 hover:bg-amber-100", icon: Clock },
-  Tamamlanmış: { variant: "outline" as const, className: "bg-gray-100 text-muted-foreground hover:bg-gray-100", icon: AlertCircle },
+  Tamamlanmış: { variant: "outline" as const, className: "bg-muted text-muted-foreground hover:bg-muted", icon: AlertCircle },
 }
 
 export default function ResearcherDashboard() {
@@ -94,7 +94,7 @@ export default function ResearcherDashboard() {
         </Card>
         <Card>
           <CardContent className="flex items-center gap-4 p-4">
-            <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-lg bg-muted flex items-center justify-center">
               <FileText className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
