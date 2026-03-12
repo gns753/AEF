@@ -16,20 +16,25 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
-  Home,
+  UserCircle,
+  BookOpen,
   Trophy,
-  BarChart3,
-  FileText,
+  Users,
   LogOut,
   Globe,
   Menu,
   ChevronDown,
+  ClipboardCheck,
+  GraduationCap,
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/admin/dashboard", label: "Ana səhifə", icon: Home },
-  { href: "/admin/reports", label: "Hesabatlar", icon: BarChart3 },
-  { href: "/admin/documents", label: "Normativ sənədlər", icon: FileText },
+  { href: "/admin/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
+  { href: "/admin/references", label: "Məlumat kitabçaları", icon: BookOpen },
+  { href: "/admin/competitions", label: "Qrant müsabiqələri", icon: Trophy },
+  { href: "/admin/users", label: "İstifadəçilər", icon: Users },
+  { href: "/admin/expertise", label: "Ekspertiza", icon: ClipboardCheck },
+  { href: "/admin/seminars", label: "Məsləhət seminarları", icon: GraduationCap },
 ]
 
 export function AdminNavbar() {
@@ -57,7 +62,7 @@ export function AdminNavbar() {
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
-            <Link href="/admin/dashboard" className="flex items-center gap-2">
+            <Link href="/admin/cabinet" className="flex items-center gap-2">
               <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full tracking-normal leading-7" />
               <span className="hidden sm:block text-sm font-bold text-foreground">Azərbaycan Elm Fondu</span>
             </Link>
@@ -65,10 +70,7 @@ export function AdminNavbar() {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/admin/dashboard"
-                    ? pathname === "/admin/dashboard"
-                    : pathname.startsWith(link.href)
+                const isActive = pathname.startsWith(link.href)
                 return (
                   <Link
                     key={link.href}
@@ -134,7 +136,7 @@ export function AdminNavbar() {
                   {language === "az" ? "English" : "Azərbaycanca"}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" />
                   Çıxış
                 </DropdownMenuItem>
@@ -160,10 +162,7 @@ export function AdminNavbar() {
                 </div>
                 <nav className="p-3 flex flex-col gap-1">
                   {navLinks.map((link) => {
-                    const isActive =
-                      link.href === "/admin/dashboard"
-                        ? pathname === "/admin/dashboard"
-                        : pathname.startsWith(link.href)
+                    const isActive = pathname.startsWith(link.href)
                     return (
                       <Link
                         key={link.href}
