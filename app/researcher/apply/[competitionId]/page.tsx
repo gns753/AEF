@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -27,7 +27,8 @@ interface ScienceField {
   name: string
 }
 
-export default function ApplyPage({ params }: { params: { competitionId: string } }) {
+export default function ApplyPage({ params }: { params: Promise<{ competitionId: string }> }) {
+  const { competitionId } = use(params)
   const [showWarning, setShowWarning] = useState(true)
   const [scienceFields, setScienceFields] = useState<ScienceField[]>([])
   const [newField, setNewField] = useState({ code: "", name: "" })
