@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const userType = localStorage.getItem("userType")
 
     if (loggedIn !== "true" || userType !== "Fond İnzibatçısı") {
-      router.push("/login")
+      router.replace("/login")
     } else {
       setIsAuthed(true)
     }
@@ -28,7 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted/30">
       <AdminNavbar />
       <main className="container mx-auto px-4 py-6">{children}</main>
     </div>

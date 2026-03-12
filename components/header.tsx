@@ -56,7 +56,7 @@ export function Header() {
   }
 
   return (
-    <header className="w-full border-b bg-white">
+    <header className="w-full border-b border-border bg-background">
       {/* Main Header */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -69,8 +69,8 @@ export function Header() {
               className="rounded-full"
             />
             <div>
-              <h1 className="text-xl font-bold text-blue-900">Azərbaycan Elm Fondu</h1>
-              <p className="text-sm text-gray-600">Azərbaycan Prezidenti yanında</p>
+              <h1 className="text-xl font-bold text-primary">Azərbaycan Elm Fondu</h1>
+              <p className="text-sm text-muted-foreground">Azərbaycan Prezidenti yanında</p>
             </div>
           </Link>
 
@@ -79,7 +79,7 @@ export function Header() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className="px-4 py-2 hover:text-blue-600">Ana səhifə</NavigationMenuLink>
+                  <NavigationMenuLink className="px-4 py-2 hover:text-primary">Ana səhifə</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
 
@@ -87,22 +87,22 @@ export function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Fond Haqqında</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid grid-cols-2 gap-6 p-6 w-[800px] bg-white border border-gray-200">
+                  <div className="grid grid-cols-2 gap-6 p-6 w-[800px] bg-popover border border-border">
                     {/* Column 1 */}
                     <div className="space-y-6">
                       {/* RƏSMİ SƏNƏDLƏR */}
                       <div>
-                        <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                        <h3 className="font-bold text-primary mb-2 flex items-center">
                           <span className="mr-2"></span> RƏSMİ SƏNƏDLƏR
                         </h3>
                         <ul className="space-y-1 pl-6">
                           <li>
-                            <Link href="/about/documents" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/documents" className="text-foreground/70 hover:text-primary text-sm">
                               Rəsmi sənədlər
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/charter" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/charter" className="text-foreground/70 hover:text-primary text-sm">
                               Fondun Nizamnaməsi
                             </Link>
                           </li>
@@ -111,17 +111,17 @@ export function Header() {
 
                       {/* FONDUN STRUKTURU */}
                       <div>
-                        <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                        <h3 className="font-bold text-primary mb-2 flex items-center">
                           <span className="mr-2"></span> FONDUN STRUKTURU
                         </h3>
                         <ul className="space-y-1 pl-6">
                           <li>
-                            <Link href="/about/board" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/board" className="text-foreground/70 hover:text-primary text-sm">
                               Himayədarlar Şurası
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/executive" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/executive" className="text-foreground/70 hover:text-primary text-sm">
                               İcraçı direksiya
                             </Link>
                           </li>
@@ -133,57 +133,57 @@ export function Header() {
                     <div className="space-y-6">
                       {/* FONDUN FƏALİYYƏTİ */}
                       <div>
-                        <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                        <h3 className="font-bold text-primary mb-2 flex items-center">
                           <span className="mr-2"></span> FONDUN FƏALİYYƏTİ
                         </h3>
                         <ul className="space-y-1 pl-6">
                           <li>
-                            <Link href="/about/history" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/history" className="text-foreground/70 hover:text-primary text-sm">
                               Yaranma tarixi
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/directions" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/directions" className="text-foreground/70 hover:text-primary text-sm">
                               Fondun fəaliyyətinin əsas istiqamətləri
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/financing" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/financing" className="text-foreground/70 hover:text-primary text-sm">
                               Fondun maliyyələşməsi
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/international" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/international" className="text-foreground/70 hover:text-primary text-sm">
                               Beynəlxalq əlaqələr
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/state-programs" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/state-programs" className="text-foreground/70 hover:text-primary text-sm">
                               Dövlət proqramlarında iştirak
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/agreements" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/agreements" className="text-foreground/70 hover:text-primary text-sm">
                               Sazişlər, memorandumlar və protokollar
                             </Link>
                           </li>
                           <li>
                             <Link
                               href="/about/international-grants"
-                              className="text-gray-700 hover:text-blue-600 text-sm"
+                              className="text-foreground/70 hover:text-primary text-sm"
                             >
                               Beynəlxalq qrantlar
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/financial-reports" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/financial-reports" className="text-foreground/70 hover:text-primary text-sm">
                               Maliyyə hesabatları
                             </Link>
                           </li>
                           <li>
                             <Link
                               href="/about/scientific-reports"
-                              className="text-gray-700 hover:text-blue-600 text-sm"
+                              className="text-foreground/70 hover:text-primary text-sm"
                             >
                               Elmi hesabatlar
                             </Link>
@@ -193,42 +193,42 @@ export function Header() {
 
                       {/* MƏLUMAT BÖLMƏSİ */}
                       <div>
-                        <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                        <h3 className="font-bold text-primary mb-2 flex items-center">
                           <span className="mr-2"></span> MƏLUMAT BÖLMƏSİ
                         </h3>
                         <ul className="space-y-1 pl-6">
                           <li>
-                            <Link href="/about/events" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/events" className="text-foreground/70 hover:text-primary text-sm">
                               Fondun tədbirləri
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/seminars" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/seminars" className="text-foreground/70 hover:text-primary text-sm">
                               Məşvərət seminarları
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/media" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/media" className="text-foreground/70 hover:text-primary text-sm">
                               Fond KİV-də
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/gallery" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/gallery" className="text-foreground/70 hover:text-primary text-sm">
                               Foto və video qalereya
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/press" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/press" className="text-foreground/70 hover:text-primary text-sm">
                               Press-relizlər
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/media-kit" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/media-kit" className="text-foreground/70 hover:text-primary text-sm">
                               Media-kit
                             </Link>
                           </li>
                           <li>
-                            <Link href="/about/video" className="text-gray-700 hover:text-blue-600 text-sm">
+                            <Link href="/about/video" className="text-foreground/70 hover:text-primary text-sm">
                               Video çarx
                             </Link>
                           </li>
@@ -243,45 +243,45 @@ export function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Qrant Müsabiqələri</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid grid-cols-3 gap-6 p-6 w-[900px] bg-white border border-gray-200">
+                  <div className="grid grid-cols-3 gap-6 p-6 w-[900px] bg-popover border border-border">
                     {/* Column 1 */}
                     <div>
-                      <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                      <h3 className="font-bold text-primary mb-2 flex items-center">
                         <span className="mr-2"></span> MÜSABİQƏLƏR
                       </h3>
                       <ul className="space-y-1 pl-6">
                         <li>
-                          <Link href="/grants/current" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/current" className="text-foreground/70 hover:text-primary text-sm">
                             Cari qrant müsabiqələri
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/completed" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/completed" className="text-foreground/70 hover:text-primary text-sm">
                             Bitmiş qrant müsabiqələri
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/joint" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/joint" className="text-foreground/70 hover:text-primary text-sm">
                             Birgə qrant müsabiqələri
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/international" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/international" className="text-foreground/70 hover:text-primary text-sm">
                             Beynəlxalq qrant müsabiqələri
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/statistics" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/statistics" className="text-foreground/70 hover:text-primary text-sm">
                             Statistika
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/results" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/results" className="text-foreground/70 hover:text-primary text-sm">
                             Nəticələr və statistika
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/institutions" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/institutions" className="text-foreground/70 hover:text-primary text-sm">
                             Qrant layihələrində təmsil olunmuş qurumlar
                           </Link>
                         </li>
@@ -290,37 +290,37 @@ export function Header() {
 
                     {/* Column 2 */}
                     <div>
-                      <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                      <h3 className="font-bold text-primary mb-2 flex items-center">
                         <span className="mr-2"></span> KÖMƏKÇİ MATERİALLAR
                       </h3>
                       <ul className="space-y-1 pl-6">
                         <li>
-                          <Link href="/grants/instructions" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/instructions" className="text-foreground/70 hover:text-primary text-sm">
                             Təlimatlar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/rules" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/rules" className="text-foreground/70 hover:text-primary text-sm">
                             Müsabiqənin keçirilməsi qaydaları
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/legislation" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/legislation" className="text-foreground/70 hover:text-primary text-sm">
                             Qanunvericilik
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/classification" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/classification" className="text-foreground/70 hover:text-primary text-sm">
                             Elm sahələri və istiqamətlərinin təsnifatı
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/faq" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/faq" className="text-foreground/70 hover:text-primary text-sm">
                             Tez-tez verilən suallar və cavablar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/certificate" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/certificate" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə verilən sertifikat nümunəsi
                           </Link>
                         </li>
@@ -329,47 +329,47 @@ export function Header() {
 
                     {/* Column 3 */}
                     <div>
-                      <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                      <h3 className="font-bold text-primary mb-2 flex items-center">
                         <span className="mr-2"></span> BAŞA ÇATMIŞ LAYİHƏLƏR
                       </h3>
                       <ul className="space-y-1 pl-6">
                         <li>
-                          <Link href="/grants/successful" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/successful" className="text-foreground/70 hover:text-primary text-sm">
                             Uğurlu layihələr
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/results-2010-2021" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/results-2010-2021" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə nəticələr və dərc olunmuş məqalələr (2010–2021)
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/results-2022" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/results-2022" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə nəticələr və dərc olunmuş məqalələr (2022–)
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/publications" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/publications" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə nəşrlər
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/websites" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/websites" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə yaradılmış veb saytlar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/conferences" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/conferences" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə keçirilmiş konfranslar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/laboratories" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/laboratories" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə yaradılmış laboratoriyalar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/grants/dissertations" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/grants/dissertations" className="text-foreground/70 hover:text-primary text-sm">
                             Qrantlar üzrə dissertasiya müdafiələri
                           </Link>
                         </li>
@@ -383,37 +383,37 @@ export function Header() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Elm və İnkişaf</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid grid-cols-2 gap-6 p-6 w-[700px] bg-white border border-gray-200">
+                  <div className="grid grid-cols-2 gap-6 p-6 w-[700px] bg-popover border border-border">
                     {/* Column 1 */}
                     <div>
-                      <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                      <h3 className="font-bold text-primary mb-2 flex items-center">
                         <span className="mr-2"></span> Elmi Resurslar və Potensial
                       </h3>
                       <ul className="space-y-1 pl-6">
                         <li>
-                          <Link href="/science/potential" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/potential" className="text-foreground/70 hover:text-primary text-sm">
                             Azərbaycanın elmi potensialı
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/institutions" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/institutions" className="text-foreground/70 hover:text-primary text-sm">
                             Azərbaycanda elmi qurumlar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/analytics" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/analytics" className="text-foreground/70 hover:text-primary text-sm">
                             Analitik informasiya
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/news" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/news" className="text-foreground/70 hover:text-primary text-sm">
                             Elmi yeniliklər
                           </Link>
                         </li>
                         <li>
                           <Link
                             href="/science/upcoming-conferences"
-                            className="text-gray-700 hover:text-blue-600 text-sm"
+                            className="text-foreground/70 hover:text-primary text-sm"
                           >
                             Baş tutacaq konfranslar
                           </Link>
@@ -423,37 +423,37 @@ export function Header() {
 
                     {/* Column 2 */}
                     <div>
-                      <h3 className="font-bold text-blue-900 mb-2 flex items-center">
+                      <h3 className="font-bold text-primary mb-2 flex items-center">
                         <span className="mr-2"></span> Elmi Nəşrlər və Maarifləndirmə
                       </h3>
                       <ul className="space-y-1 pl-6">
                         <li>
-                          <Link href="/science/journals" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/journals" className="text-foreground/70 hover:text-primary text-sm">
                             Elmi jurnallar
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/promotion" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/promotion" className="text-foreground/70 hover:text-primary text-sm">
                             Elmin təbliği
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/scientists" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/scientists" className="text-foreground/70 hover:text-primary text-sm">
                             Azərbaycanın dahi alimləri
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/diaspora" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/diaspora" className="text-foreground/70 hover:text-primary text-sm">
                             Diasporadakı alimlər
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/links" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/links" className="text-foreground/70 hover:text-primary text-sm">
                             Faydalı linklər və keçidlər
                           </Link>
                         </li>
                         <li>
-                          <Link href="/science/journal" className="text-gray-700 hover:text-blue-600 text-sm">
+                          <Link href="/science/journal" className="text-foreground/70 hover:text-primary text-sm">
                             Elektron elmi kütləvi jurnal "Elmin nəbzi"
                           </Link>
                         </li>
@@ -465,13 +465,13 @@ export function Header() {
 
               <NavigationMenuItem>
                 <Link href="/news" legacyBehavior passHref>
-                  <NavigationMenuLink className="px-4 py-2 hover:text-blue-600">Xəbərlər</NavigationMenuLink>
+                  <NavigationMenuLink className="px-4 py-2 hover:text-primary">Xəbərlər</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <Link href="/contact" legacyBehavior passHref>
-                  <NavigationMenuLink className="px-4 py-2 hover:text-blue-600">Əlaqə</NavigationMenuLink>
+                  <NavigationMenuLink className="px-4 py-2 hover:text-primary">Əlaqə</NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -481,19 +481,19 @@ export function Header() {
             {/* Language Switcher */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-sm font-medium text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-sm font-medium text-foreground/70 hover:border-primary hover:text-primary transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
             </button>
 
-            <div className="hidden lg:block w-px h-6 bg-gray-200" />
+            <div className="hidden lg:block w-px h-6 bg-border" />
             {isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                     <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-blue-100 text-blue-600 font-semibold">
+                      <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                         {userName
                           .split(" ")
                           .map((n) => n[0])
@@ -505,8 +505,8 @@ export function Header() {
                 <DropdownMenuContent className="w-56" align="end" forceMount>
                   <div className="flex items-center justify-start gap-2 p-2">
                     <div className="flex flex-col space-y-1 leading-none">
-                      <p className="font-medium text-gray-900">{userName}</p>
-                      <p className="text-xs text-gray-500">Ekspert</p>
+                      <p className="font-medium text-foreground">{userName}</p>
+                      <p className="text-xs text-muted-foreground">Ekspert</p>
                     </div>
                   </div>
                   <DropdownMenuSeparator />
@@ -556,10 +556,10 @@ export function Header() {
                   <Link href="/contact" className="text-lg font-medium">
                     Əlaqə
                   </Link>
-                  <div className="pt-2 border-t border-gray-200">
+                  <div className="pt-2 border-t border-border">
                     <button
                       onClick={() => setLanguage(language === "az" ? "en" : "az")}
-                      className="flex items-center gap-2 text-base font-medium text-gray-700"
+                      className="flex items-center gap-2 text-base font-medium text-foreground/70"
                     >
                       <Globe className="h-4 w-4" />
                       {language === "az" ? "English" : "Azərbaycanca"}

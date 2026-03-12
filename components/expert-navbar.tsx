@@ -22,10 +22,12 @@ import {
   Menu,
   ChevronDown,
   ClipboardCheck,
+  User,
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/expert/dashboard", label: "Təyin edilmiş müsabiqələr", icon: Home },
+  { href: "/expert/dashboard", label: "Ekspertizaya göndərilmiş müsabiqələr", icon: Home },
+  { href: "/expert/cabinet", label: "Şəxsi Kabinet", icon: User },
 ]
 
 export function ExpertNavbar() {
@@ -43,18 +45,19 @@ export function ExpertNavbar() {
     localStorage.removeItem("isLoggedIn")
     localStorage.removeItem("userType")
     localStorage.removeItem("userName")
-    router.push("/login")
+    window.history.replaceState(null, "", "/login")
+    router.replace("/login")
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
             <Link href="/expert/dashboard" className="flex items-center gap-2">
               <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
-              <span className="hidden sm:block text-sm font-bold text-gray-900">AEF</span>
+              <span className="hidden sm:block text-sm font-bold text-foreground">AEF</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -67,8 +70,8 @@ export function ExpertNavbar() {
                     href={link.href}
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-blue-50 text-blue-700"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
@@ -84,7 +87,7 @@ export function ExpertNavbar() {
             {/* Language Toggle (desktop) */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-gray-600 hover:border-blue-300 hover:text-blue-600 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-primary hover:text-primary transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
@@ -93,27 +96,27 @@ export function ExpertNavbar() {
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-amber-100 text-amber-700 text-xs font-semibold">
+                    <AvatarFallback className="bg-warning/10 text-warning text-xs font-semibold">
                       FM
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:flex flex-col items-start">
-                    <span className="text-sm font-medium text-gray-900 leading-none">
+                    <span className="text-sm font-medium text-foreground leading-none">
                       {userName}
                     </span>
-                    <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100">
+                    <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-warning/10 text-warning border-warning/20 hover:bg-warning/10">
                       Ekspert
                     </Badge>
                   </div>
-                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-gray-400" />
+                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-muted-foreground" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 md:hidden">
-                  <p className="text-sm font-medium text-gray-900">{userName}</p>
-                  <Badge className="mt-1 text-[10px] bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100">
+                  <p className="text-sm font-medium text-foreground">{userName}</p>
+                  <Badge className="mt-1 text-[10px] bg-warning/10 text-warning border-warning/20 hover:bg-warning/10">
                     Ekspert
                   </Badge>
                 </div>
@@ -126,7 +129,7 @@ export function ExpertNavbar() {
                   {language === "az" ? "English" : "Azərbaycanca"}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" />
                   Çıxış
                 </DropdownMenuItem>
@@ -151,8 +154,8 @@ export function ExpertNavbar() {
                       className="rounded-full"
                     />
                     <div>
-                      <p className="text-sm font-bold text-gray-900">Azərbaycan Elm Fondu</p>
-                      <p className="text-xs text-gray-500">Ekspert paneli</p>
+                      <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
+                      <p className="text-xs text-muted-foreground">Ekspert paneli</p>
                     </div>
                   </div>
                 </div>
@@ -166,8 +169,8 @@ export function ExpertNavbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-blue-50 text-blue-700"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         }`}
                       >
                         <link.icon className="h-5 w-5" />

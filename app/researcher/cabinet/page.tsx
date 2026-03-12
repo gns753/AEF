@@ -97,13 +97,13 @@ function PersonalInfoTab() {
             { label: "VÖEN", key: "voen" },
           ].map((field) => (
             <div key={field.key} className="space-y-1.5">
-              <Label className="text-xs text-gray-500">{field.label}</Label>
+              <Label className="text-xs text-muted-foreground">{field.label}</Label>
               <Input
                 type={field.type || "text"}
                 value={data[field.key as keyof typeof data]}
                 onChange={(e) => setData({ ...data, [field.key]: e.target.value })}
                 readOnly={!editing}
-                className={!editing ? "bg-gray-50 border-gray-200" : ""}
+                className={!editing ? "bg-muted border-gray-200" : ""}
               />
             </div>
           ))}
@@ -453,7 +453,7 @@ function DocumentsTab() {
                     {d.file ? (
                       <Badge className="bg-green-100 text-green-700 hover:bg-green-100">Yüklənib</Badge>
                     ) : (
-                      <Badge variant="outline" className="text-gray-400">Yoxdur</Badge>
+                      <Badge variant="outline" className="text-muted-foreground">Yoxdur</Badge>
                     )}
                   </TableCell>
                   <TableCell className="text-right pr-6">
@@ -499,9 +499,9 @@ function DocumentsTab() {
             <div className="space-y-1.5">
               <Label>Skan surəti</Label>
               <div className="border-2 border-dashed rounded-lg p-6 text-center hover:border-blue-300 transition-colors cursor-pointer">
-                <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
-                <p className="text-sm text-gray-500">Faylı buraya sürükləyin və ya klikləyin</p>
-                <p className="text-xs text-gray-400 mt-1">PDF, JPG, PNG (maks. 5MB)</p>
+                <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+                <p className="text-sm text-muted-foreground">Faylı buraya sürükləyin və ya klikləyin</p>
+                <p className="text-xs text-muted-foreground mt-1">PDF, JPG, PNG (maks. 5MB)</p>
               </div>
             </div>
           </div>
@@ -542,11 +542,11 @@ function EducationTab() {
             <div key={item.id} className="border rounded-lg p-4 hover:border-blue-200 transition-colors">
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="font-medium text-gray-900">{item.institution}</h4>
-                  <p className="text-sm text-gray-600 mt-0.5">{item.speciality}</p>
+                  <h4 className="font-medium text-foreground">{item.institution}</h4>
+                  <p className="text-sm text-muted-foreground mt-0.5">{item.speciality}</p>
                   <div className="flex items-center gap-2 mt-2">
                     <Badge variant="secondary">{item.level}</Badge>
-                    <span className="text-xs text-gray-500">{item.start} - {item.end}</span>
+                    <span className="text-xs text-muted-foreground">{item.start} - {item.end}</span>
                   </div>
                   {item.diploma && (
                     <Badge className="mt-2 bg-green-100 text-green-700 hover:bg-green-100">
@@ -604,8 +604,8 @@ function EducationTab() {
             <div className="space-y-1.5">
               <Label>Diplom</Label>
               <div className="border-2 border-dashed rounded-lg p-4 text-center hover:border-blue-300 transition-colors cursor-pointer">
-                <Upload className="h-6 w-6 mx-auto text-gray-400 mb-1" />
-                <p className="text-xs text-gray-500">PDF, JPG (maks. 5MB)</p>
+                <Upload className="h-6 w-6 mx-auto text-muted-foreground mb-1" />
+                <p className="text-xs text-muted-foreground">PDF, JPG (maks. 5MB)</p>
               </div>
             </div>
           </div>
@@ -660,14 +660,14 @@ function AcademicDegreesTab() {
       </CardHeader>
       <CardContent>
         {items.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-4">Məlumat yoxdur</p>
+          <p className="text-sm text-muted-foreground text-center py-4">Məlumat yoxdur</p>
         ) : (
           <div className="space-y-2">
             {items.map((item) => (
               <div key={item.id} className="flex items-center justify-between border rounded-lg px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                  <p className="text-xs text-gray-500">{item.year}{item.org ? ` — ${item.org}` : ""}</p>
+                  <p className="text-sm font-medium text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">{item.year}{item.org ? ` — ${item.org}` : ""}</p>
                 </div>
                 <Button size="sm" variant="ghost" className="text-red-500" onClick={() => onRemove(item.id)}>
                   <Trash2 className="h-3.5 w-3.5" />
@@ -952,8 +952,8 @@ export default function CabinetPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Şəxsi kabinet</h1>
-        <p className="text-gray-500 mt-1">Şəxsi və peşəkar məlumatlarınızı idarə edin</p>
+        <h1 className="text-2xl font-bold text-foreground">Şəxsi kabinet</h1>
+        <p className="text-muted-foreground mt-1">Şəxsi və peşəkar məlumatlarınızı idarə edin</p>
       </div>
 
       <Tabs defaultValue="personal" className="space-y-6">

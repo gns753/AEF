@@ -61,7 +61,7 @@ export default function LoginPage() {
         localStorage.setItem("isLoggedIn", "true")
         localStorage.setItem("userType", "İddiaçı")
         localStorage.setItem("userName", "Dr. Aysel Məmmədova")
-        router.push("/researcher/dashboard")
+        router.replace("/researcher/dashboard")
       } else {
         setError("Yanlış email və ya şifrə")
       }
@@ -70,7 +70,7 @@ export default function LoginPage() {
         localStorage.setItem("isLoggedIn", "true")
         localStorage.setItem("userType", "Ekspert")
         localStorage.setItem("userName", "Fuad Məmmədov")
-        router.push("/expert/dashboard")
+        router.replace("/expert/dashboard")
       } else {
         setError("Yanlış email və ya şifrə")
       }
@@ -110,7 +110,7 @@ export default function LoginPage() {
       "İddiaçı": "/researcher/dashboard",
       "Ekspert": "/expert/dashboard",
     }
-    router.push(routeMap[userType] || "/login")
+    router.replace(routeMap[userType] || "/login")
 
     setIsLoading(false)
   }
@@ -123,7 +123,7 @@ export default function LoginPage() {
     localStorage.setItem("isLoggedIn", "true")
     localStorage.setItem("userType", "Fond İnzibatçısı")
     localStorage.setItem("userName", "Sevinc Quliyeva")
-    router.push("/admin/dashboard")
+    router.replace("/admin/dashboard")
 
     setIsLoading(false)
   }
@@ -193,7 +193,7 @@ export default function LoginPage() {
       localStorage.setItem("isLoggedIn", "true")
       localStorage.setItem("userType", "Admin")
       localStorage.setItem("userName", "Admin")
-      router.push("/superadmin/users")
+      router.replace("/superadmin/users")
     } else {
       const newAttempts = pinAttempts + 1
       setPinAttempts(newAttempts)
@@ -313,12 +313,12 @@ export default function LoginPage() {
           <Card className="w-full max-w-lg shadow-2xl border-0 animate-in fade-in zoom-in-95 duration-200">
             <CardContent className="p-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Giriş növünü seçin</h2>
+                <h2 className="text-xl font-bold text-foreground">Giriş növünü seçin</h2>
                 <button
                   onClick={() => setShowFondSelection(false)}
-                  className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-muted transition-colors"
                 >
-                  <X className="h-5 w-5 text-gray-400" />
+                  <X className="h-5 w-5 text-muted-foreground" />
                 </button>
               </div>
 
@@ -326,14 +326,14 @@ export default function LoginPage() {
                 {/* Fond İnzibatçısı option */}
                 <button
                   onClick={handleFondInzibatciLogin}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-gray-200 hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
+                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
                     <User className="h-8 w-8 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 mb-1">Fond İnzibatçısı</p>
-                    <p className="text-xs text-gray-500">Standart giriş</p>
+                    <p className="font-semibold text-foreground mb-1">Fond İnzibatçısı</p>
+                    <p className="text-xs text-muted-foreground">Standart giriş</p>
                   </div>
                   <span className="text-sm font-medium text-emerald-600 border border-emerald-200 rounded-full px-4 py-1.5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                     Daxil ol
@@ -343,14 +343,14 @@ export default function LoginPage() {
                 {/* Admin option */}
                 <button
                   onClick={handleAdminPinOpen}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-gray-200 hover:border-red-400 hover:bg-red-50/50 transition-all group text-center"
+                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-red-400 hover:bg-red-50/50 transition-all group text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center group-hover:bg-red-200 transition-colors">
                     <Lock className="h-8 w-8 text-red-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 mb-1">Admin</p>
-                    <p className="text-xs text-gray-500">{"İdarəetmə panelinə giriş"}</p>
+                    <p className="font-semibold text-foreground mb-1">Admin</p>
+                    <p className="text-xs text-muted-foreground">{"İdarəetmə panelinə giriş"}</p>
                   </div>
                   <span className="text-sm font-medium text-red-600 border border-red-200 rounded-full px-4 py-1.5 group-hover:bg-red-600 group-hover:text-white transition-colors">
                     Daxil ol
@@ -374,15 +374,15 @@ export default function LoginPage() {
               className="rounded-full"
             />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Azərbaycan Elm Fondu</h1>
-          <p className="text-gray-500 text-sm">Elektron Qrant İdarəetmə Sistemi</p>
+          <h1 className="text-2xl font-bold text-foreground mb-1">Azərbaycan Elm Fondu</h1>
+          <p className="text-muted-foreground text-sm">Elektron Qrant İdarəetmə Sistemi</p>
         </div>
 
         <Card className="shadow-xl border-0 overflow-hidden">
           {/* User Type Toggle */}
-          <div className="bg-gray-50 border-b px-6 py-4">
+          <div className="bg-muted border-b px-6 py-4">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium text-gray-600">İstifadəçi növü</Label>
+              <Label className="text-sm font-medium text-muted-foreground">İstifadəçi növü</Label>
               <div className="flex gap-1 bg-white rounded-lg p-1 border">
                 <button
                   type="button"
@@ -390,7 +390,7 @@ export default function LoginPage() {
                   className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                     userType === "İddiaçı"
                       ? "bg-blue-600 text-white shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   İddiaçı
@@ -401,7 +401,7 @@ export default function LoginPage() {
                   className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                     userType === "Ekspert"
                       ? "bg-blue-600 text-white shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   Ekspert
@@ -412,7 +412,7 @@ export default function LoginPage() {
                   className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                     userType === "Fond İnzibatçısı"
                       ? "bg-emerald-600 text-white shadow-sm"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   Fond İnzibatçısı
@@ -427,8 +427,8 @@ export default function LoginPage() {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">Rəqəmsal giriş</h2>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <h2 className="text-xl font-semibold text-foreground">Rəqəmsal giriş</h2>
+                    <p className="text-sm text-muted-foreground mt-1">
                       Dövlət platforması vasitəsilə təhlükəsiz giriş
                     </p>
                   </div>
@@ -451,10 +451,10 @@ export default function LoginPage() {
                     <Shield className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-left">
-                    <span className="block text-base font-semibold text-gray-900">
+                    <span className="block text-base font-semibold text-foreground">
                       ASAN İmza ilə daxil olun
                     </span>
-                    <span className="block text-xs text-gray-500 mt-0.5">
+                    <span className="block text-xs text-muted-foreground mt-0.5">
                       Mobil elektron imza vasitəsilə təhlükəsiz autentifikasiya
                     </span>
                   </div>
@@ -470,17 +470,17 @@ export default function LoginPage() {
                     <Globe className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-left">
-                    <span className="block text-base font-semibold text-gray-900">
+                    <span className="block text-base font-semibold text-foreground">
                       e-Gov vasitəsilə daxil olun
                     </span>
-                    <span className="block text-xs text-gray-500 mt-0.5">
+                    <span className="block text-xs text-muted-foreground mt-0.5">
                       Elektron hökumət portalı ilə giriş
                     </span>
                   </div>
                 </button>
 
                 {isLoading && (
-                  <div className="flex items-center justify-center gap-2 text-sm text-gray-500 py-2">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground py-2">
                     <div className="h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                     Giriş edilir...
                   </div>
@@ -488,14 +488,14 @@ export default function LoginPage() {
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    <div className="w-full border-t border-border" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="bg-white px-3 text-gray-400">və ya</span>
+                    <span className="bg-white px-3 text-muted-foreground">və ya</span>
                   </div>
                 </div>
 
-                <p className="text-center text-xs text-gray-400">
+                <p className="text-center text-xs text-muted-foreground">
                   Rəqəmsal giriş vasitəsilə şəxsiyyətiniz avtomatik olaraq təsdiqlənir
                 </p>
               </div>
@@ -509,13 +509,13 @@ export default function LoginPage() {
                         setLoginMode("digital")
                         setError("")
                       }}
-                      className="p-1 rounded-md hover:bg-gray-100 transition-colors"
+                      className="p-1 rounded-md hover:bg-muted transition-colors"
                     >
-                      <ArrowLeft className="h-4 w-4 text-gray-500" />
+                      <ArrowLeft className="h-4 w-4 text-muted-foreground" />
                     </button>
                     <div>
-                      <h2 className="text-xl font-semibold text-gray-900">Hesab ilə giriş</h2>
-                      <p className="text-sm text-gray-500 mt-0.5">
+                      <h2 className="text-xl font-semibold text-foreground">Hesab ilə giriş</h2>
+                      <p className="text-sm text-muted-foreground mt-0.5">
                         İstifadəçi adı və şifrənizlə daxil olun
                       </p>
                     </div>
@@ -527,7 +527,7 @@ export default function LoginPage() {
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="email"
                         type="email"
@@ -544,7 +544,7 @@ export default function LoginPage() {
                   <div className="space-y-2">
                     <Label htmlFor="password">Şifrə</Label>
                     <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="password"
                         type={showPassword ? "text" : "password"}
@@ -562,9 +562,9 @@ export default function LoginPage() {
                         onClick={() => setShowPassword(!showPassword)}
                       >
                         {showPassword ? (
-                          <EyeOff className="h-4 w-4 text-gray-400" />
+                          <EyeOff className="h-4 w-4 text-muted-foreground" />
                         ) : (
-                          <Eye className="h-4 w-4 text-gray-400" />
+                          <Eye className="h-4 w-4 text-muted-foreground" />
                         )}
                       </Button>
                     </div>
@@ -587,7 +587,7 @@ export default function LoginPage() {
                     <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
                       Şifrəni unutmusunuz?
                     </Link>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-muted-foreground">
                       {"Hesabınız yoxdur? "}
                       <Link href="/register" className="text-blue-600 hover:underline">
                         Qeydiyyatdan keçin
@@ -597,17 +597,17 @@ export default function LoginPage() {
                 </form>
 
                 {/* Demo Credentials */}
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
-                  <h3 className="font-medium text-xs text-gray-500 mb-2">Demo hesablar:</h3>
-                  <div className="space-y-1 text-xs text-gray-500">
+                <div className="p-3 bg-muted rounded-lg border border-gray-100">
+                  <h3 className="font-medium text-xs text-muted-foreground mb-2">Demo hesablar:</h3>
+                  <div className="space-y-1 text-xs text-muted-foreground">
                     <div>
-                      <strong className="text-gray-700">İddiaçı:</strong> researcher@aef.gov.az / researcher123
+                      <strong className="text-foreground">İddiaçı:</strong> researcher@aef.gov.az / researcher123
                     </div>
                     <div>
-                      <strong className="text-gray-700">Ekspert:</strong> expert@aef.gov.az / expert123
+                      <strong className="text-foreground">Ekspert:</strong> expert@aef.gov.az / expert123
                     </div>
                     <div>
-                      <strong className="text-gray-700">Fond inzibatçısı:</strong> admin@aef.gov.az / admin123
+                      <strong className="text-foreground">Fond inzibatçısı:</strong> admin@aef.gov.az / admin123
                     </div>
                   </div>
                 </div>
@@ -617,8 +617,8 @@ export default function LoginPage() {
         </Card>
 
         {/* Back to home */}
-        <p className="text-center mt-6 text-sm text-gray-400">
-          <Link href="/" className="hover:text-gray-600 transition-colors">
+        <p className="text-center mt-6 text-sm text-muted-foreground">
+          <Link href="/" className="hover:text-muted-foreground transition-colors">
             Ana səhifəyə qayıt
           </Link>
         </p>

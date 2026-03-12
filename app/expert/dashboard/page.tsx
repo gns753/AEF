@@ -104,10 +104,10 @@ export default function ExpertDashboard() {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-foreground">
           Qiymətləndirmə üçün təyin edilmiş müsabiqələr
         </h1>
-        <p className="text-gray-500 mt-1">
+        <p className="text-muted-foreground mt-1">
           Sizə təyin edilmiş qrant müsabiqələrini idarə edin
         </p>
       </div>
@@ -116,12 +116,12 @@ export default function ExpertDashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4 flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gray-100">
-              <ClipboardCheck className="h-5 w-5 text-gray-600" />
+            <div className="p-2 rounded-lg bg-muted">
+              <ClipboardCheck className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{summary.total}</p>
-              <p className="text-xs text-gray-500">Ümumi müsabiqə</p>
+              <p className="text-2xl font-bold text-foreground">{summary.total}</p>
+              <p className="text-xs text-muted-foreground">Ümumi müsabiqə</p>
             </div>
           </CardContent>
         </Card>
@@ -132,7 +132,7 @@ export default function ExpertDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold text-blue-700">{summary.selection}</p>
-              <p className="text-xs text-gray-500">Ekspert seçimi</p>
+              <p className="text-xs text-muted-foreground">Ekspert seçimi</p>
             </div>
           </CardContent>
         </Card>
@@ -143,7 +143,7 @@ export default function ExpertDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold text-amber-700">{summary.evaluation}</p>
-              <p className="text-xs text-gray-500">Qiymətləndirmə</p>
+              <p className="text-xs text-muted-foreground">Qiymətləndirmə</p>
             </div>
           </CardContent>
         </Card>
@@ -154,7 +154,7 @@ export default function ExpertDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold text-green-700">{summary.completed}</p>
-              <p className="text-xs text-gray-500">Tamamlanmış</p>
+              <p className="text-xs text-muted-foreground">Tamamlanmış</p>
             </div>
           </CardContent>
         </Card>
@@ -180,11 +180,11 @@ export default function ExpertDashboard() {
               </TableHeader>
               <TableBody>
                 {competitions.map((comp) => (
-                  <TableRow key={comp.id} className="hover:bg-gray-50/50">
+                  <TableRow key={comp.id} className="hover:bg-muted/50">
                     <TableCell className="font-medium">{comp.name}</TableCell>
                     <TableCell>{getStageBadge(comp.stage)}</TableCell>
-                    <TableCell className="text-gray-600">{comp.startDate}</TableCell>
-                    <TableCell className="text-gray-600">{comp.endDate}</TableCell>
+                    <TableCell className="text-muted-foreground">{comp.startDate}</TableCell>
+                    <TableCell className="text-muted-foreground">{comp.endDate}</TableCell>
                     <TableCell className="text-right">
                       {comp.stage !== "Tamamlanmış" ? (
                         <Button
@@ -214,10 +214,10 @@ export default function ExpertDashboard() {
                 className="p-4 border rounded-lg space-y-3"
               >
                 <div className="flex justify-between items-start gap-2">
-                  <p className="font-medium text-sm text-gray-900">{comp.name}</p>
+                  <p className="font-medium text-sm text-foreground">{comp.name}</p>
                   {getStageBadge(comp.stage)}
                 </div>
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-muted-foreground">
                   <span>Başlama: {comp.startDate}</span>
                   <span>Bitmə: {comp.endDate}</span>
                 </div>

@@ -212,8 +212,8 @@ export default function ProjectsSelectionPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Layihələrin siyahısı</h1>
-          <p className="text-gray-500 mt-0.5">{competitionName}</p>
+          <h1 className="text-2xl font-bold text-foreground">Layihələrin siyahısı</h1>
+          <p className="text-muted-foreground mt-0.5">{competitionName}</p>
         </div>
       </div>
 
@@ -229,7 +229,7 @@ export default function ProjectsSelectionPage() {
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder="Açar sözə görə axtarın..."
           value={search}
@@ -269,7 +269,7 @@ export default function ProjectsSelectionPage() {
                     <TableRow
                       key={project.id}
                       className={`transition-colors ${
-                        isSelected ? "bg-blue-50/60" : "hover:bg-gray-50/50"
+                        isSelected ? "bg-blue-50/60" : "hover:bg-muted/50"
                       }`}
                     >
                       <TableCell>
@@ -279,11 +279,11 @@ export default function ProjectsSelectionPage() {
                           disabled={submitted}
                         />
                       </TableCell>
-                      <TableCell className="font-medium text-gray-900">
+                      <TableCell className="font-medium text-foreground">
                         {project.name}
                       </TableCell>
                       <TableCell className="max-w-[300px]">
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-muted-foreground">
                           {isExpanded ? project.annotation : annotationShort}
                         </div>
                         {project.annotation.length > 120 && (
@@ -296,7 +296,7 @@ export default function ProjectsSelectionPage() {
                         )}
                       </TableCell>
                       <TableCell>{getFieldBadge(project.field)}</TableCell>
-                      <TableCell className="text-gray-600">
+                      <TableCell className="text-muted-foreground">
                         {isSelected ? selectionDates[project.id] : "—"}
                       </TableCell>
                     </TableRow>
@@ -331,16 +331,16 @@ export default function ProjectsSelectionPage() {
                       className="mt-1"
                     />
                     <div className="flex-1 space-y-2">
-                      <p className="font-medium text-sm text-gray-900">{project.name}</p>
+                      <p className="font-medium text-sm text-foreground">{project.name}</p>
                       <div className="flex items-center gap-2 flex-wrap">
                         {getFieldBadge(project.field)}
                         {isSelected && (
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-muted-foreground">
                             Seçim: {selectionDates[project.id]}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-muted-foreground">
                         {isExpanded ? project.annotation : annotationShort}
                       </p>
                       {project.annotation.length > 100 && (
@@ -359,7 +359,7 @@ export default function ProjectsSelectionPage() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-muted-foreground">
               Nəticə tapılmadı.
             </div>
           )}
@@ -368,9 +368,9 @@ export default function ProjectsSelectionPage() {
 
       {/* Footer Actions */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white border rounded-lg">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-muted-foreground">
           Seçilmiş layihələr:{" "}
-          <span className="font-bold text-gray-900">{selectedIds.size}</span>
+          <span className="font-bold text-foreground">{selectedIds.size}</span>
         </p>
         <div className="flex items-center gap-3">
           <Button
@@ -403,7 +403,7 @@ export default function ProjectsSelectionPage() {
             <DialogTitle>Seçimlərinizi təsdiqləyirsiniz?</DialogTitle>
             <DialogDescription>
               Siz{" "}
-              <span className="font-semibold text-gray-900">{selectedIds.size}</span>{" "}
+              <span className="font-semibold text-foreground">{selectedIds.size}</span>{" "}
               layihə seçmisiniz. Bu seçimlər Fond İnzibatçısına göndəriləcək.
             </DialogDescription>
           </DialogHeader>

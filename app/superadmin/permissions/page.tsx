@@ -126,8 +126,8 @@ export default function PermissionsPage() {
             <Key className="h-5 w-5 text-red-600" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Səlahiyyətlər</h1>
-            <p className="text-sm text-gray-500">Sistem səlahiyyətlərini idarə edin</p>
+            <h1 className="text-xl font-bold text-foreground">Səlahiyyətlər</h1>
+            <p className="text-sm text-muted-foreground">Sistem səlahiyyətlərini idarə edin</p>
           </div>
         </div>
         <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={openAdd}>
@@ -160,7 +160,7 @@ export default function PermissionsPage() {
                       <Badge variant="outline" className="font-mono text-xs">{p.code}</Badge>
                     </TableCell>
                     <TableCell>
-                      <Badge className={moduleBadgeColors[p.module] || "bg-gray-100 text-gray-700"}>
+                      <Badge className={moduleBadgeColors[p.module] || "bg-muted text-foreground"}>
                         {p.module}
                       </Badge>
                     </TableCell>
@@ -193,10 +193,10 @@ export default function PermissionsPage() {
               <div key={p.id} className="p-4 border rounded-lg space-y-2 hover:bg-slate-50">
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="font-medium text-gray-900">{p.name}</p>
+                    <p className="font-medium text-foreground">{p.name}</p>
                     <Badge variant="outline" className="font-mono text-[10px] mt-1">{p.code}</Badge>
                   </div>
-                  <Badge className={moduleBadgeColors[p.module] || "bg-gray-100 text-gray-700"}>
+                  <Badge className={moduleBadgeColors[p.module] || "bg-muted text-foreground"}>
                     {p.module}
                   </Badge>
                 </div>

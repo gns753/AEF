@@ -86,7 +86,7 @@ export default function ProjectDetailPage() {
           <ArrowLeft className="h-5 w-5 mr-2" />
           Geri qayıt
         </Button>
-        <p className="text-gray-500">Layihə tapılmadı.</p>
+        <p className="text-muted-foreground">Layihə tapılmadı.</p>
       </div>
     )
   }
@@ -101,8 +101,8 @@ export default function ProjectDetailPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <p className="text-sm text-gray-500">Geri qayıt</p>
-          <h1 className="text-2xl font-bold text-gray-900">Layihənin məlumatları</h1>
+          <p className="text-sm text-muted-foreground">Geri qayıt</p>
+          <h1 className="text-2xl font-bold text-foreground">Layihənin məlumatları</h1>
         </div>
       </div>
 
@@ -117,19 +117,19 @@ export default function ProjectDetailPage() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div className="md:col-span-2">
-              <span className="text-gray-500">Layihənin adı:</span>
+              <span className="text-muted-foreground">Layihənin adı:</span>
               <p className="font-medium mt-0.5">{project.name}</p>
             </div>
             <div className="md:col-span-2">
-              <span className="text-gray-500">Məqsəd:</span>
+              <span className="text-muted-foreground">Məqsəd:</span>
               <p className="font-medium mt-0.5">{project.goal}</p>
             </div>
             <div className="md:col-span-2">
-              <span className="text-gray-500">Annotasiya:</span>
-              <p className="font-medium mt-0.5 text-gray-700">{project.annotation}</p>
+              <span className="text-muted-foreground">Annotasiya:</span>
+              <p className="font-medium mt-0.5 text-foreground">{project.annotation}</p>
             </div>
             <div>
-              <span className="text-gray-500">Elm sahəsi:</span>
+              <span className="text-muted-foreground">Elm sahəsi:</span>
               <div className="mt-1">
                 <Badge variant="secondary">{project.field}</Badge>
               </div>
@@ -149,19 +149,19 @@ export default function ProjectDetailPage() {
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-gray-500">İcra müddəti:</span>
+              <span className="text-muted-foreground">İcra müddəti:</span>
               <p className="font-medium mt-0.5">{project.duration}</p>
             </div>
             <div>
-              <span className="text-gray-500">Başlama tarixi:</span>
+              <span className="text-muted-foreground">Başlama tarixi:</span>
               <p className="font-medium mt-0.5">{project.startDate}</p>
             </div>
             <div>
-              <span className="text-gray-500">Bitmə tarixi:</span>
+              <span className="text-muted-foreground">Bitmə tarixi:</span>
               <p className="font-medium mt-0.5">{project.endDate}</p>
             </div>
             <div>
-              <span className="text-gray-500">Təşkilat:</span>
+              <span className="text-muted-foreground">Təşkilat:</span>
               <p className="font-medium mt-0.5">{project.organization}</p>
             </div>
           </div>
@@ -179,23 +179,23 @@ export default function ProjectDetailPage() {
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-gray-500">Layihə rəhbəri:</span>
+              <span className="text-muted-foreground">Layihə rəhbəri:</span>
               <p className="font-medium mt-0.5">{project.leader}</p>
             </div>
             <div>
-              <span className="text-gray-500">Vəzifəsi:</span>
+              <span className="text-muted-foreground">Vəzifəsi:</span>
               <p className="font-medium mt-0.5">{project.position}</p>
             </div>
             <div>
-              <span className="text-gray-500">Elmi dərəcəsi:</span>
+              <span className="text-muted-foreground">Elmi dərəcəsi:</span>
               <p className="font-medium mt-0.5">{project.degree}</p>
             </div>
             <div>
-              <span className="text-gray-500">Təşkilat:</span>
+              <span className="text-muted-foreground">Təşkilat:</span>
               <p className="font-medium mt-0.5">{project.leaderOrg}</p>
             </div>
             <div>
-              <span className="text-gray-500">Əlaqə:</span>
+              <span className="text-muted-foreground">Əlaqə:</span>
               <p className="font-medium mt-0.5 text-emerald-700">{project.email}</p>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function ProjectDetailPage() {
                   </TableCell>
                 </TableRow>
               ))}
-              <TableRow className="bg-gray-50 font-bold">
+              <TableRow className="bg-muted/50 font-bold">
                 <TableCell>Cəmi</TableCell>
                 <TableCell className="text-right">
                   {totalBudget.toLocaleString("az-AZ")}

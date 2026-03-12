@@ -16,20 +16,25 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
-  Home,
+  UserCircle,
+  BookOpen,
   Trophy,
-  BarChart3,
-  FileText,
+  Users,
   LogOut,
   Globe,
   Menu,
   ChevronDown,
+  ClipboardCheck,
+  GraduationCap,
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/admin/dashboard", label: "Ana səhifə", icon: Home },
-  { href: "/admin/reports", label: "Hesabatlar", icon: BarChart3 },
-  { href: "/admin/documents", label: "Normativ sənədlər", icon: FileText },
+  { href: "/admin/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
+  { href: "/admin/references", label: "Məlumat kitabçaları", icon: BookOpen },
+  { href: "/admin/competitions", label: "Qrant müsabiqələri", icon: Trophy },
+  { href: "/admin/users", label: "İstifadəçilər", icon: Users },
+  { href: "/admin/expertise", label: "Ekspertiza", icon: ClipboardCheck },
+  { href: "/admin/seminars", label: "Məsləhət seminarları", icon: GraduationCap },
 ]
 
 export function AdminNavbar() {
@@ -47,35 +52,33 @@ export function AdminNavbar() {
     localStorage.removeItem("isLoggedIn")
     localStorage.removeItem("userType")
     localStorage.removeItem("userName")
-    router.push("/login")
+    window.history.replaceState(null, "", "/login")
+    router.replace("/login")
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
-            <Link href="/admin/dashboard" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
-              <span className="hidden sm:block text-sm font-bold text-gray-900">AEF</span>
+            <Link href="/admin/cabinet" className="flex items-center gap-2">
+              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full tracking-normal leading-7" />
+              <span className="hidden sm:block text-sm font-bold text-foreground">Azərbaycan Elm Fondu</span>
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
-                const isActive =
-                  link.href === "/admin/dashboard"
-                    ? pathname === "/admin/dashboard"
-                    : pathname.startsWith(link.href)
+                const isActive = pathname.startsWith(link.href)
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                        ? "bg-success/10 text-success"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
                     <link.icon className="h-4 w-4" />
@@ -91,7 +94,7 @@ export function AdminNavbar() {
             {/* Language Toggle (desktop) */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-gray-600 hover:border-emerald-300 hover:text-emerald-600 transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-success hover:text-success transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
@@ -100,26 +103,26 @@ export function AdminNavbar() {
             {/* User Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-emerald-100 text-emerald-700 text-xs font-semibold">
                       SQ
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:flex flex-col items-start">
-                    <span className="text-sm font-medium text-gray-900 leading-none">
+                    <span className="text-sm font-medium text-foreground leading-none">
                       {userName}
                     </span>
                     <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
                       Fond İnzibatçısı
                     </Badge>
                   </div>
-                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-gray-400" />
+                  <ChevronDown className="hidden md:block h-3.5 w-3.5 text-muted-foreground" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 md:hidden">
-                  <p className="text-sm font-medium text-gray-900">{userName}</p>
+                  <p className="text-sm font-medium text-foreground">{userName}</p>
                   <Badge className="mt-1 text-[10px] bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
                     Fond İnzibatçısı
                   </Badge>
@@ -133,7 +136,7 @@ export function AdminNavbar() {
                   {language === "az" ? "English" : "Azərbaycanca"}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                   <LogOut className="h-4 w-4 mr-2" />
                   Çıxış
                 </DropdownMenuItem>
@@ -152,17 +155,14 @@ export function AdminNavbar() {
                   <div className="flex items-center gap-3">
                     <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
                     <div>
-                      <p className="text-sm font-bold text-gray-900">Azərbaycan Elm Fondu</p>
-                      <p className="text-xs text-gray-500">İnzibatçı paneli</p>
+                      <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
+                      <p className="text-xs text-muted-foreground">İnzibatçı paneli</p>
                     </div>
                   </div>
                 </div>
                 <nav className="p-3 flex flex-col gap-1">
                   {navLinks.map((link) => {
-                    const isActive =
-                      link.href === "/admin/dashboard"
-                        ? pathname === "/admin/dashboard"
-                        : pathname.startsWith(link.href)
+                    const isActive = pathname.startsWith(link.href)
                     return (
                       <Link
                         key={link.href}
@@ -170,8 +170,8 @@ export function AdminNavbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-emerald-50 text-emerald-700"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                            ? "bg-success/10 text-success"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         }`}
                       >
                         <link.icon className="h-5 w-5" />
