@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Eye, EyeOff, User, Lock, Shield, Globe, KeyRound, ArrowLeft, X } from "lucide-react"
+import { Eye, EyeOff, User, Lock, Shield, Globe, KeyRound, ArrowLeft, X, UserPlus } from "lucide-react"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -20,6 +21,7 @@ export default function LoginPage() {
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [loginMode, setLoginMode] = useState<"digital" | "credentials">("digital")
+  const [registerMode, setRegisterMode] = useState(false)
 
   // Fond Inzibatcisi selection modal state
   const [showFondSelection, setShowFondSelection] = useState(false)
@@ -98,12 +100,16 @@ export default function LoginPage() {
     setIsLoading(true)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // İddiaçı via Digital Login → complete profile first
+    // İddiaçı via Digital Login → check registerMode
     if (userType === "İddiaçı") {
       localStorage.setItem("isLoggedIn", "true")
       localStorage.setItem("userType", userType)
       localStorage.setItem("userName", "Dr. Aysel Məmmədova")
-      router.replace("/register/complete-profile")
+      if (registerMode) {
+        router.replace("/register/complete-profile")
+      } else {
+        router.replace("/researcher/dashboard")
+      }
       setIsLoading(false)
       return
     }
@@ -404,7 +410,7 @@ export default function LoginPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setUserType("Ekspert")}
+                  onClick={() => { setUserType("Ekspert"); setRegisterMode(false) }}
                   className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${userType === "Ekspert"
                     ? "bg-blue-600 text-white shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
@@ -414,7 +420,7 @@ export default function LoginPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setUserType("Fond İnzibatçısı")}
+                  onClick={() => { setUserType("Fond İnzibatçısı"); setRegisterMode(false) }}
                   className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${userType === "Fond İnzibatçısı"
                     ? "bg-emerald-600 text-white shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
@@ -464,6 +470,30 @@ export default function LoginPage() {
                     </span>
                   </div>
                 </button>
+
+                {/* Register mode checkbox – only for İddiaçı */}
+                {userType === "İddiaçı" && (
+                  <div className="flex items-start gap-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
+                    <Checkbox
+                      id="registerMode"
+                      checked={registerMode}
+                      onCheckedChange={(v) => setRegisterMode(!!v)}
+                      className="mt-0.5"
+                    />
+                    <div>
+                      <label
+                        htmlFor="registerMode"
+                        className="text-sm font-medium text-foreground cursor-pointer flex items-center gap-1.5"
+                      >
+                        <UserPlus className="h-3.5 w-3.5 text-blue-600" />
+                        Yeni qeydiyyat
+                      </label>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        İşarələyin — sisteme ilk dəfə daxil olursunuzsa qeydiyyat forması açılacaq
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 {/* e-Gov Button */}
                 <button
