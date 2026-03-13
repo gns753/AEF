@@ -88,7 +88,7 @@ export default function LoginPage() {
     setIsLoading(false)
   }
 
-  const handleDigitalLogin = async (method: "asan" | "egov") => {
+  const handleDigitalLogin = async (method: "Digital Login" | "egov") => {
     // If Fond İnzibatçısı, show selection modal instead of direct login
     if (userType === "Fond İnzibatçısı") {
       setShowFondSelection(true)
@@ -98,16 +98,24 @@ export default function LoginPage() {
     setIsLoading(true)
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
+    // İddiaçı via Digital Login → complete profile first
+    if (userType === "İddiaçı") {
+      localStorage.setItem("isLoggedIn", "true")
+      localStorage.setItem("userType", userType)
+      localStorage.setItem("userName", "Dr. Aysel Məmmədova")
+      router.replace("/register/complete-profile")
+      setIsLoading(false)
+      return
+    }
+
     localStorage.setItem("isLoggedIn", "true")
     localStorage.setItem("userType", userType)
     const nameMap: Record<string, string> = {
-      "İddiaçı": "Dr. Aysel Məmmədova",
       "Ekspert": "Fuad Məmmədov",
     }
     localStorage.setItem("userName", nameMap[userType] || "İstifadəçi")
 
     const routeMap: Record<string, string> = {
-      "İddiaçı": "/researcher/dashboard",
       "Ekspert": "/expert/dashboard",
     }
     router.replace(routeMap[userType] || "/login")
@@ -387,33 +395,30 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setUserType("İddiaçı")}
-                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    userType === "İddiaçı"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${userType === "İddiaçı"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   İddiaçı
                 </button>
                 <button
                   type="button"
                   onClick={() => setUserType("Ekspert")}
-                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    userType === "Ekspert"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${userType === "Ekspert"
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Ekspert
                 </button>
                 <button
                   type="button"
                   onClick={() => setUserType("Fond İnzibatçısı")}
-                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                    userType === "Fond İnzibatçısı"
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${userType === "Fond İnzibatçısı"
+                    ? "bg-emerald-600 text-white shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Fond İnzibatçısı
                 </button>
@@ -441,9 +446,9 @@ export default function LoginPage() {
                   </button>
                 </div>
 
-                {/* ASAN Imza Button */}
+                {/* Digital Login Button */}
                 <button
-                  onClick={() => handleDigitalLogin("asan")}
+                  onClick={() => handleDigitalLogin("Digital Login")}
                   disabled={isLoading}
                   className="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-blue-100 bg-gradient-to-r from-blue-50 to-blue-100/50 hover:border-blue-300 hover:from-blue-100 hover:to-blue-200/50 transition-all group disabled:opacity-50"
                 >
@@ -452,29 +457,29 @@ export default function LoginPage() {
                   </div>
                   <div className="text-left">
                     <span className="block text-base font-semibold text-foreground">
-                      ASAN İmza ilə daxil olun
+                      Digital Login ilə daxil olun
                     </span>
                     <span className="block text-xs text-muted-foreground mt-0.5">
-                      Mobil elektron imza vasitəsilə təhlükəsiz autentifikasiya
+
                     </span>
                   </div>
                 </button>
 
                 {/* e-Gov Button */}
                 <button
-                  onClick={() => handleDigitalLogin("egov")}
-                  disabled={isLoading}
-                  className="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-emerald-100 bg-gradient-to-r from-emerald-50 to-emerald-100/50 hover:border-emerald-300 hover:from-emerald-100 hover:to-emerald-200/50 transition-all group disabled:opacity-50"
+                // onClick={() => handleDigitalLogin("egov")}
+                // disabled={isLoading}
+                // className="w-full flex items-center gap-4 p-4 rounded-xl border-2 border-emerald-100 bg-gradient-to-r from-emerald-50 to-emerald-100/50 hover:border-emerald-300 hover:from-emerald-100 hover:to-emerald-200/50 transition-all group disabled:opacity-50"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                  <div className="flex-shrink-0 w-0 h-0 rounded-xl bg-emerald-600 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <Globe className="h-6 w-6 text-white" />
                   </div>
                   <div className="text-left">
                     <span className="block text-base font-semibold text-foreground">
-                      e-Gov vasitəsilə daxil olun
+
                     </span>
                     <span className="block text-xs text-muted-foreground mt-0.5">
-                      Elektron hökumət portalı ilə giriş
+
                     </span>
                   </div>
                 </button>
@@ -491,7 +496,7 @@ export default function LoginPage() {
                     <div className="w-full border-t border-border" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="bg-white px-3 text-muted-foreground">və ya</span>
+                    <span className="bg-white px-3 text-muted-foreground"> </span>
                   </div>
                 </div>
 
