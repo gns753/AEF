@@ -78,9 +78,11 @@ export function Header() {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className="px-4 py-2 hover:text-primary">Ana səhifə</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/" className="px-4 py-2 hover:text-primary">
+                    Ana səhifə
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
               {/* FOND HAQQINDA Dropdown */}
