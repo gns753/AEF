@@ -138,7 +138,7 @@ export default function ResearcherDashboard() {
                     <TableCell className="text-right pr-6">
                       <div className="flex items-center justify-end gap-2">
                         <Button size="sm" variant="outline" asChild>
-                          <Link href={`/researcher/projects/${comp.id}`}>
+                          <Link href={`/researcher/project/${comp.id}`}>
                             <ExternalLink className="h-4 w-4 mr-1" />
                             Layihəyə keçin
                           </Link>
@@ -180,7 +180,7 @@ export default function ResearcherDashboard() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" className="flex-1" asChild>
-                    <Link href={`/researcher/projects/${comp.id}`}>
+                    <Link href={`/researcher/project/${comp.id}`}>
                       <ExternalLink className="h-4 w-4 mr-1" />
                       Layihəyə keçin
                     </Link>
