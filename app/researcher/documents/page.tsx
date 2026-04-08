@@ -20,7 +20,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { FileText, Download, Plus, Pencil, Trash2, AlertCircle, CheckCircle2, Clock, XCircle } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { FileText, Download, Plus, Pencil, Trash2, AlertCircle, CheckCircle2, Clock, XCircle, FolderOpen } from "lucide-react"
 
 // Sənəd şablonları
 const documentTemplates = [
@@ -51,28 +57,70 @@ const documentTemplates = [
   },
 ]
 
-// İstifadəçinin yüklədiyi sənədlər
-const initialUserDocuments = [
+// Layihələr və onların sənədləri
+const initialProjectDocuments = [
   {
-    id: 1,
-    name: "Layihə_təklifi_2026.pdf",
-    uploadDate: "15 Yanvar 2026",
-    status: "Təsdiqlənib",
-    rejectReason: null,
+    projectId: 1,
+    projectName: "Süni İntellekt və Maşın Öyrənməsi",
+    competitionName: "2026-cı il Elm və Texnologiya Qrantları",
+    documents: [
+      {
+        id: 1,
+        name: "Layihə_təklifi_AI_2026.pdf",
+        uploadDate: "15 Yanvar 2026",
+        status: "Təsdiqlənib",
+        rejectReason: null,
+      },
+      {
+        id: 2,
+        name: "Büdcə_planı_AI.pdf",
+        uploadDate: "14 Yanvar 2026",
+        status: "Gözləmədə",
+        rejectReason: null,
+      },
+      {
+        id: 3,
+        name: "CV_tədqiqatçı_komanda.pdf",
+        uploadDate: "10 Yanvar 2026",
+        status: "İmtina edilib",
+        rejectReason: "Sənəddə imza yoxdur. Zəhmət olmasa imzalı versiyanı yükləyin.",
+      },
+    ],
   },
   {
-    id: 2,
-    name: "Büdcə_planı.pdf",
-    uploadDate: "14 Yanvar 2026",
-    status: "Gözləmədə",
-    rejectReason: null,
+    projectId: 2,
+    projectName: "Yaşıl Enerji Texnologiyaları",
+    competitionName: "Davamlı İnkişaf Qrantları 2026",
+    documents: [
+      {
+        id: 4,
+        name: "Enerji_layihəsi_təklif.pdf",
+        uploadDate: "20 Yanvar 2026",
+        status: "Təsdiqlənib",
+        rejectReason: null,
+      },
+      {
+        id: 5,
+        name: "Texniki_hesabat.pdf",
+        uploadDate: "18 Yanvar 2026",
+        status: "Təsdiqlənib",
+        rejectReason: null,
+      },
+    ],
   },
   {
-    id: 3,
-    name: "CV_tədqiqatçı.pdf",
-    uploadDate: "10 Yanvar 2026",
-    status: "İmtina edilib",
-    rejectReason: "Sənəddə imza yoxdur. Zəhmət olmasa imzalı versiyanı yükləyin.",
+    projectId: 3,
+    projectName: "Biotexnologiya Tədqiqatları",
+    competitionName: "Tibbi Araşdırmalar Qrantı",
+    documents: [
+      {
+        id: 6,
+        name: "Biotech_proposal.pdf",
+        uploadDate: "5 Fevral 2026",
+        status: "Gözləmədə",
+        rejectReason: null,
+      },
+    ],
   },
 ]
 
@@ -91,7 +139,7 @@ const statusConfig: Record<string, { color: string; icon: React.ReactNode }> = {
   },
 }
 
-interface UserDocument {
+interface Document {
   id: number
   name: string
   uploadDate: string
@@ -99,11 +147,19 @@ interface UserDocument {
   rejectReason: string | null
 }
 
+interface ProjectDocuments {
+  projectId: number
+  projectName: string
+  competitionName: string
+  documents: Document[]
+}
+
 export default function DocumentsPage() {
-  const [userDocuments, setUserDocuments] = useState<UserDocument[]>(initialUserDocuments)
-  const [editingDoc, setEditingDoc] = useState<UserDocument | null>(null)
+  const [projectDocuments, setProjectDocuments] = useState<ProjectDocuments[]>(initialProjectDocuments)
+  const [editingDoc, setEditingDoc] = useState<Document | null>(null)
   const [editName, setEditName] = useState("")
   const [showUploadDialog, setShowUploadDialog] = useState(false)
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadError, setUploadError] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -122,9 +178,9 @@ export default function DocumentsPage() {
   }
 
   const handleUpload = () => {
-    if (!selectedFile) return
+    if (!selectedFile || selectedProjectId === null) return
 
-    const newDoc: UserDocument = {
+    const newDoc: Document = {
       id: Date.now(),
       name: selectedFile.name,
       uploadDate: new Date().toLocaleDateString("az-AZ", {
@@ -136,9 +192,16 @@ export default function DocumentsPage() {
       rejectReason: null,
     }
 
-    setUserDocuments([newDoc, ...userDocuments])
+    setProjectDocuments(
+      projectDocuments.map((project) =>
+        project.projectId === selectedProjectId
+          ? { ...project, documents: [newDoc, ...project.documents] }
+          : project
+      )
+    )
     setShowUploadDialog(false)
     setSelectedFile(null)
+    setSelectedProjectId(null)
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
     }
@@ -147,23 +210,41 @@ export default function DocumentsPage() {
   const handleEditSave = () => {
     if (!editingDoc || !editName.trim()) return
 
-    setUserDocuments(
-      userDocuments.map((doc) =>
-        doc.id === editingDoc.id ? { ...doc, name: editName } : doc
-      )
+    setProjectDocuments(
+      projectDocuments.map((project) => ({
+        ...project,
+        documents: project.documents.map((doc) =>
+          doc.id === editingDoc.id ? { ...doc, name: editName } : doc
+        ),
+      }))
     )
     setEditingDoc(null)
     setEditName("")
   }
 
-  const handleDelete = (id: number) => {
-    setUserDocuments(userDocuments.filter((doc) => doc.id !== id))
+  const handleDelete = (projectId: number, docId: number) => {
+    setProjectDocuments(
+      projectDocuments.map((project) =>
+        project.projectId === projectId
+          ? { ...project, documents: project.documents.filter((doc) => doc.id !== docId) }
+          : project
+      )
+    )
   }
 
-  const openEditDialog = (doc: UserDocument) => {
+  const openEditDialog = (doc: Document) => {
     setEditingDoc(doc)
     setEditName(doc.name)
   }
+
+  const openUploadDialog = (projectId: number) => {
+    setSelectedProjectId(projectId)
+    setShowUploadDialog(true)
+  }
+
+  const getTotalDocuments = (project: ProjectDocuments) => project.documents.length
+  const getApprovedCount = (project: ProjectDocuments) => 
+    project.documents.filter(d => d.status === "Təsdiqlənib").length
 
   return (
     <div className="space-y-8">
@@ -201,89 +282,136 @@ export default function DocumentsPage() {
         </CardContent>
       </Card>
 
-      {/* Əlavə edilmiş sənədlər */}
+      {/* Əlavə edilmiş sənədlər - Layihələr üzrə */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
+        <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <FileText className="h-5 w-5 text-primary" />
+            <FolderOpen className="h-5 w-5 text-primary" />
             Əlavə edilmiş sənədlər
           </CardTitle>
-          <Button onClick={() => setShowUploadDialog(true)} size="sm">
-            <Plus className="h-4 w-4 mr-1.5" />
-            Sənəd əlavə et
-          </Button>
         </CardHeader>
         <CardContent>
-          {userDocuments.length === 0 ? (
+          {projectDocuments.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
-              <FileText className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Hələ heç bir sənəd əlavə edilməyib</p>
+              <FolderOpen className="h-12 w-12 mx-auto mb-3 opacity-50" />
+              <p>Hələ heç bir layihə yoxdur</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Sənədin adı</TableHead>
-                    <TableHead>Yüklənmə tarixi</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>İmtina səbəbi</TableHead>
-                    <TableHead className="text-right">Əməliyyatlar</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {userDocuments.map((doc) => (
-                    <TableRow key={doc.id}>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <FileText className="h-4 w-4 text-red-600" />
-                          <span className="font-medium text-sm">{doc.name}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        {doc.uploadDate}
-                      </TableCell>
-                      <TableCell>
-                        <Badge className={`${statusConfig[doc.status]?.color} flex items-center gap-1 w-fit`}>
-                          {statusConfig[doc.status]?.icon}
-                          {doc.status}
+            <Accordion type="single" collapsible className="w-full space-y-2">
+              {projectDocuments.map((project) => (
+                <AccordionItem
+                  key={project.projectId}
+                  value={`project-${project.projectId}`}
+                  className="border border-border rounded-lg px-4 data-[state=open]:bg-muted/30"
+                >
+                  <AccordionTrigger className="hover:no-underline py-4">
+                    <div className="flex items-center gap-4 text-left flex-1">
+                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <FolderOpen className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-foreground truncate">
+                          {project.projectName}
+                        </p>
+                        <p className="text-sm text-muted-foreground truncate">
+                          {project.competitionName}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0">
+                        <Badge variant="outline" className="text-xs">
+                          {getTotalDocuments(project)} sənəd
                         </Badge>
-                      </TableCell>
-                      <TableCell>
-                        {doc.rejectReason ? (
-                          <div className="flex items-start gap-1.5 max-w-xs">
-                            <AlertCircle className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
-                            <span className="text-sm text-red-600">{doc.rejectReason}</span>
-                          </div>
-                        ) : (
-                          <span className="text-sm text-muted-foreground">—</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex items-center justify-end gap-1">
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-8 w-8"
-                            onClick={() => openEditDialog(doc)}
-                          >
-                            <Pencil className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
-                            onClick={() => handleDelete(doc.id)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                        <Badge className="bg-emerald-100 text-emerald-700 text-xs">
+                          {getApprovedCount(project)} təsdiqlənib
+                        </Badge>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-2 pb-4">
+                    <div className="space-y-4">
+                      <div className="flex justify-end">
+                        <Button onClick={() => openUploadDialog(project.projectId)} size="sm">
+                          <Plus className="h-4 w-4 mr-1.5" />
+                          Sənəd əlavə et
+                        </Button>
+                      </div>
+
+                      {project.documents.length === 0 ? (
+                        <div className="text-center py-6 text-muted-foreground border border-dashed border-border rounded-lg">
+                          <FileText className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                          <p className="text-sm">Bu layihəyə hələ sənəd əlavə edilməyib</p>
                         </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+                      ) : (
+                        <div className="overflow-x-auto border border-border rounded-lg">
+                          <Table>
+                            <TableHeader>
+                              <TableRow className="bg-muted/50">
+                                <TableHead>Sənədin adı</TableHead>
+                                <TableHead>Yüklənmə tarixi</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>İmtina səbəbi</TableHead>
+                                <TableHead className="text-right">Əməliyyatlar</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {project.documents.map((doc) => (
+                                <TableRow key={doc.id}>
+                                  <TableCell>
+                                    <div className="flex items-center gap-2">
+                                      <FileText className="h-4 w-4 text-red-600" />
+                                      <span className="font-medium text-sm">{doc.name}</span>
+                                    </div>
+                                  </TableCell>
+                                  <TableCell className="text-sm text-muted-foreground">
+                                    {doc.uploadDate}
+                                  </TableCell>
+                                  <TableCell>
+                                    <Badge className={`${statusConfig[doc.status]?.color} flex items-center gap-1 w-fit`}>
+                                      {statusConfig[doc.status]?.icon}
+                                      {doc.status}
+                                    </Badge>
+                                  </TableCell>
+                                  <TableCell>
+                                    {doc.rejectReason ? (
+                                      <div className="flex items-start gap-1.5 max-w-xs">
+                                        <AlertCircle className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
+                                        <span className="text-sm text-red-600">{doc.rejectReason}</span>
+                                      </div>
+                                    ) : (
+                                      <span className="text-sm text-muted-foreground">—</span>
+                                    )}
+                                  </TableCell>
+                                  <TableCell className="text-right">
+                                    <div className="flex items-center justify-end gap-1">
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="h-8 w-8"
+                                        onClick={() => openEditDialog(doc)}
+                                      >
+                                        <Pencil className="h-4 w-4" />
+                                      </Button>
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
+                                        onClick={() => handleDelete(project.projectId, doc.id)}
+                                      >
+                                        <Trash2 className="h-4 w-4" />
+                                      </Button>
+                                    </div>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </div>
+                      )}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           )}
         </CardContent>
       </Card>
