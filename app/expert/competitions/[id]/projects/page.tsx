@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   Table,
   TableBody,
@@ -26,16 +27,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Search, ArrowLeft, CheckCircle2, Eye, FileText, Star } from "lucide-react"
+import { Search, ArrowLeft, CheckCircle2, Eye, FileText, Star, AlertTriangle, ChevronRight, ChevronLeft } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 
 const competitionNames: Record<string, string> = {
   "1": "Gənc alimlər üçün qrant müsabiqəsi",
@@ -46,6 +41,7 @@ const competitionNames: Record<string, string> = {
 
 interface ProjectDetails {
   id: number
+  code: string
   name: string
   annotation: string
   field: string
@@ -81,6 +77,7 @@ interface ProjectDetails {
 const allProjects: ProjectDetails[] = [
   {
     id: 1,
+    code: "EIF-2025-001",
     name: "Neyroşəbəkələrdə dərin öyrənmə alqoritmlərinin optimallaşdırılması",
     annotation:
       "Bu layihə müxtəlif neyroşəbəkə arxitekturalarında dərin öyrənmə alqoritmlərinin performansının artırılmasına yönəlib. Xüsusilə, böyük həcmli verilənlər üzərində emal sürətinin və dəqiqliyinin yaxşılaşdırılması nəzərdə tutulur.",
@@ -99,27 +96,26 @@ const allProjects: ProjectDetails[] = [
       young: 3,
       female: 2,
     },
-    objectives: "Layihənin əsas məqsədi neyroşəbəkələrdə dərin öyrənmə alqoritmlərinin performansını 30% artırmaq, emal vaxtını azaltmaq və enerji səmərəliliyini yaxşılaşdırmaqdır. Tədqiqat müasir GPU arxitekturalarında paralel hesablama imkanlarından istifadə edərək optimallaşdırma metodlarını araşdıracaq.",
+    objectives: "Layihənin əsas məqsədi neyroşəbəkələrdə dərin öyrənmə alqoritmlərinin performansını 30% artırmaq, emal vaxtını azaltmaq və enerji səmərəliliyini yaxşılaşdırmaqdır.",
     keywords: "neyroşəbəkə; dərin öyrənmə; optimallaşdırma; GPU; paralel hesablama; süni intellekt",
-    scientificReview: "Son illərdə dərin öyrənmə sahəsində əhəmiyyətli irəliləyişlər əldə edilmişdir. Transformer arxitekturaları, böyük dil modelləri və diffuziya modelləri kimi yeniliklər sahəni inqilab etmişdir. Lakin bu modellərin hesablama tələbləri eksponensial olaraq artır.",
-    scientificIdea: "Layihənin elmi ideyası adaptiv öyrənmə sürəti və dinamik batch ölçüsü istifadə edərək gradient descent optimallaşdırmasını təkmilləşdirməkdir. Bu yanaşma mövcud metodlardan fərqli olaraq real-vaxt rejimində hiperparametr tənzimləməsini təmin edəcək.",
-    researchStructure: "Mərhələ 1: Mövcud alqoritmlərin analizi (6 ay)\nMərhələ 2: Yeni optimallaşdırma metodunun işlənməsi (8 ay)\nMərhələ 3: Eksperimental sınaqlar və validasiya (6 ay)\nMərhələ 4: Nəticələrin ümumiləşdirilməsi və yayılması (4 ay)",
-    expectedResults: "1. Ən azı 2 impakt faktorlu jurnalda elmi məqalə\n2. Açıq mənbəli proqram kitabxanası\n3. 1 patent ərizəsi\n4. 2 beynəlxalq konfransda məruzə",
-    applicationAreas: "Tədqiqat nəticələri tibbi görüntü analizi, avtomatik sürücüsüz avtomobillər, maliyyə proqnozlaşdırması və təbii dil emalı sahələrində tətbiq oluna bilər.",
-    equipment: "Mövcud: NVIDIA RTX 3090 GPU (2 ədəd), Intel Xeon server\nLazım olan: NVIDIA A100 GPU (2 ədəd) - böyük miqyaslı eksperimentlər üçün zəruridir",
-    budgetExplanation: "Büdcənin 45%-i avadanlıq alınmasına, 35%-i işçi heyətinin əmək haqqına, 15%-i ezamiyyət və konfrans xərclərinə, 5%-i nəşr və patent xərclərinə ayrılır.",
+    scientificReview: "Son illərdə dərin öyrənmə sahəsində əhəmiyyətli irəliləyişlər əldə edilmişdir.",
+    scientificIdea: "Layihənin elmi ideyası adaptiv öyrənmə sürəti və dinamik batch ölçüsü istifadə edərək gradient descent optimallaşdırmasını təkmilləşdirməkdir.",
+    researchStructure: "Mərhələ 1: Mövcud alqoritmlərin analizi (6 ay)\nMərhələ 2: Yeni optimallaşdırma metodunun işlənməsi (8 ay)",
+    expectedResults: "1. Ən azı 2 impakt faktorlu jurnalda elmi məqalə\n2. Açıq mənbəli proqram kitabxanası",
+    applicationAreas: "Tibbi görüntü analizi, avtomatik sürücüsüz avtomobillər, maliyyə proqnozlaşdırması",
+    equipment: "NVIDIA RTX 3090 GPU (2 ədəd), Intel Xeon server",
+    budgetExplanation: "Büdcənin 45%-i avadanlıq alınmasına ayrılır.",
     budgetBreakdown: [
       { role: "Layihə rəhbəri", amount: 15000 },
       { role: "Baş tədqiqatçı", amount: 12000 },
-      { role: "Tədqiqatçı (2 nəfər)", amount: 18000 },
-      { role: "Doktorant", amount: 8000 },
     ],
   },
   {
     id: 2,
+    code: "EIF-2025-002",
     name: "Azərbaycanın endemik bitki növlərinin genomik analizi",
     annotation:
-      "Layihə çərçivəsində Azərbaycanın endemik bitki növlərinin tam genomik ardıcıllığı müəyyən ediləcək və biomüxtəlifliyin qorunması üçün genetik verilənlər bazası yaradılacaq.",
+      "Layihə çərçivəsində Azərbaycanın endemik bitki növlərinin tam genomik ardıcıllığı müəyyən ediləcək.",
     field: "Biologiya",
     scientificDirection: "Genomika və bioinformatika",
     projectType: "Qrup",
@@ -135,128 +131,85 @@ const allProjects: ProjectDetails[] = [
       young: 4,
       female: 5,
     },
-    objectives: "Azərbaycanın 50+ endemik bitki növünün tam genom ardıcıllığını müəyyən etmək, filogenetik analizlər aparmaq və mühafizə strategiyaları üçün elmi əsas yaratmaq.",
-    keywords: "endemik bitkilər; genomika; bioinformatika; biomüxtəliflik; Azərbaycan florası; mühafizə",
-    scientificReview: "Azərbaycan florası 4500-dən çox bitki növünü əhatə edir ki, bunların 240-dan çoxu endemikdir. Bu növlərin genetik müxtəlifliyi və evolyusion tarixi hələ tam öyrənilməyib.",
-    scientificIdea: "İlk dəfə olaraq müasir sekvensləşdirmə texnologiyalarından istifadə edərək Azərbaycan endemiklərinin tam genom ardıcıllığı əldə ediləcək və beynəlxalq genom verilənlər bazalarına inteqrasiya ediləcək.",
-    researchStructure: "Mərhələ 1: Nümunə toplama ekspedisiyaları (8 ay)\nMərhələ 2: DNT ekstrakti və sekvensləşdirmə (12 ay)\nMərhələ 3: Bioinformatik analiz (10 ay)\nMərhələ 4: Verilənlər bazasının yaradılması (6 ay)",
-    expectedResults: "1. 50+ növün tam genom ardıcıllığı\n2. Açıq genom verilənlər bazası\n3. 5 impakt faktorlu məqalə\n4. Mühafizə tövsiyələri sənədi",
-    applicationAreas: "Kənd təsərrüfatı, dərman bitkiləri sənayesi, ekoloji mühafizə və turizm sektorunda tətbiq imkanları.",
-    equipment: "Mövcud: Illumina MiSeq sekvenser, standart laboratoriya avadanlığı\nLazım olan: Oxford Nanopore sekvenser, yüksək performanslı hesablama serverləri",
-    budgetExplanation: "Büdcənin 40%-i sekvensləşdirmə xərclərinə, 25%-i işçi heyətinə, 20%-i avadanlıq və reaktivlərə, 15%-i ekspedisiya və nəşr xərclərinə ayrılır.",
+    objectives: "Azərbaycanın 50+ endemik bitki növünün tam genom ardıcıllığını müəyyən etmək.",
+    keywords: "endemik bitkilər; genomika; bioinformatika; biomüxtəliflik",
+    scientificReview: "Azərbaycan florası 4500-dən çox bitki növünü əhatə edir.",
+    scientificIdea: "İlk dəfə olaraq müasir sekvensləşdirmə texnologiyalarından istifadə ediləcək.",
+    researchStructure: "Mərhələ 1: Nümunə toplama ekspedisiyaları (8 ay)",
+    expectedResults: "1. 50+ növün tam genom ardıcıllığı\n2. Açıq genom verilənlər bazası",
+    applicationAreas: "Kənd təsərrüfatı, dərman bitkiləri sənayesi",
+    equipment: "Illumina MiSeq sekvenser",
+    budgetExplanation: "Büdcənin 40%-i sekvensləşdirmə xərclərinə ayrılır.",
     budgetBreakdown: [
       { role: "Layihə rəhbəri", amount: 18000 },
-      { role: "Baş tədqiqatçı (2 nəfər)", amount: 24000 },
-      { role: "Tədqiqatçı (3 nəfər)", amount: 27000 },
-      { role: "Laborant (2 nəfər)", amount: 12000 },
+      { role: "Baş tədqiqatçı", amount: 24000 },
     ],
   },
-  {
-    id: 3,
-    name: "Şəhər mühitində hava keyfiyyətinin monitorinqi üçün IoT sistemi",
-    annotation:
-      "Bu tədqiqat layihəsi Bakı şəhərində IoT sensorları vasitəsilə real vaxt rejimində hava keyfiyyətinin monitorinqi və proqnozlaşdırılması üçün ağıllı sistem yaratmağı hədəfləyir.",
-    field: "Mühəndislik",
-    scientificDirection: "IoT və ətraf mühit monitorinqi",
-    projectType: "Fərdi",
-    applicantStatus: "Universitet",
-    category: "Ölkədaxili",
-    character: "Tətbiqi",
-    duration: 18,
-    estimatedCost: 65000,
-    participants: {
-      total: 4,
-      withDegree: 1,
-      withTitle: 1,
-      young: 2,
-      female: 1,
-    },
-    objectives: "Bakı şəhərinin 10 nöqtəsində IoT sensor şəbəkəsi qurmaq, real-vaxt verilənlər toplamaq və süni intellekt əsaslı proqnozlaşdırma sistemi yaratmaq.",
-    keywords: "IoT; hava keyfiyyəti; sensor şəbəkəsi; süni intellekt; proqnozlaşdırma; smart city",
-    scientificReview: "Şəhər hava çirklənməsi qlobal səhiyyə problemidir. IoT texnologiyaları bu sahədə inqilabi dəyişikliklər vəd edir.",
-    scientificIdea: "Aşağı qiymətli, yüksək dəqiqlikli sensor şəbəkəsi ilə maşın öyrənməsi alqoritmlərinin inteqrasiyası vasitəsilə hava keyfiyyətinin 24-48 saat əvvəlcədən proqnozlaşdırılması.",
-    researchStructure: "Mərhələ 1: Sensor seçimi və kalibrasiyası (4 ay)\nMərhələ 2: Şəbəkə qurulması (6 ay)\nMərhələ 3: Verilənlər toplama (4 ay)\nMərhələ 4: ML model inkişafı (4 ay)",
-    expectedResults: "1. 10 nöqtəli sensor şəbəkəsi\n2. Real-vaxt izləmə platforması\n3. Proqnozlaşdırma modeli (85%+ dəqiqlik)\n4. 3 elmi məqalə",
-    applicationAreas: "Bələdiyyə xidmətləri, səhiyyə, şəhər planlaşdırması və vətəndaş məlumatlandırılması.",
-    equipment: "Mövcud: Prototip sensorlar, server infrastrukturu\nLazım olan: 30 ədəd PM2.5/PM10 sensoru, bulud hosting xərcləri",
-    budgetExplanation: "Büdcənin 50%-i avadanlıq və sensorlara, 30%-i işçi heyətinə, 15%-i bulud xərclərinə, 5%-i nəşrlərə ayrılır.",
-    budgetBreakdown: [
-      { role: "Layihə rəhbəri", amount: 10000 },
-      { role: "Mühəndis (2 nəfər)", amount: 14000 },
-      { role: "Tələbə köməkçi", amount: 4000 },
+]
+
+// Wizard step definitions
+const WIZARD_STEPS = [
+  { id: 1, title: "Layihənin qiymətləndirilməsi", subtitle: "Meyarlar üzrə ballar" },
+  { id: 2, title: "Yekun qiymətləndirmə şkalası", subtitle: "6 seçim" },
+  { id: 3, title: "Ekspertin yazılı rəyi", subtitle: "Mətn sahəsi" },
+  { id: 4, title: "Şəxsi məlumatlar", subtitle: "Bank məlumatları" },
+]
+
+// Criteria definitions
+const CRITERIA = {
+  criterion1: {
+    title: "Meyar 1. Layihənin elmi tədqiqatlara uyğunluq dərəcəsi",
+    options: [
+      { value: "5", label: "5 bal - Tam uyğun gəlir", description: "Layihə verilmiş elm sahəsi və istiqamətləri üzrə nəzərdə tutulmuş elmi tədqiqatlara tam uyğundur və yeni prinsipal elmi nailiyyətlərin və vacib nəticələrin alınmasına istiqamətləndirilmişdir." },
+      { value: "3", label: "3 bal - Qismən uyğun gəlir", description: "Layihə tədqiqata uyğun elm sahəsinin vacib probleminin həllinə istiqamətləndirilmişdir" },
+      { value: "0", label: "0 bal - Uyğun gəlmir", description: "Layihə səthi xarakterlidir və nəzərdə tutulan elmi tədqiqatların əsas xüsusiyyətlərini özündə əks etdirmir", warning: true },
     ],
   },
-  {
-    id: 4,
-    name: "Orta əsr Azərbaycan ədəbiyyatında sufi motivlərinin tədqiqi",
-    annotation:
-      "XII-XVI əsrlər Azərbaycan ədəbiyyatında sufi düşüncəsinin poetik ifadəsini, rəmzləri və obrazlar sistemini araşdırmaq, müqayisəli ədəbiyyatşünaslıq metodları ilə təhlil etmək.",
-    field: "Filologiya",
-    scientificDirection: "Orta əsr ədəbiyyatı və sufi estetikası",
-    projectType: "Fərdi",
-    applicantStatus: "Universitet",
-    category: "Ölkədaxili",
-    character: "Fundamental",
-    duration: 24,
-    estimatedCost: 45000,
-    participants: {
-      total: 3,
-      withDegree: 2,
-      withTitle: 1,
-      young: 1,
-      female: 2,
-    },
-    objectives: "Nizami, Nəsimi, Füzuli kimi klassiklərin əsərlərində sufi rəmzlərini sistemləşdirmək, müqayisəli analiz aparmaq və müasir oxucu üçün şərhlər hazırlamaq.",
-    keywords: "sufi ədəbiyyatı; orta əsrlər; Nizami; Nəsimi; Füzuli; poetik rəmzlər; müqayisəli ədəbiyyatşünaslıq",
-    scientificReview: "Azərbaycan klassik ədəbiyyatı sufi düşüncəsinin zəngin ifadəsi ilə seçilir. Lakin bu mirasın sistemli tədqiqi hələ tamamlanmayıb.",
-    scientificIdea: "Kompüter linqvistikası metodlarından istifadə edərək klassik mətnlərdə sufi terminologiyasının statistik analizini aparmaq və rəqəmsal annotasiya sistemi yaratmaq.",
-    researchStructure: "Mərhələ 1: Mətnlərin rəqəmsallaşdırılması (6 ay)\nMərhələ 2: Terminoloji analiz (8 ay)\nMərhələ 3: Müqayisəli tədqiqat (6 ay)\nMərhələ 4: Monoqrafiya hazırlanması (4 ay)",
-    expectedResults: "1. Sufi terminologiyası lüğəti\n2. Annotasiya edilmiş mətnlər bazası\n3. Monoqrafiya\n4. 4 elmi məqalə",
-    applicationAreas: "Ədəbiyyat tədrisi, mədəniyyətşünaslıq, turizm və mədəni irs mühafizəsi.",
-    equipment: "Mövcud: Kompüter avadanlığı, kitabxana resurları\nLazım olan: Rəqəmsallaşdırma avadanlığı, xarici mənbələrə çıxış",
-    budgetExplanation: "Büdcənin 40%-i işçi heyətinə, 25%-i ezamiyyət və arxiv işinə, 20%-i nəşr xərclərinə, 15%-i avadanlıq və materiallara ayrılır.",
-    budgetBreakdown: [
-      { role: "Layihə rəhbəri", amount: 12000 },
-      { role: "Baş tədqiqatçı", amount: 10000 },
-      { role: "Doktorant", amount: 6000 },
+  criterion2: {
+    title: "Meyar 2. Elmi ideyanın (hipotezin) yeniliyi, tədqiqatın orijinallığı",
+    options: [
+      { value: "7", label: "7 bal - Analoqu yoxdur", description: "Layihədə təqdim olunan problemin həlli yolu unikaldır" },
+      { value: "5", label: "5 bal - Layihənin ideyası məlumdur və müəllif(lər)ə məxsusdur", description: "Elmi ideya patentləşdirilib və ya lisenziyalı elmi jurnalda və ya monoqrafiya şəklində çap olunub" },
+      { value: "3", label: "3 bal - Yerli və xarici analoqlar haqqında məlumat var", description: "Təqdim olunmuş ideya az öyrənilmişdir və onun bu layihədə tədqiqini orijinal hesab etmək olar" },
+      { value: "0", label: "0 bal - Elmi ideya yoxdur", description: "Layihənin elmi ideyası məlumdur və dəfələrlə həll olunan problemlər çərçivəsində reallaşdırılmışdır", warning: true },
     ],
   },
-  {
-    id: 5,
-    name: "Ürək-damar xəstəliklərinin erkən diaqnostikası üçün biomarkerlər",
-    annotation:
-      "Layihə ürək-damar xəstəliklərinin erkən mərhələdə aşkarlanması üçün yeni biomarkerlərin identifikasiyasını, validasiyasını və klinik tətbiq imkanlarının araşdırılmasını nəzərdə tutur.",
-    field: "Tibb",
-    scientificDirection: "Kardiovaskulyar biomarkerlər",
-    projectType: "Qrup",
-    applicantStatus: "Tibb universiteti",
-    category: "Ölkədaxili",
-    character: "Tətbiqi",
-    duration: 36,
-    estimatedCost: 150000,
-    participants: {
-      total: 10,
-      withDegree: 5,
-      withTitle: 3,
-      young: 4,
-      female: 6,
-    },
-    objectives: "500+ xəstədə qan nümunəsi analizi aparmaq, potensial biomarkerləri identifikasiya etmək və klinik validasiya protokolu hazırlamaq.",
-    keywords: "biomarker; ürək-damar xəstəlikləri; erkən diaqnostika; proteomika; klinik tədqiqat",
-    scientificReview: "Ürək-damar xəstəlikləri Azərbaycanda ölüm səbəbləri arasında birinci yerdədir. Erkən diaqnostika xəstəliyin proqnozunu əhəmiyyətli dərəcədə yaxşılaşdıra bilər.",
-    scientificIdea: "Proteomik və metabolomik yanaşmaların kombinasiyası ilə yüksək spesifiklik və həssaslığa malik biomarker panelinin yaradılması.",
-    researchStructure: "Mərhələ 1: Xəstə qruplarının formalaşdırılması (6 ay)\nMərhələ 2: Nümunə toplama və analiz (12 ay)\nMərhələ 3: Biomarker identifikasiyası (10 ay)\nMərhələ 4: Klinik validasiya (8 ay)",
-    expectedResults: "1. Yeni biomarker paneli\n2. Diaqnostik protokol\n3. 6 impakt faktorlu məqalə\n4. Patent ərizəsi",
-    applicationAreas: "Klinik laboratoriyalar, ailə həkimliyi, profilaktik tibb və sığorta sektoru.",
-    equipment: "Mövcud: Standart laboratoriya avadanlığı\nLazım olan: Mass-spektrometr, ELISA oxuyucu, kriogenik saxlama sistemi",
-    budgetExplanation: "Büdcənin 35%-i avadanlıq və reaktivlərə, 30%-i işçi heyətinə, 20%-i xəstə kompensasiyasına, 15%-i nəşr və patent xərclərinə ayrılır.",
-    budgetBreakdown: [
-      { role: "Layihə rəhbəri (həkim-tədqiqatçı)", amount: 20000 },
-      { role: "Baş tədqiqatçı (2 nəfər)", amount: 24000 },
-      { role: "Tədqiqatçı (4 nəfər)", amount: 32000 },
-      { role: "Laborant (3 nəfər)", amount: 18000 },
+  criterion3: {
+    title: "Meyar 3. Metodik yanaşmanın adekvatlığı",
+    options: [
+      { value: "5", label: "5 bal - Adekvatdır", description: "Layihədə qarşıya qoyulmuş elmi problem və məsələlərin düzgün həlli üsullarından istifadə olunur və bunlar qarşıya qoyulmuş məqsədin tam şəkildə reallaşmasına imkan verə bilər." },
+      { value: "3", label: "3 bal - Adekvatlıq problemlidir", description: "Təqdim olunan yanaşma layihədə qarşıya qoyulmuş məsələlərin qismən həllinə imkan verə bilər" },
+      { value: "0", label: "0 bal - Adekvat deyildir", description: "Təqdim olunan metodlar layihədə qarşıya qoyulmuş problemin həllinə imkan verə bilməz", warning: true },
     ],
   },
+  criterion4: {
+    title: "Meyar 4. Gözlənilən nəticələrin elmi əhəmiyyəti",
+    options: [
+      { value: "5", label: "5 bal - Yüksəkdir", description: "Gözlənilən nəticələr layihədə qarşıya qoyulan məsələlərin tam şəkildə həllini əks etdirməlidir. Onlar yenilik və orijinallığı ilə fərqlənməli və tədqiq olunan problemin həllinə çox böyük töhfə verməlidir" },
+      { value: "3", label: "3 bal - Əhəmiyyətlidir", description: "Gözlənilən nəticələr layihədə qarşıya qoyulan məsələlərin müəyyən səviyyədə həllini əks etdirməlidir" },
+      { value: "1", label: "1 bal - Yüksək deyil", description: "Gözlənilən nəticələr layihədə qarşıya qoyulan məsələlərin qismən həllini əks etdirməlidir" },
+      { value: "0", label: "0 bal - Yoxdur", description: "Gözlənilən nəticələrin layihədə qarşıya qoyulan problemə aidiyyəti yoxdur" },
+    ],
+  },
+  criterion5: {
+    title: "Meyar 5. Gözlənilən nəticələrin praktiki əhəmiyyəti",
+    options: [
+      { value: "5", label: "5 bal - Yüksəkdir", description: "Gözlənilən nəticələr elmdə irəliyə atılmış çox mühüm addım xarakterli olmalı və müvafiq elm sahəsinin inkişafı üçün prinsipial əhəmiyyətli olmalıdır" },
+      { value: "3", label: "3 bal - Əhəmiyyətlidir", description: "Gözlənilən nəticələr müvafiq elm sahəsi üçün əhəmiyyətli olmalı, praktikada özünün geniş tətbiqini tapmalıdır" },
+      { value: "1", label: "1 bal - Yüksək deyil", description: "Gözlənilən nəticələr praktikada qismən (məhdud) tətbiqə malik olmalıdır" },
+      { value: "0", label: "0 bal - Yoxdur", description: "Gözlənilən nəticələrin praktiki əhəmiyyəti yoxdur" },
+    ],
+  },
+}
+
+// Final evaluation scale
+const FINAL_SCALE = [
+  { value: "5", label: "5 bal - Layihə çox əhəmiyyətlidir", range: "26-27 bal" },
+  { value: "4", label: "4 bal - Layihə dəstəklənə bilər", range: "21-25 bal" },
+  { value: "3", label: "3 bal - Layihə müəyyən elmi maraq kəsb edir", range: "16-20 bal" },
+  { value: "2", label: "2 bal - Layihə az əhəmiyyətlidir", range: "11-15 bal" },
+  { value: "1", label: "1 bal - Layihədə ciddi dəyişikliklər tələb olunur", range: "6-10 bal" },
+  { value: "0", label: "0 bal - Layihə dəstəklənməyə layiq deyildir", range: "0-5 bal" },
 ]
 
 function getFieldBadge(field: string) {
@@ -298,17 +251,52 @@ export default function ProjectsSelectionPage() {
   const [selectedProject, setSelectedProject] = useState<ProjectDetails | null>(null)
   const [detailOpen, setDetailOpen] = useState(false)
   
-  // Evaluation dialog state
-  const [evaluationOpen, setEvaluationOpen] = useState(false)
-  const [evaluationData, setEvaluationData] = useState({
-    scientificValue: "",
-    methodology: "",
-    teamQualification: "",
-    budgetAdequacy: "",
-    overallScore: "",
-    recommendation: "",
-    comments: "",
-  })
+  // Wizard state
+  const [wizardOpen, setWizardOpen] = useState(false)
+  const [wizardStep, setWizardStep] = useState(1)
+  const [showZeroWarning, setShowZeroWarning] = useState(false)
+  const [zeroJustification, setZeroJustification] = useState("")
+  
+  // Step 1: Criteria scores
+  const [projectCode, setProjectCode] = useState("")
+  const [evaluationDate, setEvaluationDate] = useState(formatDate())
+  const [criterion1, setCriterion1] = useState("")
+  const [criterion2, setCriterion2] = useState("")
+  const [criterion3, setCriterion3] = useState("")
+  const [criterion4, setCriterion4] = useState("")
+  const [criterion5, setCriterion5] = useState("")
+  
+  // Step 2: Final scale
+  const [finalScale, setFinalScale] = useState("")
+  
+  // Step 3: Written review
+  const [writtenReview, setWrittenReview] = useState("")
+  const [reviewDecision, setReviewDecision] = useState("")
+  
+  // Step 4: Personal info
+  const [hasVoen, setHasVoen] = useState("")
+  const [voenNumber, setVoenNumber] = useState("")
+  const [bankName, setBankName] = useState("")
+  const [bankVoen, setBankVoen] = useState("")
+  const [mh, setMh] = useState("")
+  const [hh, setHh] = useState("")
+  const [bankCode, setBankCode] = useState("")
+  const [swift, setSwift] = useState("")
+  const [cardNumber, setCardNumber] = useState("")
+  
+  // Signature dialog
+  const [signatureDialogOpen, setSignatureDialogOpen] = useState(false)
+  const [signatureMethod, setSignatureMethod] = useState("")
+
+  // Calculate total score
+  const totalScore = useMemo(() => {
+    const c1 = parseInt(criterion1) || 0
+    const c2 = parseInt(criterion2) || 0
+    const c3 = parseInt(criterion3) || 0
+    const c4 = parseInt(criterion4) || 0
+    const c5 = parseInt(criterion5) || 0
+    return c1 + c2 + c3 + c4 + c5
+  }, [criterion1, criterion2, criterion3, criterion4, criterion5])
 
   const filtered = useMemo(() => {
     if (!search.trim()) return allProjects
@@ -351,13 +339,80 @@ export default function ProjectsSelectionPage() {
     setDetailOpen(true)
   }
 
-  const openEvaluation = () => {
+  const openWizard = () => {
+    if (selectedProject) {
+      setProjectCode(selectedProject.code)
+      setEvaluationDate(formatDate())
+    }
     setDetailOpen(false)
-    setEvaluationOpen(true)
+    setWizardOpen(true)
+    setWizardStep(1)
   }
 
-  const handleEvaluationSubmit = () => {
-    // Mark project as evaluated
+  const resetWizard = () => {
+    setWizardStep(1)
+    setCriterion1("")
+    setCriterion2("")
+    setCriterion3("")
+    setCriterion4("")
+    setCriterion5("")
+    setFinalScale("")
+    setWrittenReview("")
+    setReviewDecision("")
+    setHasVoen("")
+    setVoenNumber("")
+    setBankName("")
+    setBankVoen("")
+    setMh("")
+    setHh("")
+    setBankCode("")
+    setSwift("")
+    setCardNumber("")
+    setZeroJustification("")
+    setShowZeroWarning(false)
+  }
+
+  // Check if current step is valid for navigation
+  const isStep1Valid = () => {
+    return projectCode && evaluationDate && criterion1 && criterion2 && criterion3 && criterion4 && criterion5
+  }
+
+  const isStep2Valid = () => {
+    return finalScale !== ""
+  }
+
+  const isStep3Valid = () => {
+    return writtenReview.trim().length > 0 && reviewDecision !== ""
+  }
+
+  const isStep4Valid = () => {
+    if (hasVoen === "yes") {
+      return voenNumber.length === 10 && bankName && bankVoen.length === 10 && mh && hh && bankCode.length >= 4 && bankCode.length <= 6 && swift.length >= 8 && swift.length <= 11
+    } else if (hasVoen === "no") {
+      return bankName && bankVoen.length === 10 && mh && hh && bankCode.length >= 4 && bankCode.length <= 6 && swift.length >= 8 && swift.length <= 11 && cardNumber
+    }
+    return false
+  }
+
+  const handleCriterionChange = (criterion: string, value: string, setter: (val: string) => void) => {
+    setter(value)
+    if (value === "0") {
+      setShowZeroWarning(true)
+    }
+  }
+
+  const handleNextStep = () => {
+    if (wizardStep < 4) {
+      setWizardStep(wizardStep + 1)
+    }
+  }
+
+  const handleFinish = () => {
+    setWizardOpen(false)
+    setSignatureDialogOpen(true)
+  }
+
+  const handleSignatureSubmit = () => {
     if (selectedProject) {
       const next = new Set(selectedIds)
       const nextDates = { ...selectionDates }
@@ -366,16 +421,8 @@ export default function ProjectsSelectionPage() {
       setSelectedIds(next)
       setSelectionDates(nextDates)
     }
-    setEvaluationOpen(false)
-    setEvaluationData({
-      scientificValue: "",
-      methodology: "",
-      teamQualification: "",
-      budgetAdequacy: "",
-      overallScore: "",
-      recommendation: "",
-      comments: "",
-    })
+    setSignatureDialogOpen(false)
+    resetWizard()
   }
 
   const handleSubmit = () => {
@@ -390,6 +437,333 @@ export default function ProjectsSelectionPage() {
     setTimeout(() => {
       router.push("/expert/dashboard")
     }, 2000)
+  }
+
+  // Render wizard step content
+  const renderWizardContent = () => {
+    switch (wizardStep) {
+      case 1:
+        return (
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label className="text-sm font-medium">Layihənin kodu *</Label>
+                <Input
+                  value={projectCode}
+                  onChange={(e) => setProjectCode(e.target.value)}
+                  placeholder="EIF-2025-001"
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label className="text-sm font-medium">Tarix *</Label>
+                <Input
+                  value={evaluationDate}
+                  onChange={(e) => setEvaluationDate(e.target.value)}
+                  placeholder="DD/MM/YYYY"
+                  className="mt-1"
+                />
+              </div>
+            </div>
+
+            {/* Criteria */}
+            <div className="space-y-6">
+              {/* Criterion 1 */}
+              <div className="border border-border rounded-lg p-4">
+                <h4 className="font-semibold text-foreground mb-3">{CRITERIA.criterion1.title}</h4>
+                <RadioGroup value={criterion1} onValueChange={(v) => handleCriterionChange("criterion1", v, setCriterion1)}>
+                  {CRITERIA.criterion1.options.map((opt) => (
+                    <div key={opt.value} className={cn("flex items-start space-x-3 p-3 rounded-lg border", opt.warning && criterion1 === opt.value ? "border-red-300 bg-red-50" : "border-transparent hover:bg-muted/50")}>
+                      <RadioGroupItem value={opt.value} id={`c1-${opt.value}`} />
+                      <div className="flex-1">
+                        <Label htmlFor={`c1-${opt.value}`} className="font-medium cursor-pointer">{opt.label}</Label>
+                        <p className="text-sm text-muted-foreground mt-1">{opt.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              {/* Criterion 2 */}
+              <div className="border border-border rounded-lg p-4">
+                <h4 className="font-semibold text-foreground mb-3">{CRITERIA.criterion2.title}</h4>
+                <RadioGroup value={criterion2} onValueChange={(v) => handleCriterionChange("criterion2", v, setCriterion2)}>
+                  {CRITERIA.criterion2.options.map((opt) => (
+                    <div key={opt.value} className={cn("flex items-start space-x-3 p-3 rounded-lg border", opt.warning && criterion2 === opt.value ? "border-red-300 bg-red-50" : "border-transparent hover:bg-muted/50")}>
+                      <RadioGroupItem value={opt.value} id={`c2-${opt.value}`} />
+                      <div className="flex-1">
+                        <Label htmlFor={`c2-${opt.value}`} className="font-medium cursor-pointer">{opt.label}</Label>
+                        <p className="text-sm text-muted-foreground mt-1">{opt.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              {/* Criterion 3 */}
+              <div className="border border-border rounded-lg p-4">
+                <h4 className="font-semibold text-foreground mb-3">{CRITERIA.criterion3.title}</h4>
+                <RadioGroup value={criterion3} onValueChange={(v) => handleCriterionChange("criterion3", v, setCriterion3)}>
+                  {CRITERIA.criterion3.options.map((opt) => (
+                    <div key={opt.value} className={cn("flex items-start space-x-3 p-3 rounded-lg border", opt.warning && criterion3 === opt.value ? "border-red-300 bg-red-50" : "border-transparent hover:bg-muted/50")}>
+                      <RadioGroupItem value={opt.value} id={`c3-${opt.value}`} />
+                      <div className="flex-1">
+                        <Label htmlFor={`c3-${opt.value}`} className="font-medium cursor-pointer">{opt.label}</Label>
+                        <p className="text-sm text-muted-foreground mt-1">{opt.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              {/* Criterion 4 */}
+              <div className="border border-border rounded-lg p-4">
+                <h4 className="font-semibold text-foreground mb-3">{CRITERIA.criterion4.title}</h4>
+                <RadioGroup value={criterion4} onValueChange={(v) => setCriterion4(v)}>
+                  {CRITERIA.criterion4.options.map((opt) => (
+                    <div key={opt.value} className="flex items-start space-x-3 p-3 rounded-lg border border-transparent hover:bg-muted/50">
+                      <RadioGroupItem value={opt.value} id={`c4-${opt.value}`} />
+                      <div className="flex-1">
+                        <Label htmlFor={`c4-${opt.value}`} className="font-medium cursor-pointer">{opt.label}</Label>
+                        <p className="text-sm text-muted-foreground mt-1">{opt.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              {/* Criterion 5 */}
+              <div className="border border-border rounded-lg p-4">
+                <h4 className="font-semibold text-foreground mb-3">{CRITERIA.criterion5.title}</h4>
+                <RadioGroup value={criterion5} onValueChange={(v) => setCriterion5(v)}>
+                  {CRITERIA.criterion5.options.map((opt) => (
+                    <div key={opt.value} className="flex items-start space-x-3 p-3 rounded-lg border border-transparent hover:bg-muted/50">
+                      <RadioGroupItem value={opt.value} id={`c5-${opt.value}`} />
+                      <div className="flex-1">
+                        <Label htmlFor={`c5-${opt.value}`} className="font-medium cursor-pointer">{opt.label}</Label>
+                        <p className="text-sm text-muted-foreground mt-1">{opt.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+            </div>
+
+            {/* Total Score Display */}
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-foreground">Cəmi bal:</span>
+                <span className="text-2xl font-bold text-primary">{totalScore} / 27</span>
+              </div>
+            </div>
+
+            {/* Zero Warning */}
+            {showZeroWarning && (
+              <Alert className="border-red-300 bg-red-50">
+                <AlertTriangle className="h-4 w-4 text-red-600" />
+                <AlertDescription className="text-red-800">
+                  <strong>Xəbərdarlıq:</strong> 0 bal seçdiyiniz halda ekspertiza dayandırılacaq. Zəhmət olmasa yazılı əsaslandırma təqdim edin.
+                </AlertDescription>
+              </Alert>
+            )}
+            {showZeroWarning && (
+              <div>
+                <Label className="text-sm font-medium">Yazılı əsaslandırma *</Label>
+                <Textarea
+                  value={zeroJustification}
+                  onChange={(e) => setZeroJustification(e.target.value)}
+                  placeholder="0 bal vermənizin səbəbini ətraflı izah edin..."
+                  className="mt-1 min-h-[100px]"
+                />
+              </div>
+            )}
+          </div>
+        )
+
+      case 2:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h3 className="text-lg font-semibold">Layihənin yekun qiymətləndirilmə şkalası</h3>
+              <p className="text-muted-foreground">Meyarlar üzrə cəmi bal: <strong>{totalScore}</strong></p>
+            </div>
+
+            <RadioGroup value={finalScale} onValueChange={setFinalScale} className="space-y-3">
+              {FINAL_SCALE.map((item) => (
+                <div key={item.value} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-muted/50">
+                  <RadioGroupItem value={item.value} id={`scale-${item.value}`} />
+                  <div className="flex-1">
+                    <Label htmlFor={`scale-${item.value}`} className="font-medium cursor-pointer">{item.label}</Label>
+                    <p className="text-sm text-muted-foreground">{item.range}</p>
+                  </div>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+        )
+
+      case 3:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h3 className="text-lg font-semibold">Ekspertin yazılı rəyi</h3>
+            </div>
+
+            <div>
+              <Label className="text-sm font-medium">Yazılı rəy *</Label>
+              <Textarea
+                value={writtenReview}
+                onChange={(e) => setWrittenReview(e.target.value)}
+                placeholder="Rəyinizi buraya yazın..."
+                className="mt-1 min-h-[200px] font-sans text-sm"
+                style={{ fontFamily: "Arial", fontSize: "12pt", lineHeight: "1" }}
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Yazılı rəy elmi üslubda, aydın tərzdə, obyektivlik və etik qaydalar gözlənilməklə tərtib olunmalıdır, 12 ölçülü, Arial şrifti ilə, 1 intervalla yazılmalıdır.
+              </p>
+            </div>
+
+            <div className="border border-border rounded-lg p-4">
+              <h4 className="font-semibold mb-3">Qərar *</h4>
+              <RadioGroup value={reviewDecision} onValueChange={setReviewDecision} className="space-y-3">
+                <div className="flex items-center space-x-3 p-3 rounded-lg border border-transparent hover:bg-muted/50">
+                  <RadioGroupItem value="supported" id="decision-supported" />
+                  <Label htmlFor="decision-supported" className="cursor-pointer">Layihə dəstəklənə bilər</Label>
+                </div>
+                <div className="flex items-center space-x-3 p-3 rounded-lg border border-transparent hover:bg-muted/50">
+                  <RadioGroupItem value="not-supported" id="decision-not-supported" />
+                  <Label htmlFor="decision-not-supported" className="cursor-pointer">Layihə dəstəklənməyə layiq deyildir</Label>
+                </div>
+              </RadioGroup>
+            </div>
+          </div>
+        )
+
+      case 4:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h3 className="text-lg font-semibold">Ekspertin şəxsi məlumatları</h3>
+              <p className="text-sm text-muted-foreground">Bank məlumatlarınızı daxil edin</p>
+            </div>
+
+            <div className="border border-border rounded-lg p-4">
+              <h4 className="font-semibold mb-3">VÖEN statusu *</h4>
+              <RadioGroup value={hasVoen} onValueChange={setHasVoen} className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <RadioGroupItem value="yes" id="voen-yes" />
+                  <Label htmlFor="voen-yes" className="cursor-pointer">VÖEN var</Label>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <RadioGroupItem value="no" id="voen-no" />
+                  <Label htmlFor="voen-no" className="cursor-pointer">VÖEN yoxdur</Label>
+                </div>
+              </RadioGroup>
+            </div>
+
+            {hasVoen && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {hasVoen === "yes" && (
+                  <div>
+                    <Label className="text-sm font-medium">VÖEN nömrəsi *</Label>
+                    <Input
+                      value={voenNumber}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, "").slice(0, 10)
+                        setVoenNumber(val)
+                      }}
+                      placeholder="10 rəqəm"
+                      className="mt-1"
+                      maxLength={10}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Yalnız rəqəm, 10 simvol</p>
+                  </div>
+                )}
+                <div>
+                  <Label className="text-sm font-medium">Bankın adı *</Label>
+                  <Input
+                    value={bankName}
+                    onChange={(e) => setBankName(e.target.value)}
+                    placeholder="Bank adı"
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Bankın VÖEN-i *</Label>
+                  <Input
+                    value={bankVoen}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 10)
+                      setBankVoen(val)
+                    }}
+                    placeholder="10 rəqəm"
+                    className="mt-1"
+                    maxLength={10}
+                  />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">M/h *</Label>
+                  <Input
+                    value={mh}
+                    onChange={(e) => setMh(e.target.value)}
+                    placeholder="M/h"
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">H/h *</Label>
+                  <Input
+                    value={hh}
+                    onChange={(e) => setHh(e.target.value)}
+                    placeholder="H/h"
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Bankın kodu *</Label>
+                  <Input
+                    value={bankCode}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 6)
+                      setBankCode(val)
+                    }}
+                    placeholder="4-6 rəqəm"
+                    className="mt-1"
+                    maxLength={6}
+                  />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">SWIFT *</Label>
+                  <Input
+                    value={swift}
+                    onChange={(e) => {
+                      const val = e.target.value.toUpperCase().slice(0, 11)
+                      setSwift(val)
+                    }}
+                    placeholder="8-11 simvol"
+                    className="mt-1"
+                    maxLength={11}
+                  />
+                </div>
+                {hasVoen === "no" && (
+                  <div className="md:col-span-2">
+                    <Label className="text-sm font-medium">Kart hesab nömrəsi *</Label>
+                    <Input
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)}
+                      placeholder="Kart nömrəsi"
+                      className="mt-1"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )
+
+      default:
+        return null
+    }
   }
 
   return (
@@ -437,8 +811,7 @@ export default function ProjectsSelectionPage() {
           <CardTitle className="text-lg">Layihələr</CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Desktop Table */}
-          <div className="hidden lg:block">
+          <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -454,18 +827,8 @@ export default function ProjectsSelectionPage() {
                 {filtered.map((project) => {
                   const isSelected = selectedIds.has(project.id)
                   const isExpanded = expandedAnnotations.has(project.id)
-                  const annotationShort =
-                    project.annotation.length > 120
-                      ? project.annotation.slice(0, 120) + "..."
-                      : project.annotation
-
                   return (
-                    <TableRow
-                      key={project.id}
-                      className={`transition-colors ${
-                        isSelected ? "bg-blue-50/60" : "hover:bg-muted/50"
-                      }`}
-                    >
+                    <TableRow key={project.id} className={isSelected ? "bg-primary/5" : undefined}>
                       <TableCell>
                         <Checkbox
                           checked={isSelected}
@@ -473,34 +836,36 @@ export default function ProjectsSelectionPage() {
                           disabled={submitted}
                         />
                       </TableCell>
-                      <TableCell className="font-medium text-foreground">
-                        {project.name}
+                      <TableCell className="font-medium max-w-[250px]">
+                        <span className="line-clamp-2">{project.name}</span>
                       </TableCell>
                       <TableCell className="max-w-[300px]">
-                        <div className="text-sm text-muted-foreground">
-                          {isExpanded ? project.annotation : annotationShort}
+                        <div>
+                          <p className={isExpanded ? "" : "line-clamp-2"}>
+                            {project.annotation}
+                          </p>
+                          {project.annotation.length > 100 && (
+                            <button
+                              onClick={() => toggleAnnotation(project.id)}
+                              className="text-primary text-sm hover:underline mt-1"
+                            >
+                              {isExpanded ? "Gizlə" : "Daha çox"}
+                            </button>
+                          )}
                         </div>
-                        {project.annotation.length > 120 && (
-                          <button
-                            onClick={() => toggleAnnotation(project.id)}
-                            className="text-xs text-blue-600 hover:underline mt-1"
-                          >
-                            {isExpanded ? "Gizlə" : "Ətraflı"}
-                          </button>
-                        )}
                       </TableCell>
                       <TableCell>{getFieldBadge(project.field)}</TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {isSelected ? selectionDates[project.id] : "—"}
+                      <TableCell>
+                        {selectionDates[project.id] || "-"}
                       </TableCell>
                       <TableCell className="text-center">
                         <Button
                           variant="outline"
                           size="sm"
                           onClick={() => openProjectDetails(project)}
-                          className="gap-1"
+                          disabled={submitted}
                         >
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 mr-1" />
                           Seçim edin
                         </Button>
                       </TableCell>
@@ -510,499 +875,249 @@ export default function ProjectsSelectionPage() {
               </TableBody>
             </Table>
           </div>
-
-          {/* Mobile Cards */}
-          <div className="lg:hidden space-y-3">
-            {filtered.map((project) => {
-              const isSelected = selectedIds.has(project.id)
-              const isExpanded = expandedAnnotations.has(project.id)
-              const annotationShort =
-                project.annotation.length > 100
-                  ? project.annotation.slice(0, 100) + "..."
-                  : project.annotation
-
-              return (
-                <div
-                  key={project.id}
-                  className={`p-4 border rounded-lg space-y-3 transition-colors ${
-                    isSelected ? "bg-blue-50/60 border-blue-200" : ""
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <Checkbox
-                      checked={isSelected}
-                      onCheckedChange={() => toggleSelect(project.id)}
-                      disabled={submitted}
-                      className="mt-1"
-                    />
-                    <div className="flex-1 space-y-2">
-                      <p className="font-medium text-sm text-foreground">{project.name}</p>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {getFieldBadge(project.field)}
-                        {isSelected && (
-                          <span className="text-xs text-muted-foreground">
-                            Seçim: {selectionDates[project.id]}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        {isExpanded ? project.annotation : annotationShort}
-                      </p>
-                      {project.annotation.length > 100 && (
-                        <button
-                          onClick={() => toggleAnnotation(project.id)}
-                          className="text-xs text-blue-600 hover:underline"
-                        >
-                          {isExpanded ? "Gizlə" : "Ətraflı"}
-                        </button>
-                      )}
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => openProjectDetails(project)}
-                        className="w-full mt-2 gap-1"
-                      >
-                        <Eye className="h-4 w-4" />
-                        Seçim edin
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {filtered.length === 0 && (
-            <div className="text-center py-8 text-muted-foreground">
-              Nəticə tapılmadı.
-            </div>
-          )}
         </CardContent>
       </Card>
 
-      {/* Footer Actions */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 bg-white border rounded-lg">
-        <p className="text-sm text-muted-foreground">
-          Seçilmiş layihələr:{" "}
-          <span className="font-bold text-foreground">{selectedIds.size}</span>
-        </p>
-        <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            onClick={() => router.push("/expert/dashboard")}
-            disabled={submitted}
-          >
-            Ləğv et
-          </Button>
-          <Button
-            onClick={() => setConfirmOpen(true)}
-            disabled={selectedIds.size === 0 || submitted}
-          >
-            {submitted ? (
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4" />
-                Göndərildi
-              </span>
-            ) : (
-              "Rəyi göndər"
-            )}
+      {/* Submit Button */}
+      {selectedIds.size > 0 && !submitted && (
+        <div className="flex justify-end">
+          <Button onClick={() => setConfirmOpen(true)} className="bg-primary text-primary-foreground">
+            Seçimləri təsdiqlə ({selectedIds.size} layihə)
           </Button>
         </div>
-      </div>
+      )}
 
-      {/* Confirmation Dialog */}
-      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <DialogContent>
+      {/* Project Details Dialog */}
+      <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh]">
           <DialogHeader>
-            <DialogTitle>Seçimlərinizi təsdiqləyirsiniz?</DialogTitle>
-            <DialogDescription>
-              Siz{" "}
-              <span className="font-semibold text-foreground">{selectedIds.size}</span>{" "}
-              layihə seçmisiniz. Bu seçimlər Fond İnzibatçısına göndəriləcək.
-            </DialogDescription>
+            <DialogTitle>Qiymətləndiriləcək layihə</DialogTitle>
+            <DialogDescription>Layihənin tam məlumatlarını nəzərdən keçirin</DialogDescription>
           </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0">
-            <Button variant="outline" onClick={() => setConfirmOpen(false)}>
-              Xeyr, qayıt
+          {selectedProject && (
+            <ScrollArea className="max-h-[60vh] pr-4">
+              <div className="space-y-4">
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50 w-1/3">Layihənin adı</TableCell>
+                      <TableCell>{selectedProject.name}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Elm sahəsi</TableCell>
+                      <TableCell>{selectedProject.field}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Elmi istiqamət</TableCell>
+                      <TableCell>{selectedProject.scientificDirection}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Layihənin növü</TableCell>
+                      <TableCell>{selectedProject.projectType}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Ərizəçi statusu</TableCell>
+                      <TableCell>{selectedProject.applicantStatus}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Kateqoriya</TableCell>
+                      <TableCell>{selectedProject.category}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Xarakter</TableCell>
+                      <TableCell>{selectedProject.character}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">İştirakçılar</TableCell>
+                      <TableCell>
+                        Ümumi: {selectedProject.participants.total} | 
+                        Elmi dərəcəli: {selectedProject.participants.withDegree} | 
+                        Elmi adlı: {selectedProject.participants.withTitle} | 
+                        Gənc: {selectedProject.participants.young} | 
+                        Qadın: {selectedProject.participants.female}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">İcra müddəti</TableCell>
+                      <TableCell>{selectedProject.duration} ay</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Smeta dəyəri</TableCell>
+                      <TableCell>{selectedProject.estimatedCost.toLocaleString()} AZN</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Annotasiya</TableCell>
+                      <TableCell>{selectedProject.annotation}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Məqsəd</TableCell>
+                      <TableCell>{selectedProject.objectives}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Açar sözlər</TableCell>
+                      <TableCell>{selectedProject.keywords}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Elmi icmal</TableCell>
+                      <TableCell>{selectedProject.scientificReview}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Elmi ideya</TableCell>
+                      <TableCell>{selectedProject.scientificIdea}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Tədqiqat strukturu</TableCell>
+                      <TableCell className="whitespace-pre-line">{selectedProject.researchStructure}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Gözlənilən nəticələr</TableCell>
+                      <TableCell className="whitespace-pre-line">{selectedProject.expectedResults}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Tətbiq sahələri</TableCell>
+                      <TableCell>{selectedProject.applicationAreas}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Avadanlıq</TableCell>
+                      <TableCell>{selectedProject.equipment}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium bg-muted/50">Büdcə bölgüsü</TableCell>
+                      <TableCell>
+                        {selectedProject.budgetBreakdown.map((b, i) => (
+                          <div key={i}>{b.role}: {b.amount.toLocaleString()} AZN</div>
+                        ))}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </ScrollArea>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDetailOpen(false)}>Bağla</Button>
+            <Button onClick={openWizard} className="bg-primary text-primary-foreground">
+              <Star className="h-4 w-4 mr-2" />
+              Qiymətləndir
             </Button>
-            <Button onClick={handleSubmit}>Bəli, göndər</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Project Detail Dialog */}
-      <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] p-0">
-          <DialogHeader className="p-6 pb-0">
-            <DialogTitle className="text-xl">Qiymətləndiriləcək layihə</DialogTitle>
-            <DialogDescription>
-              Layihə məlumatları aşağıda əks olunur
-            </DialogDescription>
+      {/* Evaluation Wizard Dialog */}
+      <Dialog open={wizardOpen} onOpenChange={(open) => { if (!open) { setWizardOpen(false); resetWizard(); } }}>
+        <DialogContent className="max-w-4xl max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle>Ekspert rəyi - {WIZARD_STEPS[wizardStep - 1]?.title}</DialogTitle>
+            <DialogDescription>{WIZARD_STEPS[wizardStep - 1]?.subtitle}</DialogDescription>
           </DialogHeader>
-          
-          {selectedProject && (
-            <ScrollArea className="max-h-[calc(90vh-180px)] px-6">
-              <div className="space-y-6 pb-6">
-                {/* Basic Info Table */}
-                <div className="border rounded-lg overflow-hidden">
-                  <Table>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50 w-1/3">Layihənin adı</TableCell>
-                        <TableCell>{selectedProject.name}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Elm sahəsi</TableCell>
-                        <TableCell>{selectedProject.field}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Elmi istiqamət</TableCell>
-                        <TableCell>{selectedProject.scientificDirection}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Layihənin növü</TableCell>
-                        <TableCell>{selectedProject.projectType}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Qrant ərizəçisinin statusu</TableCell>
-                        <TableCell>{selectedProject.applicantStatus}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Layihənin kateqoriyası</TableCell>
-                        <TableCell>{selectedProject.category}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Layihənin xarakteri</TableCell>
-                        <TableCell>{selectedProject.character}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
+
+          {/* Progress Bar */}
+          <div className="flex items-center justify-between mb-6">
+            {WIZARD_STEPS.map((step, index) => (
+              <div key={step.id} className="flex items-center">
+                <div className={cn(
+                  "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium",
+                  wizardStep > step.id ? "bg-green-500 text-white" :
+                  wizardStep === step.id ? "bg-primary text-primary-foreground" :
+                  "bg-muted text-muted-foreground"
+                )}>
+                  {wizardStep > step.id ? <CheckCircle2 className="h-5 w-5" /> : step.id}
                 </div>
-
-                {/* Participants Info */}
-                <div className="border rounded-lg overflow-hidden">
-                  <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                    Layihədə iştirak edən şəxslər
-                  </div>
-                  <div className="p-4">
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                      <div className="text-center p-3 bg-blue-50 rounded-lg">
-                        <div className="text-2xl font-bold text-blue-700">{selectedProject.participants.total}</div>
-                        <div className="text-xs text-muted-foreground">Ümumi say</div>
-                      </div>
-                      <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                        <div className="text-2xl font-bold text-emerald-700">{selectedProject.participants.withDegree}</div>
-                        <div className="text-xs text-muted-foreground">Elmi dərəcəsi olanlar</div>
-                      </div>
-                      <div className="text-center p-3 bg-violet-50 rounded-lg">
-                        <div className="text-2xl font-bold text-violet-700">{selectedProject.participants.withTitle}</div>
-                        <div className="text-xs text-muted-foreground">Elmi adı olanlar</div>
-                      </div>
-                      <div className="text-center p-3 bg-amber-50 rounded-lg">
-                        <div className="text-2xl font-bold text-amber-700">{selectedProject.participants.young}</div>
-                        <div className="text-xs text-muted-foreground">Gənc iştirakçılar</div>
-                      </div>
-                      <div className="text-center p-3 bg-rose-50 rounded-lg">
-                        <div className="text-2xl font-bold text-rose-700">{selectedProject.participants.female}</div>
-                        <div className="text-xs text-muted-foreground">Qadın iştirakçılar</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Duration and Cost */}
-                <div className="border rounded-lg overflow-hidden">
-                  <Table>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50 w-1/3">Layihənin icra müddəti</TableCell>
-                        <TableCell>{selectedProject.duration} ay</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium bg-muted/50">Smeta dəyəri</TableCell>
-                        <TableCell className="font-semibold">{selectedProject.estimatedCost.toLocaleString()} AZN</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </div>
-
-                {/* Detailed Sections */}
-                <div className="space-y-4">
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Layihənin məqsədi, qarşıya qoyulan məsələləri, aktuallığı
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.objectives}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Layihənin annotasiyası
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground">
-                      {selectedProject.annotation}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Açar sözlər
-                    </div>
-                    <div className="p-4">
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.keywords.split(";").map((keyword, idx) => (
-                          <Badge key={idx} variant="secondary" className="text-xs">
-                            {keyword.trim()}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Layihənin elmi istiqaməti və qısa icmal
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.scientificReview}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Layihənin elmi ideyası
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.scientificIdea}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Layihə üzrə tədqiqatın strukturu
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.researchStructure}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Gözlənilən nəticələr
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.expectedResults}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Nəticələrin istifadəsi və tətbiqi sahələri
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.applicationAreas}
-                    </div>
-                  </div>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Avadanlıq, cihaz və qurğular haqqında məlumat
-                    </div>
-                    <div className="p-4 text-sm text-muted-foreground whitespace-pre-line">
-                      {selectedProject.equipment}
-                    </div>
-                  </div>
-
-                  {/* Budget Breakdown */}
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="bg-muted/50 px-4 py-2 font-medium border-b">
-                      Smeta xərclərinin açıqlaması
-                    </div>
-                    <div className="p-4 space-y-4">
-                      <p className="text-sm text-muted-foreground">{selectedProject.budgetExplanation}</p>
-                      <Separator />
-                      <div className="text-sm font-medium mb-2">Əmək haqqı bölgüsü (adlar gizli):</div>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Rol</TableHead>
-                            <TableHead className="text-right">Məbləğ (AZN)</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {selectedProject.budgetBreakdown.map((item, idx) => (
-                            <TableRow key={idx}>
-                              <TableCell>{item.role}</TableCell>
-                              <TableCell className="text-right font-medium">{item.amount.toLocaleString()}</TableCell>
-                            </TableRow>
-                          ))}
-                          <TableRow className="bg-muted/30">
-                            <TableCell className="font-semibold">Cəmi</TableCell>
-                            <TableCell className="text-right font-bold">
-                              {selectedProject.budgetBreakdown.reduce((sum, item) => sum + item.amount, 0).toLocaleString()} AZN
-                            </TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                    </div>
-                  </div>
-                </div>
+                {index < WIZARD_STEPS.length - 1 && (
+                  <div className={cn(
+                    "w-12 md:w-24 h-1 mx-2",
+                    wizardStep > step.id ? "bg-green-500" : "bg-muted"
+                  )} />
+                )}
               </div>
-            </ScrollArea>
-          )}
-
-          <div className="p-6 pt-0 border-t bg-muted/30">
-            <div className="flex justify-end gap-3">
-              <Button variant="outline" onClick={() => setDetailOpen(false)}>
-                Bağla
-              </Button>
-              <Button onClick={openEvaluation} className="gap-2">
-                <Star className="h-4 w-4" />
-                Qiymətləndir
-              </Button>
-            </div>
+            ))}
           </div>
+
+          <ScrollArea className="max-h-[55vh] pr-4">
+            {renderWizardContent()}
+          </ScrollArea>
+
+          <DialogFooter className="flex justify-between">
+            <div>
+              {wizardStep > 1 && (
+                <Button variant="outline" disabled>
+                  <ChevronLeft className="h-4 w-4 mr-1" />
+                  Geri qayıt
+                </Button>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => { setWizardOpen(false); resetWizard(); }}>Ləğv et</Button>
+              {wizardStep < 4 ? (
+                <Button 
+                  onClick={handleNextStep}
+                  disabled={
+                    (wizardStep === 1 && !isStep1Valid()) ||
+                    (wizardStep === 2 && !isStep2Valid()) ||
+                    (wizardStep === 3 && !isStep3Valid())
+                  }
+                >
+                  Davam et
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              ) : (
+                <Button 
+                  onClick={handleFinish}
+                  disabled={!isStep4Valid()}
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  Tamamla
+                </Button>
+              )}
+            </div>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* Evaluation Dialog */}
-      <Dialog open={evaluationOpen} onOpenChange={setEvaluationOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] p-0">
-          <DialogHeader className="p-6 pb-0">
-            <DialogTitle className="text-xl">Ekspert rəyi</DialogTitle>
+      {/* Signature Dialog */}
+      <Dialog open={signatureDialogOpen} onOpenChange={setSignatureDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Ekspert rəyinin imzalanması</DialogTitle>
             <DialogDescription>
-              {selectedProject?.name}
+              Rəyi imzalamaq üçün üsul seçin
             </DialogDescription>
           </DialogHeader>
-          
-          <ScrollArea className="max-h-[calc(90vh-180px)] px-6">
-            <div className="space-y-6 py-4">
-              <div className="space-y-2">
-                <Label>Elmi dəyər (1-10)</Label>
-                <Select
-                  value={evaluationData.scientificValue}
-                  onValueChange={(val) => setEvaluationData({ ...evaluationData, scientificValue: val })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bal seçin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                      <SelectItem key={n} value={String(n)}>{n}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+          <div className="space-y-4 py-4">
+            <RadioGroup value={signatureMethod} onValueChange={setSignatureMethod} className="space-y-3">
+              <div className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-muted/50">
+                <RadioGroupItem value="sima" id="sig-sima" />
+                <Label htmlFor="sig-sima" className="cursor-pointer font-medium">SİMA ilə imzala</Label>
               </div>
-
-              <div className="space-y-2">
-                <Label>Metodologiya (1-10)</Label>
-                <Select
-                  value={evaluationData.methodology}
-                  onValueChange={(val) => setEvaluationData({ ...evaluationData, methodology: val })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bal seçin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                      <SelectItem key={n} value={String(n)}>{n}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-muted/50">
+                <RadioGroupItem value="asan" id="sig-asan" />
+                <Label htmlFor="sig-asan" className="cursor-pointer font-medium">ASAN imza ilə imzala</Label>
               </div>
-
-              <div className="space-y-2">
-                <Label>Komanda ixtisası (1-10)</Label>
-                <Select
-                  value={evaluationData.teamQualification}
-                  onValueChange={(val) => setEvaluationData({ ...evaluationData, teamQualification: val })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bal seçin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                      <SelectItem key={n} value={String(n)}>{n}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Büdcə adekvatlığı (1-10)</Label>
-                <Select
-                  value={evaluationData.budgetAdequacy}
-                  onValueChange={(val) => setEvaluationData({ ...evaluationData, budgetAdequacy: val })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Bal seçin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                      <SelectItem key={n} value={String(n)}>{n}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <Separator />
-
-              <div className="space-y-2">
-                <Label>Ümumi bal (1-100)</Label>
-                <Input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={evaluationData.overallScore}
-                  onChange={(e) => setEvaluationData({ ...evaluationData, overallScore: e.target.value })}
-                  placeholder="Ümumi balı daxil edin"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Tövsiyə</Label>
-                <Select
-                  value={evaluationData.recommendation}
-                  onValueChange={(val) => setEvaluationData({ ...evaluationData, recommendation: val })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tövsiyə seçin" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="approve">Maliyyələşdirilməsi tövsiyə olunur</SelectItem>
-                    <SelectItem value="revise">Düzəlişlərlə maliyyələşdirilə bilər</SelectItem>
-                    <SelectItem value="reject">Maliyyələşdirilməsi tövsiyə olunmur</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Əlavə şərhlər</Label>
-                <Textarea
-                  value={evaluationData.comments}
-                  onChange={(e) => setEvaluationData({ ...evaluationData, comments: e.target.value })}
-                  placeholder="Layihə haqqında əlavə rəylərinizi yazın..."
-                  rows={5}
-                />
-              </div>
-            </div>
-          </ScrollArea>
-
-          <div className="p-6 pt-0 border-t bg-muted/30">
-            <div className="flex justify-end gap-3">
-              <Button variant="outline" onClick={() => setEvaluationOpen(false)}>
-                Ləğv et
-              </Button>
-              <Button 
-                onClick={handleEvaluationSubmit}
-                disabled={!evaluationData.overallScore || !evaluationData.recommendation}
-              >
-                Rəyi göndər
-              </Button>
-            </div>
+            </RadioGroup>
           </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setSignatureDialogOpen(false)}>Ləğv et</Button>
+            <Button onClick={handleSignatureSubmit} disabled={!signatureMethod} className="bg-green-600 hover:bg-green-700">
+              İmzala və göndər
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Confirm Submit Dialog */}
+      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Seçimləri təsdiqlə</DialogTitle>
+            <DialogDescription>
+              {selectedIds.size} layihə seçdiniz. Təsdiqləmək istədiyinizə əminsiniz?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setConfirmOpen(false)}>Ləğv et</Button>
+            <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700">Təsdiqlə</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
