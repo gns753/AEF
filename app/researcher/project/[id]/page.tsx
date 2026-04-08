@@ -216,7 +216,7 @@ export default function ProjectDetailPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-foreground mb-2">Layihə Redaktəsi / Project Edit</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-2">Fundamental və tətbiqi xarakterli elmi-tədqiqat layihələri müsabiqəsi</h1>
         <p className="text-muted-foreground">Layihə ID: {params.id}</p>
       </div>
 
