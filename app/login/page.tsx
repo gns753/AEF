@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Eye, EyeOff, User, Lock, Shield, Globe, KeyRound, ArrowLeft, X } from "lucide-react"
+import { Eye, EyeOff, User, Lock, Shield, Globe, KeyRound, ArrowLeft, X, ClipboardCheck, FileText } from "lucide-react"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -23,6 +23,7 @@ export default function LoginPage() {
 
   // Fond Inzibatcisi selection modal state
   const [showFondSelection, setShowFondSelection] = useState(false)
+  const [selectedAdminType, setSelectedAdminType] = useState<"fond" | "ekspertiza" | "hesabat" | null>(null)
 
   // Admin PIN state
   const [showPinScreen, setShowPinScreen] = useState(false)
@@ -307,13 +308,13 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
-      {/* Fond İnzibatçısı Selection Modal */}
+      {/* İnzibatçı Selection Modal - 3 Admin Types */}
       {showFondSelection && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-lg shadow-2xl border-0 animate-in fade-in zoom-in-95 duration-200">
+          <Card className="w-full max-w-2xl shadow-2xl border-0 animate-in fade-in zoom-in-95 duration-200">
             <CardContent className="p-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-foreground">Giriş növünü seçin</h2>
+                <h2 className="text-xl font-bold text-foreground">İnzibatçı profilini seçin</h2>
                 <button
                   onClick={() => setShowFondSelection(false)}
                   className="p-1.5 rounded-lg hover:bg-muted transition-colors"
@@ -322,37 +323,69 @@ export default function LoginPage() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Fond İnzibatçısı option */}
                 <button
-                  onClick={handleFondInzibatciLogin}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
+                  onClick={() => {
+                    localStorage.setItem("isLoggedIn", "true")
+                    localStorage.setItem("userType", "Fond İnzibatçısı")
+                    localStorage.setItem("userName", "Sevinc Quliyeva")
+                    router.replace("/admin/dashboard")
+                  }}
+                  className="flex flex-col items-center gap-3 p-5 rounded-xl border-2 border-border hover:border-emerald-400 hover:bg-emerald-50/50 transition-all group text-center"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
-                    <User className="h-8 w-8 text-emerald-600" />
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
+                    <User className="h-7 w-7 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">Fond İnzibatçısı</p>
-                    <p className="text-xs text-muted-foreground">Standart giriş</p>
+                    <p className="font-semibold text-foreground mb-1 text-sm">Fond İnzibatçısı</p>
+                    <p className="text-xs text-muted-foreground">Müsabiqə və istifadəçi idarəsi</p>
                   </div>
-                  <span className="text-sm font-medium text-emerald-600 border border-emerald-200 rounded-full px-4 py-1.5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <span className="text-xs font-medium text-emerald-600 border border-emerald-200 rounded-full px-3 py-1 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                     Daxil ol
                   </span>
                 </button>
 
-                {/* Admin option */}
+                {/* Ekspertiza üzrə admin option */}
                 <button
-                  onClick={handleAdminPinOpen}
-                  className="flex flex-col items-center gap-4 p-6 rounded-xl border-2 border-border hover:border-red-400 hover:bg-red-50/50 transition-all group text-center"
+                  onClick={() => {
+                    localStorage.setItem("isLoggedIn", "true")
+                    localStorage.setItem("userType", "Ekspertiza üzrə admin")
+                    localStorage.setItem("userName", "Ekspertiza Admin")
+                    router.replace("/ekspertiza-admin/competitions")
+                  }}
+                  className="flex flex-col items-center gap-3 p-5 rounded-xl border-2 border-border hover:border-blue-400 hover:bg-blue-50/50 transition-all group text-center"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center group-hover:bg-red-200 transition-colors">
-                    <Lock className="h-8 w-8 text-red-600" />
+                  <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                    <ClipboardCheck className="h-7 w-7 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">Admin</p>
-                    <p className="text-xs text-muted-foreground">{"İdarəetmə panelinə giriş"}</p>
+                    <p className="font-semibold text-foreground mb-1 text-sm">Ekspertiza üzrə admin</p>
+                    <p className="text-xs text-muted-foreground">Ekspertiza prosesinin idarəsi</p>
                   </div>
-                  <span className="text-sm font-medium text-red-600 border border-red-200 rounded-full px-4 py-1.5 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                  <span className="text-xs font-medium text-blue-600 border border-blue-200 rounded-full px-3 py-1 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    Daxil ol
+                  </span>
+                </button>
+
+                {/* Elmi-texniki hesabat üzrə admin option */}
+                <button
+                  onClick={() => {
+                    localStorage.setItem("isLoggedIn", "true")
+                    localStorage.setItem("userType", "Elmi-texniki hesabat üzrə admin")
+                    localStorage.setItem("userName", "Hesabat Admin")
+                    router.replace("/hesabat-admin/dashboard")
+                  }}
+                  className="flex flex-col items-center gap-3 p-5 rounded-xl border-2 border-border hover:border-amber-400 hover:bg-amber-50/50 transition-all group text-center"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                    <FileText className="h-7 w-7 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground mb-1 text-sm">Elmi-texniki hesabat üzrə admin</p>
+                    <p className="text-xs text-muted-foreground">Hesabat və sənədləşmə</p>
+                  </div>
+                  <span className="text-xs font-medium text-amber-600 border border-amber-200 rounded-full px-3 py-1 group-hover:bg-amber-600 group-hover:text-white transition-colors">
                     Daxil ol
                   </span>
                 </button>
@@ -415,7 +448,7 @@ export default function LoginPage() {
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  Fond İnzibatçısı
+                  İnzibatçı
                 </button>
               </div>
             </div>
