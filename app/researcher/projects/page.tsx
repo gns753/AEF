@@ -196,9 +196,11 @@ export default function ProjectsPage() {
                       <ChevronRight className="h-4 w-4 ml-2" />
                     </Link>
                   </Button>
-                  <Button variant="outline" className="flex-1 md:flex-none">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Sənədələrə baxış
+                  <Button asChild variant="outline" className="flex-1 md:flex-none">
+                    <Link href={`/researcher/documents?project=${project.id}`}>
+                      <FileText className="h-4 w-4 mr-2" />
+                      Sənədələrə baxış
+                    </Link>
                   </Button>
                 </div>
               </CardContent>

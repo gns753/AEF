@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -155,6 +156,9 @@ interface ProjectDocuments {
 }
 
 export default function DocumentsPage() {
+  const searchParams = useSearchParams()
+  const projectIdFromUrl = searchParams.get("project")
+  const [openAccordion, setOpenAccordion] = useState<string | undefined>(undefined)
   const [projectDocuments, setProjectDocuments] = useState<ProjectDocuments[]>(initialProjectDocuments)
   const [editingDoc, setEditingDoc] = useState<Document | null>(null)
   const [editName, setEditName] = useState("")
@@ -163,6 +167,19 @@ export default function DocumentsPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadError, setUploadError] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (projectIdFromUrl) {
+      setOpenAccordion(`project-${projectIdFromUrl}`)
+      // Scroll to accordion after a small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.getElementById(`project-${projectIdFromUrl}`)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" })
+        }
+      }, 100)
+    }
+  }, [projectIdFromUrl])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -297,11 +314,18 @@ export default function DocumentsPage() {
               <p>Hələ heç bir layihə yoxdur</p>
             </div>
           ) : (
-            <Accordion type="single" collapsible className="w-full space-y-2">
+            <Accordion 
+              type="single" 
+              collapsible 
+              className="w-full space-y-2"
+              value={openAccordion}
+              onValueChange={setOpenAccordion}
+            >
               {projectDocuments.map((project) => (
                 <AccordionItem
                   key={project.projectId}
                   value={`project-${project.projectId}`}
+                  id={`project-${project.projectId}`}
                   className="border border-border rounded-lg px-4 data-[state=open]:bg-muted/30"
                 >
                   <AccordionTrigger className="hover:no-underline py-4">
