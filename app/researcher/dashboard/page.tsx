@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,8 +12,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { FileText, Clock, CheckCircle2, AlertCircle } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import { CheckCircle2, XCircle, ExternalLink, AlertTriangle } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const competitions = [
   {
@@ -20,87 +29,128 @@ const competitions = [
     name: "Süni İntellekt və Rəqəmsal Transformasiya",
     deadline: "15 Mart 2026",
     status: "Aktiv" as const,
-    amount: "50,000 - 120,000 AZN",
   },
   {
     id: 2,
     name: "Yaşıl Enerji və Dayanıqlı İnkişaf",
     deadline: "30 Mart 2026",
     status: "Aktiv" as const,
-    amount: "40,000 - 100,000 AZN",
   },
   {
     id: 3,
     name: "Tibbi Biotexnologiya və Genomika",
     deadline: "10 Aprel 2026",
-    status: "Gözləmədə" as const,
-    amount: "60,000 - 150,000 AZN",
+    status: "Aktiv" as const,
   },
   {
     id: 4,
     name: "Rəqəmsal Humanitar Elmlər",
     deadline: "25 Aprel 2026",
     status: "Aktiv" as const,
-    amount: "30,000 - 80,000 AZN",
   },
   {
     id: 5,
     name: "İqlim Dəyişikliyi və Ekoloji Tədqiqatlar",
     deadline: "01 Fevral 2026",
-    status: "Tamamlanmış" as const,
-    amount: "45,000 - 110,000 AZN",
+    status: "Vaxtı bitmiş" as const,
+  },
+  {
+    id: 6,
+    name: "Kənd Təsərrüfatı İnnovasiyaları",
+    deadline: "15 Yanvar 2026",
+    status: "Vaxtı bitmiş" as const,
   },
 ]
 
 const statusConfig = {
-  Aktiv: { variant: "default" as const, className: "bg-green-100 text-green-800 hover:bg-green-100", icon: CheckCircle2 },
-  Gözləmədə: { variant: "secondary" as const, className: "bg-amber-100 text-amber-800 hover:bg-amber-100", icon: Clock },
-  Tamamlanmış: { variant: "outline" as const, className: "bg-muted text-muted-foreground hover:bg-muted", icon: AlertCircle },
+  "Aktiv": { 
+    variant: "default" as const, 
+    className: "bg-green-100 text-green-800 hover:bg-green-100", 
+    icon: CheckCircle2 
+  },
+  "Vaxtı bitmiş": { 
+    variant: "outline" as const, 
+    className: "bg-red-100 text-red-800 hover:bg-red-100", 
+    icon: XCircle 
+  },
 }
 
 export default function ResearcherDashboard() {
+  const router = useRouter()
+  const [showWarning, setShowWarning] = useState(false)
+  const [selectedCompetitionId, setSelectedCompetitionId] = useState<number | null>(null)
+
+  const activeCount = competitions.filter(c => c.status === "Aktiv").length
+  const expiredCount = competitions.filter(c => c.status === "Vaxtı bitmiş").length
+
+  const handleParticipate = (competitionId: number) => {
+    setSelectedCompetitionId(competitionId)
+    setShowWarning(true)
+  }
+
+  const handleConfirmParticipate = () => {
+    if (selectedCompetitionId) {
+      router.push(`/researcher/apply/${selectedCompetitionId}`)
+    }
+    setShowWarning(false)
+  }
+
   return (
     <div className="space-y-6">
+      {/* Warning Dialog */}
+      <Dialog open={showWarning} onOpenChange={setShowWarning}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-amber-600">
+              <AlertTriangle className="h-5 w-5" />
+              Diqqət!
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className="text-foreground">
+              Məlumatları doldurarkən ad, soyad qeyd olunduğu halda layihəyə xitam veriləcəkdir.
+            </p>
+          </div>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setShowWarning(false)}>
+              Ləğv et
+            </Button>
+            <Button onClick={handleConfirmParticipate} className="bg-blue-600 hover:bg-blue-700">
+              Oldu
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Page Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Qrant Müsabiqələri</h1>
         <p className="text-muted-foreground mt-1">
-          Hazırda müraciət üçün açıq olan və keçmiş müsabiqələr
+          Elan olunmuş qrant müsabiqələri və onların statusları
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Card>
           <CardContent className="flex items-center gap-4 p-4">
             <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center">
               <CheckCircle2 className="h-5 w-5 text-green-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">3</p>
+              <p className="text-2xl font-bold text-foreground">{activeCount}</p>
               <p className="text-xs text-muted-foreground">Aktiv müsabiqə</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex items-center gap-4 p-4">
-            <div className="h-10 w-10 rounded-lg bg-amber-100 flex items-center justify-center">
-              <Clock className="h-5 w-5 text-amber-600" />
+            <div className="h-10 w-10 rounded-lg bg-red-100 flex items-center justify-center">
+              <XCircle className="h-5 w-5 text-red-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">1</p>
-              <p className="text-xs text-muted-foreground">Gözləmədə</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-4 p-4">
-            <div className="h-10 w-10 rounded-lg bg-muted flex items-center justify-center">
-              <FileText className="h-5 w-5 text-muted-foreground" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-foreground">1</p>
-              <p className="text-xs text-muted-foreground">Tamamlanmış</p>
+              <p className="text-2xl font-bold text-foreground">{expiredCount}</p>
+              <p className="text-xs text-muted-foreground">Vaxtı bitmiş</p>
             </div>
           </CardContent>
         </Card>
@@ -109,14 +159,13 @@ export default function ResearcherDashboard() {
       {/* Desktop Table */}
       <Card className="hidden md:block">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">Müsabiqələr</CardTitle>
+          <CardTitle className="text-base">Elan olunmuş müsabiqələr</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="pl-6">Müsabiqənin adı</TableHead>
-                <TableHead>Maliyyələşmə</TableHead>
                 <TableHead>Son təqdimetmə tarixi</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right pr-6">Əməliyyatlar</TableHead>
@@ -129,7 +178,6 @@ export default function ResearcherDashboard() {
                 return (
                   <TableRow key={comp.id}>
                     <TableCell className="pl-6 font-medium">{comp.name}</TableCell>
-                    <TableCell className="text-muted-foreground">{comp.amount}</TableCell>
                     <TableCell className="text-muted-foreground">{comp.deadline}</TableCell>
                     <TableCell>
                       <Badge className={config.className}>
@@ -138,21 +186,23 @@ export default function ResearcherDashboard() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right pr-6">
-                      {comp.status === "Aktiv" ? (
-                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" asChild>
-                          <Link href={`/researcher/apply/${comp.id}`}>
-                            İştirak et
+                      <div className="flex items-center justify-end gap-2">
+                        <Button size="sm" variant="outline" asChild>
+                          <Link href={`/researcher/project/${comp.id}`}>
+                            <ExternalLink className="h-4 w-4 mr-1" />
+                            Layihəyə keçin
                           </Link>
                         </Button>
-                      ) : comp.status === "Gözləmədə" ? (
-                        <Button size="sm" variant="outline" disabled>
-                          Gözləyin
-                        </Button>
-                      ) : (
-                        <Button size="sm" variant="ghost" className="text-muted-foreground">
-                          Baxış
-                        </Button>
-                      )}
+                        {comp.status === "Aktiv" && (
+                          <Button 
+                            size="sm" 
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                            onClick={() => handleParticipate(comp.id)}
+                          >
+                            İştirak et
+                          </Button>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 )
@@ -177,17 +227,26 @@ export default function ResearcherDashboard() {
                     {comp.status}
                   </Badge>
                 </div>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>{comp.amount}</span>
-                  <span>Son tarix: {comp.deadline}</span>
+                <div className="text-sm text-muted-foreground">
+                  Son tarix: {comp.deadline}
                 </div>
-                {comp.status === "Aktiv" && (
-                  <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white" asChild>
-                    <Link href={`/researcher/apply/${comp.id}`}>
-                      İştirak et
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" className="flex-1" asChild>
+                    <Link href={`/researcher/project/${comp.id}`}>
+                      <ExternalLink className="h-4 w-4 mr-1" />
+                      Layihəyə keçin
                     </Link>
                   </Button>
-                )}
+                  {comp.status === "Aktiv" && (
+                    <Button 
+                      size="sm" 
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                      onClick={() => handleParticipate(comp.id)}
+                    >
+                      İştirak et
+                    </Button>
+                  )}
+                </div>
               </CardContent>
             </Card>
           )
