@@ -420,6 +420,14 @@ export default function UsersPage() {
     { id: "4", lastName: "Kərimov", firstName: "Cavid", email: "c.karimov@mail.az", currentRole: "İddiaçı", applicationStatus: "İnkar edilib", fin: "6RS9T1U", applicationDate: "2024-02-15" },
   ])
 
+  const [selectedApplication, setSelectedApplication] = useState<ExpertApplication | null>(null)
+  const [applicationDetailOpen, setApplicationDetailOpen] = useState(false)
+
+  const openApplicationDetail = (app: ExpertApplication) => {
+    setSelectedApplication(app)
+    setApplicationDetailOpen(true)
+  }
+
   const handleApproveExpert = (app: ExpertApplication) => {
     setExpertApplications(expertApplications.map(a => 
       a.id === app.id ? { ...a, applicationStatus: "Təsdiqlənib" as const } : a
@@ -906,7 +914,7 @@ export default function UsersPage() {
                   </TableHeader>
                   <TableBody>
                     {expertApplications.map((app) => (
-                      <TableRow key={app.id}>
+                      <TableRow key={app.id} className="cursor-pointer hover:bg-muted/50" onClick={() => openApplicationDetail(app)}>
                         <TableCell className="font-medium">{app.lastName}</TableCell>
                         <TableCell>{app.firstName}</TableCell>
                         <TableCell>{app.email}</TableCell>
@@ -922,14 +930,14 @@ export default function UsersPage() {
                           </Badge>
                         </TableCell>
                         <TableCell>{app.fin}</TableCell>
-                        <TableCell className="text-right">
+                        <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                           {app.applicationStatus === "Gözlənilir" && (
                             <div className="flex items-center justify-end gap-2">
-                              <Button variant="outline" size="sm" className="text-emerald-600 hover:text-emerald-700" onClick={() => handleApproveExpert(app)}>
+                              <Button variant="outline" size="sm" className="text-emerald-600 hover:text-emerald-700" onClick={(e) => { e.stopPropagation(); handleApproveExpert(app); }}>
                                 <CheckCircle className="h-4 w-4 mr-1" />
                                 Təsdiq et
                               </Button>
-                              <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={() => handleRejectExpert(app)}>
+                              <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={(e) => { e.stopPropagation(); handleRejectExpert(app); }}>
                                 <XCircle className="h-4 w-4 mr-1" />
                                 İnkar et
                               </Button>
@@ -1129,6 +1137,117 @@ export default function UsersPage() {
             <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={handleSaveParticipant}>
               {editParticipant ? "Yadda saxla" : "Əlavə et"}
             </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Expert Application Detail Dialog */}
+      <Dialog open={applicationDetailOpen} onOpenChange={setApplicationDetailOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <UserPlus className="h-5 w-5 text-emerald-600" />
+              Müraciətçi haqqında məlumat
+            </DialogTitle>
+            <DialogDescription>Ekspert müraciəti haqqında ətraflı məlumat</DialogDescription>
+          </DialogHeader>
+          {selectedApplication && (
+            <div className="space-y-4 py-2">
+              {/* Status Badge */}
+              <div className="flex justify-center">
+                <Badge 
+                  variant={
+                    selectedApplication.applicationStatus === "Təsdiqlənib" ? "default" :
+                    selectedApplication.applicationStatus === "İnkar edilib" ? "destructive" : "secondary"
+                  }
+                  className="text-sm px-4 py-1"
+                >
+                  {selectedApplication.applicationStatus}
+                </Badge>
+              </div>
+
+              {/* Personal Info */}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Şəxsi məlumatlar</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Ad</p>
+                      <p className="font-medium">{selectedApplication.firstName}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Soyad</p>
+                      <p className="font-medium">{selectedApplication.lastName}</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-muted-foreground">FİN</p>
+                      <p className="font-medium font-mono">{selectedApplication.fin}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">E-mail</p>
+                      <p className="font-medium text-sm break-all">{selectedApplication.email}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Role Info */}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Rol məlumatları</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-muted-foreground">Cari rol</p>
+                      <Badge variant="outline" className="mt-1">{selectedApplication.currentRole}</Badge>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">Müraciət etdiyi rol</p>
+                      <Badge className="mt-1 bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">Ekspert</Badge>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Müraciət tarixi</p>
+                    <p className="font-medium">{selectedApplication.applicationDate}</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Actions */}
+              {selectedApplication.applicationStatus === "Gözlənilir" && (
+                <div className="flex gap-3 pt-2">
+                  <Button 
+                    className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" 
+                    onClick={() => { 
+                      handleApproveExpert(selectedApplication); 
+                      setApplicationDetailOpen(false); 
+                    }}
+                  >
+                    <CheckCircle className="h-4 w-4 mr-2" />
+                    Təsdiq et
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="flex-1 text-red-600 hover:text-red-700 border-red-200 hover:border-red-300" 
+                    onClick={() => { 
+                      handleRejectExpert(selectedApplication); 
+                      setApplicationDetailOpen(false); 
+                    }}
+                  >
+                    <XCircle className="h-4 w-4 mr-2" />
+                    İnkar et
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setApplicationDetailOpen(false)}>Bağla</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
