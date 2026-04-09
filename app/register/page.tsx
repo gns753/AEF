@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, Upload, X, Plus, Trash2 } from "lucide-react"
+import Image from "next/image"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -171,18 +172,16 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-4">
       <Card className="w-full max-w-5xl shadow-2xl border-0">
-        <div className="bg-gradient-to-r from-blue-600 to-emerald-600 p-6 text-white">
+        <div className="bg-gradient-to-r from-blue-50/80 to-emerald-50/50 p-6 text-gray-800">
           <div className="flex items-center gap-4 mb-4">
-            <Link href="/login" className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-              <ArrowLeft className="h-5 w-5" />
+            <Link href="/login" className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <ArrowLeft className="h-5 w-5 text-gray-700" />
             </Link>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-2xl font-bold text-blue-600">EİF</span>
-              </div>
+              <Image src="/logo.png" alt="AEF" width={48} height={48} className="rounded-lg" />
               <div>
-                <h1 className="text-2xl font-bold">Profil məlumatlarının tamamlanması</h1>
-                <p className="text-sm text-blue-50">Zəhmət olmasa, bütün vacib məlumatları doldurun</p>
+                <h1 className="text-2xl font-bold text-blue-600">Profil məlumatlarının tamamlanması</h1>
+                <p className="text-sm text-gray-600">Zəhmət olmasa, bütün vacib məlumatları doldurun</p>
               </div>
             </div>
           </div>
