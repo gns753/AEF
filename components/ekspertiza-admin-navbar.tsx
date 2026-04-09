@@ -17,9 +17,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   UserCircle,
-  BookOpen,
   Trophy,
-  Users,
+  ClipboardCheck,
   LogOut,
   Globe,
   Menu,
@@ -27,13 +26,12 @@ import {
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/admin/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
-  { href: "/admin/references", label: "Məlumat kitabçaları", icon: BookOpen },
-  { href: "/admin/competitions", label: "Elan olunmuş qrant müsabiqələri", icon: Trophy },
-  { href: "/admin/users", label: "İstifadəçilər", icon: Users },
+  { href: "/ekspertiza-admin/competitions", label: "Qrant müsabiqələri", icon: Trophy },
+  { href: "/ekspertiza-admin/cabinet", label: "Şəxsi kabinet", icon: UserCircle },
+  { href: "/ekspertiza-admin/expertise", label: "Ekspertiza", icon: ClipboardCheck },
 ]
 
-export function AdminNavbar() {
+export function EkspertizaAdminNavbar() {
   const pathname = usePathname()
   const router = useRouter()
   const [language, setLanguage] = useState<"az" | "en">("az")
@@ -58,8 +56,8 @@ export function AdminNavbar() {
         <div className="flex items-center justify-between h-16">
           {/* Left: Logo + Nav */}
           <div className="flex items-center gap-8">
-            <Link href="/admin/cabinet" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full tracking-normal leading-7" />
+            <Link href="/ekspertiza-admin/competitions" className="flex items-center gap-2">
+              <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
               <span className="hidden sm:block text-sm font-bold text-foreground">Azərbaycan Elm Fondu</span>
             </Link>
 
@@ -73,7 +71,7 @@ export function AdminNavbar() {
                     href={link.href}
                     className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-success/10 text-success"
+                        ? "bg-blue-50 text-blue-600"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
@@ -90,7 +88,7 @@ export function AdminNavbar() {
             {/* Language Toggle (desktop) */}
             <button
               onClick={() => setLanguage(language === "az" ? "en" : "az")}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-success hover:text-success transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:border-blue-600 hover:text-blue-600 transition-colors"
             >
               <Globe className="h-3.5 w-3.5" />
               {language === "az" ? "EN" : "AZ"}
@@ -101,16 +99,16 @@ export function AdminNavbar() {
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-emerald-100 text-emerald-700 text-xs font-semibold">
-                      SQ
+                    <AvatarFallback className="bg-blue-100 text-blue-700 text-xs font-semibold">
+                      EA
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:flex flex-col items-start">
                     <span className="text-sm font-medium text-foreground leading-none">
                       {userName}
                     </span>
-                    <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
-                      Fond İnzibatçısı
+                    <Badge className="mt-0.5 text-[10px] px-1.5 py-0 h-4 bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-100">
+                      Ekspertiza admin
                     </Badge>
                   </div>
                   <ChevronDown className="hidden md:block h-3.5 w-3.5 text-muted-foreground" />
@@ -119,8 +117,8 @@ export function AdminNavbar() {
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-3 py-2 md:hidden">
                   <p className="text-sm font-medium text-foreground">{userName}</p>
-                  <Badge className="mt-1 text-[10px] bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-100">
-                    Fond İnzibatçısı
+                  <Badge className="mt-1 text-[10px] bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-100">
+                    Ekspertiza admin
                   </Badge>
                 </div>
                 <DropdownMenuSeparator className="md:hidden" />
@@ -152,7 +150,7 @@ export function AdminNavbar() {
                     <Image src="/logo.png" alt="AEF" width={36} height={36} className="rounded-full" />
                     <div>
                       <p className="text-sm font-bold text-foreground">Azərbaycan Elm Fondu</p>
-                      <p className="text-xs text-muted-foreground">İnzibatçı paneli</p>
+                      <p className="text-xs text-muted-foreground">Ekspertiza admin paneli</p>
                     </div>
                   </div>
                 </div>
@@ -166,7 +164,7 @@ export function AdminNavbar() {
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isActive
-                            ? "bg-success/10 text-success"
+                            ? "bg-blue-50 text-blue-600"
                             : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         }`}
                       >
