@@ -1,31 +1,36 @@
-'use client'
+"use client"
 
-import { redirect } from 'next/navigation'
-import { useEffect } from 'react'
-import HesabatAdminNavbar from '@/components/hesabat-admin-navbar'
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import HesabatAdminNavbar from "@/components/hesabat-admin-navbar"
 
-export default function HesabatAdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function HesabatAdminLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const [isAuthed, setIsAuthed] = useState(false)
+
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn')
-    const userType = localStorage.getItem('userType')
-    
-    if (!isLoggedIn || userType !== 'Elmi-texniki hesabat üzrə admin') {
-      redirect('/login')
+    const loggedIn = localStorage.getItem("isLoggedIn")
+    const userType = localStorage.getItem("userType")
+
+    if (loggedIn !== "true" || userType !== "Elmi-texniki hesabat üzrə admin") {
+      router.replace("/login")
+    } else {
+      setIsAuthed(true)
     }
-  }, [])
+  }, [router])
+
+  if (!isAuthed) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="h-8 w-8 border-2 border-amber-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
+  }
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="min-h-screen bg-muted/30">
       <HesabatAdminNavbar />
-      <main className="flex-1 overflow-auto">
-        <div className="p-8">
-          {children}
-        </div>
-      </main>
+      <main className="container mx-auto px-4 py-6">{children}</main>
     </div>
   )
 }
