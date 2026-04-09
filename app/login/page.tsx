@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Eye, EyeOff, User, Lock, Shield, Globe, KeyRound, ArrowLeft, X, ClipboardCheck, FileText } from "lucide-react"
 
 export default function LoginPage() {
@@ -24,6 +25,9 @@ export default function LoginPage() {
   // Fond Inzibatcisi selection modal state
   const [showFondSelection, setShowFondSelection] = useState(false)
   const [selectedAdminType, setSelectedAdminType] = useState<"fond" | "ekspertiza" | "hesabat" | null>(null)
+  
+  // Register checkbox state
+  const [isNewRegistration, setIsNewRegistration] = useState(false)
 
   // Admin PIN state
   const [showPinScreen, setShowPinScreen] = useState(false)
@@ -93,6 +97,12 @@ export default function LoginPage() {
     // If Fond İnzibatçısı, show selection modal instead of direct login
     if (userType === "Fond İnzibatçısı") {
       setShowFondSelection(true)
+      return
+    }
+
+    // If new registration checkbox is checked, redirect to register page
+    if (isNewRegistration) {
+      router.push("/register")
       return
     }
 
@@ -512,10 +522,22 @@ export default function LoginPage() {
                   </div>
                 </button>
 
+                {/* Registration Checkbox */}
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-blue-50/50 border border-blue-100">
+                  <Checkbox
+                    id="isNewRegistration"
+                    checked={isNewRegistration}
+                    onCheckedChange={(checked) => setIsNewRegistration(checked as boolean)}
+                  />
+                  <Label htmlFor="isNewRegistration" className="cursor-pointer text-sm text-foreground">
+                    İlk dəfə qeydiyyatdan keçirəm (Profil məlumatlarını tamamlamaq üçün)
+                  </Label>
+                </div>
+
                 {isLoading && (
                   <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground py-2">
                     <div className="h-4 w-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                    Giriş edilir...
+                    {isNewRegistration ? "Qeydiyyat səhifəsinə yönləndirilir..." : "Giriş edilir..."}
                   </div>
                 )}
 
