@@ -37,20 +37,7 @@ import {
 import { Eye, Send, FileText, CheckCircle2, Download, Search, Filter, MoreHorizontal } from "lucide-react"
 
 // Mock project data
-interface Project {
-  id: number
-  code: string
-  leadName: string
-  projectName: string
-  annotation: string
-  field: string
-  status: "Təsdiq olunmayan versiya" | "Təsdiq olunan versiya" | "Kağız versiya təqdim olunmayıb" | "Təsdiq olunub" | "Texniki ekspertizadan keçib" | "Texniki ekspertizadan keçməyib" | "Elmi ekspertizadan keçib" | "Elmi ekspertizadan keçməyib"
-  participants: string[]
-  documents: Document[]
-  expertOpinion?: ExpertOpinion
-}
-
-interface Document {
+interface ProjectDocument {
   id: number
   code: string
   signer: string
@@ -65,6 +52,19 @@ interface ExpertOpinion {
   review: string
   expertName: string
   signingDate: string
+}
+
+interface Project {
+  id: number
+  code: string
+  leadName: string
+  projectName: string
+  annotation: string
+  field: string
+  status: "Təsdiq olunmayan versiya" | "Təsdiq olunan versiya" | "Kağız versiya təqdim olunmayıb" | "Təsdiq olunub" | "Texniki ekspertizadan keçib" | "Texniki ekspertizadan keçməyib" | "Elmi ekspertizadan keçib" | "Elmi ekspertizadan keçməyib"
+  participants: string[]
+  documents: ProjectDocument[]
+  expertOpinion?: ExpertOpinion
 }
 
 const PROJECTS: Project[] = [
@@ -96,7 +96,7 @@ const PROJECTS: Project[] = [
     projectName: "Azərbaycanın endemik bitki növlərinin genomik analizi",
     annotation: "Layihə çərçivəsində Azərbaycanın endemik bitki növlərinin tam genomik ardıcıllığı müəyyən ediləcəkdir.",
     field: "Biologiya",
-    status: "Elmi ekspertizadan keçməyib",
+    status: "Elmi ekspertizadan keçməyib" as const,
     participants: ["Dr. Hacıyeva Leyla", "Vasif Məcidov", "Aynur Hüseynova"],
     documents: [
       { id: 3, code: "DOC-003", signer: "Hacıyeva Leyla", signingDate: "18.01.2025", format: "PDF", type: "Layihə Təklifi" },
@@ -109,7 +109,7 @@ const PROJECTS: Project[] = [
     projectName: "Kənd təsərrüfatı robotlarının süni intellekt ilə idarə edilməsi",
     annotation: "",
     field: "Mühəndislik",
-    status: "Təsdiq olunan versiya",
+    status: "Təsdiq olunan versiya" as const,
     participants: ["Prof. Vəliyev Kamil", "İsmət Səfərov"],
     documents: [],
   },
