@@ -1,12 +1,19 @@
 'use client'
 
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { BarChart3, FileText, CheckCircle, Users } from 'lucide-react'
 
 export default function HesabatAdminDashboard() {
+  const [recentDocuments] = React.useState([
+    { id: 1, competition: "Fundamental Tədqiqatlar 2024", date: "2024-03-15", status: "Təsdiqlənib" },
+    { id: 2, competition: "Tətbiqi Tədqiqatlar 2024", date: "2024-03-18", status: "Gözlənilir" },
+    { id: 3, competition: "Gənc Alimlər 2024", date: "2024-02-28", status: "İnkar edilib" },
+  ])
+
   const stats = [
     {
-      title: 'Toplam Hesabatlar',
+      title: 'Emal olunmuş Sənədlər',
       value: '24',
       change: '+5 bu ay',
       icon: FileText,
@@ -22,16 +29,16 @@ export default function HesabatAdminDashboard() {
     {
       title: 'Gözlənilir',
       value: '4',
-      change: '2 vaciqdən',
+      change: '2 qeyd olunmalı',
       icon: BarChart3,
       color: 'bg-amber-100 text-amber-600',
     },
     {
-      title: 'Əmtəə Sahəsi',
-      value: '12',
-      change: 'Aktiv sahə',
+      title: 'İnkar edilib',
+      value: '2',
+      change: 'Ətiraz üçün',
       icon: Users,
-      color: 'bg-violet-100 text-violet-600',
+      color: 'bg-red-100 text-red-600',
     },
   ]
 
@@ -39,8 +46,8 @@ export default function HesabatAdminDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">Elmi-texniki hesabat idarəetmə</p>
+        <h1 className="text-3xl font-bold text-foreground">Ana səhifə</h1>
+        <p className="text-sm text-muted-foreground mt-1">Elmi-texniki hesabatlar idarə sistemi</p>
       </div>
 
       {/* Stats Grid */}
@@ -64,40 +71,35 @@ export default function HesabatAdminDashboard() {
         })}
       </div>
 
-      {/* Recent Reports */}
+      {/* Recent Documents */}
       <Card className="border-0 shadow-sm">
         <CardHeader className="border-b px-6 py-4">
-          <CardTitle className="text-base">Ən Yeni Hesabatlar</CardTitle>
+          <CardTitle className="text-base">Ən Yeni Sənədlər</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b bg-muted/50">
-                  <th className="text-left px-6 py-3 font-semibold">Başlıq</th>
-                  <th className="text-left px-6 py-3 font-semibold">Müəllif</th>
+                  <th className="text-left px-6 py-3 font-semibold">Müsabiqə</th>
                   <th className="text-left px-6 py-3 font-semibold">Tarix</th>
                   <th className="text-left px-6 py-3 font-semibold">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { title: '2024 Maliyyə Hesabatı', author: 'Sevinc Q.', date: '2024-03-15', status: 'Təsdiqlənib' },
-                  { title: 'Tədqiqat Fəaliyyətinin Xülasəsi', author: 'Rəşad Q.', date: '2024-03-10', status: 'Təsdiqlənib' },
-                  { title: 'Layihə İcraatı Hesabatı', author: 'Günel Ə.', date: '2024-03-08', status: 'Gözlənilir' },
-                  { title: 'Kadr Dəyişiklikləri Xülasəsi', author: 'Orxan H.', date: '2024-03-05', status: 'Gözlənilir' },
-                ].map((report, idx) => (
-                  <tr key={idx} className="border-b hover:bg-muted/30 transition-colors">
-                    <td className="px-6 py-3">{report.title}</td>
-                    <td className="px-6 py-3 text-muted-foreground">{report.author}</td>
-                    <td className="px-6 py-3 text-muted-foreground">{report.date}</td>
+                {recentDocuments.map((doc) => (
+                  <tr key={doc.id} className="border-b hover:bg-muted/30 transition-colors">
+                    <td className="px-6 py-3">{doc.competition}</td>
+                    <td className="px-6 py-3 text-muted-foreground">{doc.date}</td>
                     <td className="px-6 py-3">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                        report.status === 'Təsdiqlənib'
+                        doc.status === 'Təsdiqlənib'
                           ? 'bg-emerald-100 text-emerald-700'
-                          : 'bg-amber-100 text-amber-700'
+                          : doc.status === 'Gözlənilir'
+                          ? 'bg-amber-100 text-amber-700'
+                          : 'bg-red-100 text-red-700'
                       }`}>
-                        {report.status}
+                        {doc.status}
                       </span>
                     </td>
                   </tr>

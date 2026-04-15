@@ -26,9 +26,9 @@ import {
 } from "lucide-react"
 
 const navLinks = [
-  { href: "/hesabat-admin/dashboard", label: "Dashboard", icon: BarChart3 },
-  { href: "/hesabat-admin/reports", label: "Hesabatlar", icon: FileText },
-  { href: "/hesabat-admin/settings", label: "Tənzimləmələr", icon: Settings },
+  { href: "/hesabat-admin/dashboard", label: "Ana səhifə", icon: BarChart3 },
+  { href: "/hesabat-admin/cabinet", label: "Şəxsi kabinet", icon: Settings },
+  { href: "/hesabat-admin/documents", label: "Sənədlər", icon: FileText },
 ]
 
 export default function HesabatAdminNavbar() {
