@@ -79,11 +79,46 @@ const STATUS_OPTIONS = [
   "Elmi ekspertizadan keçməyib",
 ]
 
+const HALTED_PROJECTS = [
+  {
+    id: 1,
+    code: "EIF-2025-004",
+    leadName: "Dr. Hüseynov Elmir",
+    projectName: "Süni zekanın etika aspektləri",
+    status: "İştirakı dayandırılmış - Büdcə qeydyazmacığı",
+  },
+  {
+    id: 2,
+    code: "EIF-2025-005",
+    leadName: "Prof. Qasımova Türkan",
+    projectName: "Nanoteknologiyalar sənaye tətbiqləri",
+    status: "İştirakı dayandırılmış - Hüquqi etirazlar",
+  },
+  {
+    id: 3,
+    code: "EIF-2025-006",
+    leadName: "Dr. Məmmədev Orxan",
+    projectName: "Dövrə ekonomikasının idarə modeli",
+    status: "İştirakı dayandırılmış - Anlaşılmazlıqlar",
+  },
+]
+
+const HALTED_STATUS_OPTIONS = [
+  "İştirakı dayandırılmış - Büdcə qeydyazmacığı",
+  "İştirakı dayandırılmış - Hüquqi etirazlar",
+  "İştirakı dayandırılmış - Anlaşılmazlıqlar",
+  "İştirakı dayandırılmış - Başqalar",
+]
+
 export default function ExpertisePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
+  const [haltedSearchTerm, setHaltedSearchTerm] = useState("")
+  const [haltedStatusFilter, setHaltedStatusFilter] = useState("")
   const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedHaltedProject, setSelectedHaltedProject] = useState(null)
   const [projectDetailOpen, setProjectDetailOpen] = useState(false)
+  const [haltedProjectDetailOpen, setHaltedProjectDetailOpen] = useState(false)
   const [documentsOpen, setDocumentsOpen] = useState(false)
   const [statusChangeOpen, setStatusChangeOpen] = useState(false)
   const [expertOpinionOpen, setExpertOpinionOpen] = useState(false)
@@ -98,6 +133,17 @@ export default function ExpertisePage() {
       project.code.toLowerCase().includes(searchTerm.toLowerCase())
 
     const matchesStatus = !statusFilter || project.status === statusFilter
+
+    return matchesSearch && matchesStatus
+  })
+
+  const filteredHaltedProjects = HALTED_PROJECTS.filter((project) => {
+    const matchesSearch =
+      project.leadName.toLowerCase().includes(haltedSearchTerm.toLowerCase()) ||
+      project.projectName.toLowerCase().includes(haltedSearchTerm.toLowerCase()) ||
+      project.code.toLowerCase().includes(haltedSearchTerm.toLowerCase())
+
+    const matchesStatus = !haltedStatusFilter || project.status === haltedStatusFilter
 
     return matchesSearch && matchesStatus
   })
@@ -239,6 +285,102 @@ export default function ExpertisePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Halted Projects Section */}
+      <div className="space-y-4 pt-8 border-t">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight">İştirakı dayandırılmış layihələr</h2>
+          <p className="text-muted-foreground">Fəaliyyəti dayandırılan layihələrin siyahısı</p>
+        </div>
+
+        {/* Halted Projects Search and Filter */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">Axtarış və Filtr</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Açar söz ilə axtarış (ad, layihə adı, kod)..."
+                  value={haltedSearchTerm}
+                  onChange={(e) => setHaltedSearchTerm(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+              <select
+                value={haltedStatusFilter}
+                onChange={(e) => setHaltedStatusFilter(e.target.value)}
+                className="px-3 py-2 border border-input rounded-md bg-background text-sm"
+              >
+                <option value="">Bütün statuslar</option>
+                {HALTED_STATUS_OPTIONS.map((status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Halted Projects Table */}
+        <Card>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-12">Sıra</TableHead>
+                    <TableHead>Layihə rəhbərinin adı</TableHead>
+                    <TableHead>Layihənin adı</TableHead>
+                    <TableHead>Layihənin statusu</TableHead>
+                    <TableHead className="w-24 text-right">Əməliyyatlar</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredHaltedProjects.length > 0 ? (
+                    filteredHaltedProjects.map((project, index) => (
+                      <TableRow key={project.id}>
+                        <TableCell className="font-medium">{index + 1}</TableCell>
+                        <TableCell className="font-medium">{project.leadName}</TableCell>
+                        <TableCell className="max-w-xs">{project.projectName}</TableCell>
+                        <TableCell>
+                          <Badge className="bg-red-100 text-red-700 border-red-200">
+                            {project.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="gap-1"
+                            onClick={() => {
+                              setSelectedHaltedProject(project)
+                              setHaltedProjectDetailOpen(true)
+                            }}
+                            title="Layihəyə baxış"
+                          >
+                            <Eye className="h-4 w-4" />
+                            Baxış
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-4 text-muted-foreground">
+                        Nəticə tapılmadı
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Project Detail Dialog */}
       <Dialog open={projectDetailOpen} onOpenChange={setProjectDetailOpen}>
@@ -395,6 +537,43 @@ export default function ExpertisePage() {
                 setSendToExpertOpen(false)
               }
             }} className="bg-primary text-primary-foreground">Göndər</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Halted Project Detail Dialog */}
+      <Dialog open={haltedProjectDetailOpen} onOpenChange={setHaltedProjectDetailOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>İştirakı dayandırılmış layihə (Yalnız oxu)</DialogTitle>
+            <DialogDescription>{selectedHaltedProject?.code}</DialogDescription>
+          </DialogHeader>
+          {selectedHaltedProject && (
+            <div className="space-y-4 py-2">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">Layihə Kodu</p>
+                  <p className="font-medium">{selectedHaltedProject.code}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">Layihə rəhbəri</p>
+                  <p className="font-medium">{selectedHaltedProject.leadName}</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Layihənin adı</p>
+                <p className="font-medium">{selectedHaltedProject.projectName}</p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Status</p>
+                <Badge className="bg-red-100 text-red-700 border-red-200">
+                  {selectedHaltedProject.status}
+                </Badge>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setHaltedProjectDetailOpen(false)}>Bağla</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
